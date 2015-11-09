@@ -12,13 +12,13 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class md_hospital
+    public partial class patient_address
     {
         public int pkid { get; set; }
-        public string name { get; set; }
-        public int cityid { get; set; }
-        public string address { get; set; }
         public string contact_tel { get; set; }
-        public string level { get; set; }
+        public string contact_add { get; set; }
+        public string contact_mobile { get; set; }
+        public bool isdefault { get; set; }
+        public int patient_id { get; set; }
     }
 }

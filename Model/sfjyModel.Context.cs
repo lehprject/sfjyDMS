@@ -26,5 +26,35 @@ namespace Model
         }
     
         public virtual DbSet<md_hospital> md_hospital { get; set; }
+        public virtual DbSet<area_city> area_city { get; set; }
+        public virtual DbSet<area_district> area_district { get; set; }
+        public virtual DbSet<area_province> area_province { get; set; }
+        public virtual DbSet<chk_demo> chk_demo { get; set; }
+        public virtual DbSet<chk_info> chk_info { get; set; }
+        public virtual DbSet<chk_type> chk_type { get; set; }
+        public virtual DbSet<dr_addvisit> dr_addvisit { get; set; }
+        public virtual DbSet<dr_pre_addvisit> dr_pre_addvisit { get; set; }
+        public virtual DbSet<dr_pre_visit> dr_pre_visit { get; set; }
+        public virtual DbSet<dr_visit> dr_visit { get; set; }
+        public virtual DbSet<dr_visit_detail> dr_visit_detail { get; set; }
+        public virtual DbSet<file_check> file_check { get; set; }
+        public virtual DbSet<md_cashdraw_app> md_cashdraw_app { get; set; }
+        public virtual DbSet<md_docter> md_docter { get; set; }
+        public virtual DbSet<md_dr_account> md_dr_account { get; set; }
+        public virtual DbSet<md_druginfo> md_druginfo { get; set; }
+        public virtual DbSet<patient_address> patient_address { get; set; }
+        public virtual DbSet<patient_assess> patient_assess { get; set; }
+        public virtual DbSet<patient_checklist> patient_checklist { get; set; }
+        public virtual DbSet<patient_disease> patient_disease { get; set; }
+        public virtual DbSet<patient_druguse_rcd> patient_druguse_rcd { get; set; }
+        public virtual DbSet<patient_info> patient_info { get; set; }
+        public virtual DbSet<patient_medical_rcd> patient_medical_rcd { get; set; }
+        public virtual DbSet<patient_order> patient_order { get; set; }
+        public virtual DbSet<patient_recipelist> patient_recipelist { get; set; }
+        public virtual DbSet<patient_recipelist_druguse> patient_recipelist_druguse { get; set; }
+        public virtual DbSet<promotion_coupons> promotion_coupons { get; set; }
+        public virtual DbSet<promotion_coupons_cycle> promotion_coupons_cycle { get; set; }
+        public virtual DbSet<promotion_coupons_detail> promotion_coupons_detail { get; set; }
+        public virtual DbSet<promotion_events> promotion_events { get; set; }
     }
 }

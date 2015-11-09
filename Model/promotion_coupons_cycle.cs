@@ -12,13 +12,13 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class md_hospital
+    public partial class promotion_coupons_cycle
     {
         public int pkid { get; set; }
-        public string name { get; set; }
-        public int cityid { get; set; }
-        public string address { get; set; }
-        public string contact_tel { get; set; }
-        public string level { get; set; }
+        public int coupons_id { get; set; }
+        public string code { get; set; }
+        public System.DateTime issue_time { get; set; }
+        public System.DateTime send_time { get; set; }
+        public System.DateTime use_time { get; set; }
     }
 }

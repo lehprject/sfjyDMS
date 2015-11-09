@@ -55,7 +55,97 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="area_city.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="area_district.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="area_province.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="chk_demo.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="chk_info.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="chk_type.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dr_addvisit.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dr_pre_addvisit.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dr_pre_visit.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dr_visit.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dr_visit_detail.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="file_check.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="md_cashdraw_app.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="md_docter.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="md_druginfo.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="md_dr_account.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="md_hospital.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="patient_address.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="patient_assess.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="patient_checklist.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="patient_disease.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="patient_druguse_rcd.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="patient_info.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="patient_medical_rcd.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="patient_order.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="patient_recipelist.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="patient_recipelist_druguse.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="promotion_coupons.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="promotion_coupons_cycle.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="promotion_coupons_detail.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="promotion_events.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

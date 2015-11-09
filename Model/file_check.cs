@@ -12,13 +12,16 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class md_hospital
+    public partial class file_check
     {
         public int pkid { get; set; }
-        public string name { get; set; }
-        public int cityid { get; set; }
-        public string address { get; set; }
-        public string contact_tel { get; set; }
-        public string level { get; set; }
+        public string file_path { get; set; }
+        public int patient_id { get; set; }
+        public int file_type { get; set; }
+        public int check_status { get; set; }
+        public System.DateTime check_time { get; set; }
+        public string check_remark { get; set; }
+        public string check_user { get; set; }
+        public System.DateTime createtime { get; set; }
     }
 }

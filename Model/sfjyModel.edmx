@@ -4,7 +4,207 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="sfjyModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="sfjyModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="area_city">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="area_province_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="name_jc" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="area_district">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="area_city_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="name_jc" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="area_province">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="name_jc" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="chk_demo">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typeid" Type="int" Nullable="false" />
+          <Property Name="chk_item" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="chk_value" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="chk_unit" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="chk_info">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="medical_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="chk_type_id" Type="int" Nullable="false" />
+          <Property Name="chk_demo_id" Type="int" Nullable="false" />
+          <Property Name="chk_result" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="fileid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="chk_type">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dr_addvisit">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hospital_id" Type="int" Nullable="false" />
+          <Property Name="drid" Type="int" Nullable="false" />
+          <Property Name="visit_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="visit_time" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="service_type" Type="int" Nullable="false" />
+          <Property Name="service_money" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="addnum" Type="int" Nullable="false" />
+          <Property Name="remarks" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dr_pre_addvisit">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="addvisit_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="pre_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="pre_time" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="pre_type" Type="int" Nullable="false" />
+          <Property Name="remarks" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dr_pre_visit">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="visit_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="pre_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="pre_time" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="pre_type" Type="int" Nullable="false" />
+          <Property Name="remarks" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dr_visit">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hospital_id" Type="int" Nullable="false" />
+          <Property Name="drid" Type="int" Nullable="false" />
+          <Property Name="visit_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="visit_time" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="service_type" Type="int" Nullable="false" />
+          <Property Name="service_money" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="remarks" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dr_visit_detail">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="visit_id" Type="int" Nullable="false" />
+          <Property Name="visit_type" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="patient_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="service_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="service_time" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="remarks" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="file_check">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="file_path" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="file_type" Type="int" Nullable="false" />
+          <Property Name="check_status" Type="int" Nullable="false" />
+          <Property Name="check_time" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="check_remark" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="check_user" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="md_cashdraw_app">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="drid" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="app_time" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="drawmoney" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="in_bank" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="in_bank_acc" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="opuser" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="optime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="opstatus" Type="int" Nullable="false" />
+          <Property Name="opremark" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="md_docter">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hispital_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="gender" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="position" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="cust_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="sub_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="birthday" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="contact_tel" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="login_pwd" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="current_income" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="md_dr_account">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dr_id" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="income_type" Type="int" Nullable="false" />
+          <Property Name="money" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="remarks" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="md_druginfo">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="drugcode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="drugname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="commonname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="standard" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="authno" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="producerid" Type="int" Nullable="false" />
+          <Property Name="cust_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="sub_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="use_num" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="use_daynum" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
         <EntityType Name="md_hospital">
           <Key>
             <PropertyRef Name="pkid" />
@@ -14,12 +214,217 @@
           <Property Name="cityid" Type="int" Nullable="false" />
           <Property Name="address" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="contact_tel" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="level" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_address">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="contact_tel" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="contact_add" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="contact_mobile" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="isdefault" Type="bit" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_assess">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="drid" Type="int" Nullable="false" />
+          <Property Name="assess_time" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="assess_contents" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_checklist">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="medical_rcd_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="hospital_id" Type="int" Nullable="false" />
+          <Property Name="check_item" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="check_time" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="check_result" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="fileid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_disease">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="sub_disease" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="hospital_id" Type="int" Nullable="false" />
+          <Property Name="drid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_druguse_rcd">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="drugid" Type="int" Nullable="false" />
+          <Property Name="usenum" Type="int" Nullable="false" />
+          <Property Name="lastuse_time" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="less_num" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_info">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="gender" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="cardtype" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="cardno" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="birthday" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="login_pwd" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="patient_medical_rcd">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="hospital_id" Type="int" Nullable="false" />
+          <Property Name="drid" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="cust_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="rcd_result" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="rcd_time" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="fileid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_order">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="drid" Type="int" Nullable="false" />
+          <Property Name="service_type" Type="int" Nullable="false" />
+          <Property Name="check_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="check_time" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="check_usetime" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="service_money" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_recipelist">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="medical_rcd_id" Type="int" Nullable="false" />
+          <Property Name="hospital_id" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="cust_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="issue_time" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="check_result" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="fileid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_recipelist_druguse">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="recipelist_id" Type="int" Nullable="false" />
+          <Property Name="drugid" Type="int" Nullable="false" />
+          <Property Name="use_num" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="use_type" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="promotion_coupons">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="values" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="startdate" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="enddate" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="issue_num" Type="int" Nullable="false" />
+          <Property Name="issue_status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="promotion_coupons_cycle">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="coupons_id" Type="int" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="issue_time" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="send_time" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="use_time" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="promotion_coupons_detail">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="coupons_id" Type="int" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="use_status" Type="int" Nullable="false" />
+          <Property Name="business_type" Type="int" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="drid" Type="int" Nullable="false" />
+          <Property Name="sendtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="usetime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="promotion_events">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="contents" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="hospital_id" Type="int" Nullable="false" />
+          <Property Name="face_type" Type="int" Nullable="false" />
+          <Property Name="startdate" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="enddate" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="attachfile" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityContainer Name="sfjyModelStoreContainer">
+          <EntitySet Name="area_city" EntityType="Self.area_city" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="area_district" EntityType="Self.area_district" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="area_province" EntityType="Self.area_province" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="chk_demo" EntityType="Self.chk_demo" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="chk_info" EntityType="Self.chk_info" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="chk_type" EntityType="Self.chk_type" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="dr_addvisit" EntityType="Self.dr_addvisit" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="dr_pre_addvisit" EntityType="Self.dr_pre_addvisit" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="dr_pre_visit" EntityType="Self.dr_pre_visit" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="dr_visit" EntityType="Self.dr_visit" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="dr_visit_detail" EntityType="Self.dr_visit_detail" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="file_check" EntityType="Self.file_check" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="md_cashdraw_app" EntityType="Self.md_cashdraw_app" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="md_docter" EntityType="Self.md_docter" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="md_dr_account" EntityType="Self.md_dr_account" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="md_druginfo" EntityType="Self.md_druginfo" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="md_hospital" EntityType="Self.md_hospital" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_address" EntityType="Self.patient_address" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_assess" EntityType="Self.patient_assess" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_checklist" EntityType="Self.patient_checklist" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_disease" EntityType="Self.patient_disease" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_druguse_rcd" EntityType="Self.patient_druguse_rcd" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_info" EntityType="Self.patient_info" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_medical_rcd" EntityType="Self.patient_medical_rcd" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_order" EntityType="Self.patient_order" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_recipelist" EntityType="Self.patient_recipelist" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_recipelist_druguse" EntityType="Self.patient_recipelist_druguse" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="promotion_coupons" EntityType="Self.promotion_coupons" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="promotion_coupons_cycle" EntityType="Self.promotion_coupons_cycle" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="promotion_coupons_detail" EntityType="Self.promotion_coupons_detail" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="promotion_events" EntityType="Self.promotion_events" Schema="sfjy" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="sfjyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -32,10 +437,416 @@
           <Property Name="cityid" Type="Int32" Nullable="false" />
           <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="contact_tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="level" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="sfjyEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="md_hospital" EntityType="Self.md_hospital" />
+          <EntitySet Name="area_city" EntityType="sfjyModel.area_city" />
+          <EntitySet Name="area_district" EntityType="sfjyModel.area_district" />
+          <EntitySet Name="area_province" EntityType="sfjyModel.area_province" />
+          <EntitySet Name="chk_demo" EntityType="sfjyModel.chk_demo" />
+          <EntitySet Name="chk_info" EntityType="sfjyModel.chk_info" />
+          <EntitySet Name="chk_type" EntityType="sfjyModel.chk_type" />
+          <EntitySet Name="dr_addvisit" EntityType="sfjyModel.dr_addvisit" />
+          <EntitySet Name="dr_pre_addvisit" EntityType="sfjyModel.dr_pre_addvisit" />
+          <EntitySet Name="dr_pre_visit" EntityType="sfjyModel.dr_pre_visit" />
+          <EntitySet Name="dr_visit" EntityType="sfjyModel.dr_visit" />
+          <EntitySet Name="dr_visit_detail" EntityType="sfjyModel.dr_visit_detail" />
+          <EntitySet Name="file_check" EntityType="sfjyModel.file_check" />
+          <EntitySet Name="md_cashdraw_app" EntityType="sfjyModel.md_cashdraw_app" />
+          <EntitySet Name="md_docter" EntityType="sfjyModel.md_docter" />
+          <EntitySet Name="md_dr_account" EntityType="sfjyModel.md_dr_account" />
+          <EntitySet Name="md_druginfo" EntityType="sfjyModel.md_druginfo" />
+          <EntitySet Name="patient_address" EntityType="sfjyModel.patient_address" />
+          <EntitySet Name="patient_assess" EntityType="sfjyModel.patient_assess" />
+          <EntitySet Name="patient_checklist" EntityType="sfjyModel.patient_checklist" />
+          <EntitySet Name="patient_disease" EntityType="sfjyModel.patient_disease" />
+          <EntitySet Name="patient_druguse_rcd" EntityType="sfjyModel.patient_druguse_rcd" />
+          <EntitySet Name="patient_info" EntityType="sfjyModel.patient_info" />
+          <EntitySet Name="patient_medical_rcd" EntityType="sfjyModel.patient_medical_rcd" />
+          <EntitySet Name="patient_order" EntityType="sfjyModel.patient_order" />
+          <EntitySet Name="patient_recipelist" EntityType="sfjyModel.patient_recipelist" />
+          <EntitySet Name="patient_recipelist_druguse" EntityType="sfjyModel.patient_recipelist_druguse" />
+          <EntitySet Name="promotion_coupons" EntityType="sfjyModel.promotion_coupons" />
+          <EntitySet Name="promotion_coupons_cycle" EntityType="sfjyModel.promotion_coupons_cycle" />
+          <EntitySet Name="promotion_coupons_detail" EntityType="sfjyModel.promotion_coupons_detail" />
+          <EntitySet Name="promotion_events" EntityType="sfjyModel.promotion_events" />
         </EntityContainer>
+        <EntityType Name="area_city">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="area_province_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="name_jc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="area_district">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="area_city_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="name_jc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="area_province">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="name_jc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="chk_demo">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typeid" Type="Int32" Nullable="false" />
+          <Property Name="chk_item" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="chk_value" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="chk_unit" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="chk_info">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="medical_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="chk_type_id" Type="Int32" Nullable="false" />
+          <Property Name="chk_demo_id" Type="Int32" Nullable="false" />
+          <Property Name="chk_result" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="fileid" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="chk_type">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dr_addvisit">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hospital_id" Type="Int32" Nullable="false" />
+          <Property Name="drid" Type="Int32" Nullable="false" />
+          <Property Name="visit_date" Type="DateTime" Nullable="false" />
+          <Property Name="visit_time" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="service_type" Type="Int32" Nullable="false" />
+          <Property Name="service_money" Type="Decimal" Nullable="false" />
+          <Property Name="addnum" Type="Int32" Nullable="false" />
+          <Property Name="remarks" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dr_pre_addvisit">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="addvisit_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="pre_date" Type="DateTime" Nullable="false" />
+          <Property Name="pre_time" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="pre_type" Type="Int32" Nullable="false" />
+          <Property Name="remarks" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dr_pre_visit">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="visit_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="pre_date" Type="DateTime" Nullable="false" />
+          <Property Name="pre_time" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="pre_type" Type="Int32" Nullable="false" />
+          <Property Name="remarks" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dr_visit">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hospital_id" Type="Int32" Nullable="false" />
+          <Property Name="drid" Type="Int32" Nullable="false" />
+          <Property Name="visit_date" Type="DateTime" Nullable="false" />
+          <Property Name="visit_time" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="service_type" Type="Int32" Nullable="false" />
+          <Property Name="service_money" Type="Decimal" Nullable="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="remarks" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dr_visit_detail">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="visit_id" Type="Int32" Nullable="false" />
+          <Property Name="visit_type" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="service_date" Type="DateTime" Nullable="false" />
+          <Property Name="service_time" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="remarks" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="file_check">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="file_path" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="file_type" Type="Int32" Nullable="false" />
+          <Property Name="check_status" Type="Int32" Nullable="false" />
+          <Property Name="check_time" Type="DateTime" Nullable="false" />
+          <Property Name="check_remark" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="check_user" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="md_cashdraw_app">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="drid" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="app_time" Type="DateTime" Nullable="false" />
+          <Property Name="drawmoney" Type="Decimal" Nullable="false" />
+          <Property Name="in_bank" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="in_bank_acc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="opuser" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="optime" Type="DateTime" Nullable="false" />
+          <Property Name="opstatus" Type="Int32" Nullable="false" />
+          <Property Name="opremark" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="md_docter">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hispital_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="position" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="cust_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="sub_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="birthday" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="contact_tel" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="login_pwd" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="current_income" Type="Decimal" Nullable="false" />
+        </EntityType>
+        <EntityType Name="md_dr_account">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dr_id" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="income_type" Type="Int32" Nullable="false" />
+          <Property Name="money" Type="Decimal" Nullable="false" />
+          <Property Name="remarks" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="md_druginfo">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="drugcode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="drugname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="commonname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="standard" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="authno" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="producerid" Type="Int32" Nullable="false" />
+          <Property Name="cust_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="sub_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="use_num" Type="Decimal" Nullable="false" />
+          <Property Name="use_daynum" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_address">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contact_tel" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="contact_add" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="contact_mobile" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="isdefault" Type="Boolean" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_assess">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="drid" Type="Int32" Nullable="false" />
+          <Property Name="assess_time" Type="DateTime" Nullable="false" />
+          <Property Name="assess_contents" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="patient_checklist">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="medical_rcd_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="hospital_id" Type="Int32" Nullable="false" />
+          <Property Name="check_item" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="check_time" Type="DateTime" Nullable="false" />
+          <Property Name="check_result" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fileid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_disease">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="sub_disease" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="hospital_id" Type="Int32" Nullable="false" />
+          <Property Name="drid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_druguse_rcd">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="drugid" Type="Int32" Nullable="false" />
+          <Property Name="usenum" Type="Int32" Nullable="false" />
+          <Property Name="lastuse_time" Type="DateTime" Nullable="false" />
+          <Property Name="less_num" Type="Decimal" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_info">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="cardtype" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cardno" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="birthday" Type="DateTime" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="login_pwd" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="patient_medical_rcd">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="hospital_id" Type="Int32" Nullable="false" />
+          <Property Name="drid" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="cust_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="rcd_result" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="rcd_time" Type="DateTime" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="fileid" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_order">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="drid" Type="Int32" Nullable="false" />
+          <Property Name="service_type" Type="Int32" Nullable="false" />
+          <Property Name="check_date" Type="DateTime" Nullable="false" />
+          <Property Name="check_time" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="check_usetime" Type="Decimal" Nullable="false" />
+          <Property Name="service_money" Type="Decimal" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_recipelist">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="medical_rcd_id" Type="Int32" Nullable="false" />
+          <Property Name="hospital_id" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="cust_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="issue_time" Type="DateTime" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="check_result" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fileid" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_recipelist_druguse">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="recipelist_id" Type="Int32" Nullable="false" />
+          <Property Name="drugid" Type="Int32" Nullable="false" />
+          <Property Name="use_num" Type="Decimal" Nullable="false" />
+          <Property Name="use_type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="promotion_coupons">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="values" Type="Decimal" Nullable="false" />
+          <Property Name="startdate" Type="DateTime" Nullable="false" />
+          <Property Name="enddate" Type="DateTime" Nullable="false" />
+          <Property Name="issue_num" Type="Int32" Nullable="false" />
+          <Property Name="issue_status" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="promotion_coupons_cycle">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="coupons_id" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="issue_time" Type="DateTime" Nullable="false" />
+          <Property Name="send_time" Type="DateTime" Nullable="false" />
+          <Property Name="use_time" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="promotion_coupons_detail">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="coupons_id" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="use_status" Type="Int32" Nullable="false" />
+          <Property Name="business_type" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="drid" Type="Int32" Nullable="false" />
+          <Property Name="sendtime" Type="DateTime" Nullable="false" />
+          <Property Name="usetime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="promotion_events">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="contents" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="hospital_id" Type="Int32" Nullable="false" />
+          <Property Name="face_type" Type="Int32" Nullable="false" />
+          <Property Name="startdate" Type="DateTime" Nullable="false" />
+          <Property Name="enddate" Type="DateTime" Nullable="false" />
+          <Property Name="attachfile" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -45,11 +856,417 @@
           <EntitySetMapping Name="md_hospital">
             <EntityTypeMapping TypeName="sfjyModel.md_hospital">
               <MappingFragment StoreEntitySet="md_hospital">
+                <ScalarProperty Name="level" ColumnName="level" />
                 <ScalarProperty Name="pkid" ColumnName="pkid" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="cityid" ColumnName="cityid" />
                 <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="contact_tel" ColumnName="contact_tel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="area_city">
+            <EntityTypeMapping TypeName="sfjyModel.area_city">
+              <MappingFragment StoreEntitySet="area_city">
+                <ScalarProperty Name="name_jc" ColumnName="name_jc" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="area_province_id" ColumnName="area_province_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="area_district">
+            <EntityTypeMapping TypeName="sfjyModel.area_district">
+              <MappingFragment StoreEntitySet="area_district">
+                <ScalarProperty Name="name_jc" ColumnName="name_jc" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="area_city_id" ColumnName="area_city_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="area_province">
+            <EntityTypeMapping TypeName="sfjyModel.area_province">
+              <MappingFragment StoreEntitySet="area_province">
+                <ScalarProperty Name="name_jc" ColumnName="name_jc" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="chk_demo">
+            <EntityTypeMapping TypeName="sfjyModel.chk_demo">
+              <MappingFragment StoreEntitySet="chk_demo">
+                <ScalarProperty Name="chk_unit" ColumnName="chk_unit" />
+                <ScalarProperty Name="chk_value" ColumnName="chk_value" />
+                <ScalarProperty Name="chk_item" ColumnName="chk_item" />
+                <ScalarProperty Name="typeid" ColumnName="typeid" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="chk_info">
+            <EntityTypeMapping TypeName="sfjyModel.chk_info">
+              <MappingFragment StoreEntitySet="chk_info">
+                <ScalarProperty Name="fileid" ColumnName="fileid" />
+                <ScalarProperty Name="chk_result" ColumnName="chk_result" />
+                <ScalarProperty Name="chk_demo_id" ColumnName="chk_demo_id" />
+                <ScalarProperty Name="chk_type_id" ColumnName="chk_type_id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="medical_id" ColumnName="medical_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="chk_type">
+            <EntityTypeMapping TypeName="sfjyModel.chk_type">
+              <MappingFragment StoreEntitySet="chk_type">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dr_addvisit">
+            <EntityTypeMapping TypeName="sfjyModel.dr_addvisit">
+              <MappingFragment StoreEntitySet="dr_addvisit">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="addnum" ColumnName="addnum" />
+                <ScalarProperty Name="service_money" ColumnName="service_money" />
+                <ScalarProperty Name="service_type" ColumnName="service_type" />
+                <ScalarProperty Name="visit_time" ColumnName="visit_time" />
+                <ScalarProperty Name="visit_date" ColumnName="visit_date" />
+                <ScalarProperty Name="drid" ColumnName="drid" />
+                <ScalarProperty Name="hospital_id" ColumnName="hospital_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dr_pre_addvisit">
+            <EntityTypeMapping TypeName="sfjyModel.dr_pre_addvisit">
+              <MappingFragment StoreEntitySet="dr_pre_addvisit">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="pre_type" ColumnName="pre_type" />
+                <ScalarProperty Name="pre_time" ColumnName="pre_time" />
+                <ScalarProperty Name="pre_date" ColumnName="pre_date" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="addvisit_id" ColumnName="addvisit_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dr_pre_visit">
+            <EntityTypeMapping TypeName="sfjyModel.dr_pre_visit">
+              <MappingFragment StoreEntitySet="dr_pre_visit">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="pre_type" ColumnName="pre_type" />
+                <ScalarProperty Name="pre_time" ColumnName="pre_time" />
+                <ScalarProperty Name="pre_date" ColumnName="pre_date" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="visit_id" ColumnName="visit_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dr_visit">
+            <EntityTypeMapping TypeName="sfjyModel.dr_visit">
+              <MappingFragment StoreEntitySet="dr_visit">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="service_money" ColumnName="service_money" />
+                <ScalarProperty Name="service_type" ColumnName="service_type" />
+                <ScalarProperty Name="visit_time" ColumnName="visit_time" />
+                <ScalarProperty Name="visit_date" ColumnName="visit_date" />
+                <ScalarProperty Name="drid" ColumnName="drid" />
+                <ScalarProperty Name="hospital_id" ColumnName="hospital_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dr_visit_detail">
+            <EntityTypeMapping TypeName="sfjyModel.dr_visit_detail">
+              <MappingFragment StoreEntitySet="dr_visit_detail">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="service_time" ColumnName="service_time" />
+                <ScalarProperty Name="service_date" ColumnName="service_date" />
+                <ScalarProperty Name="patient_name" ColumnName="patient_name" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="visit_type" ColumnName="visit_type" />
+                <ScalarProperty Name="visit_id" ColumnName="visit_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="file_check">
+            <EntityTypeMapping TypeName="sfjyModel.file_check">
+              <MappingFragment StoreEntitySet="file_check">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="check_user" ColumnName="check_user" />
+                <ScalarProperty Name="check_remark" ColumnName="check_remark" />
+                <ScalarProperty Name="check_time" ColumnName="check_time" />
+                <ScalarProperty Name="check_status" ColumnName="check_status" />
+                <ScalarProperty Name="file_type" ColumnName="file_type" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="file_path" ColumnName="file_path" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="md_cashdraw_app">
+            <EntityTypeMapping TypeName="sfjyModel.md_cashdraw_app">
+              <MappingFragment StoreEntitySet="md_cashdraw_app">
+                <ScalarProperty Name="opremark" ColumnName="opremark" />
+                <ScalarProperty Name="opstatus" ColumnName="opstatus" />
+                <ScalarProperty Name="optime" ColumnName="optime" />
+                <ScalarProperty Name="opuser" ColumnName="opuser" />
+                <ScalarProperty Name="in_bank_acc" ColumnName="in_bank_acc" />
+                <ScalarProperty Name="in_bank" ColumnName="in_bank" />
+                <ScalarProperty Name="drawmoney" ColumnName="drawmoney" />
+                <ScalarProperty Name="app_time" ColumnName="app_time" />
+                <ScalarProperty Name="drid" ColumnName="drid" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="md_docter">
+            <EntityTypeMapping TypeName="sfjyModel.md_docter">
+              <MappingFragment StoreEntitySet="md_docter">
+                <ScalarProperty Name="current_income" ColumnName="current_income" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="login_pwd" ColumnName="login_pwd" />
+                <ScalarProperty Name="contact_tel" ColumnName="contact_tel" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="sub_name" ColumnName="sub_name" />
+                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="hispital_id" ColumnName="hispital_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="md_dr_account">
+            <EntityTypeMapping TypeName="sfjyModel.md_dr_account">
+              <MappingFragment StoreEntitySet="md_dr_account">
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="money" ColumnName="money" />
+                <ScalarProperty Name="income_type" ColumnName="income_type" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="dr_id" ColumnName="dr_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="md_druginfo">
+            <EntityTypeMapping TypeName="sfjyModel.md_druginfo">
+              <MappingFragment StoreEntitySet="md_druginfo">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="use_daynum" ColumnName="use_daynum" />
+                <ScalarProperty Name="use_num" ColumnName="use_num" />
+                <ScalarProperty Name="sub_name" ColumnName="sub_name" />
+                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+                <ScalarProperty Name="producerid" ColumnName="producerid" />
+                <ScalarProperty Name="authno" ColumnName="authno" />
+                <ScalarProperty Name="standard" ColumnName="standard" />
+                <ScalarProperty Name="commonname" ColumnName="commonname" />
+                <ScalarProperty Name="drugname" ColumnName="drugname" />
+                <ScalarProperty Name="drugcode" ColumnName="drugcode" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_address">
+            <EntityTypeMapping TypeName="sfjyModel.patient_address">
+              <MappingFragment StoreEntitySet="patient_address">
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="isdefault" ColumnName="isdefault" />
+                <ScalarProperty Name="contact_mobile" ColumnName="contact_mobile" />
+                <ScalarProperty Name="contact_add" ColumnName="contact_add" />
+                <ScalarProperty Name="contact_tel" ColumnName="contact_tel" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_assess">
+            <EntityTypeMapping TypeName="sfjyModel.patient_assess">
+              <MappingFragment StoreEntitySet="patient_assess">
+                <ScalarProperty Name="assess_contents" ColumnName="assess_contents" />
+                <ScalarProperty Name="assess_time" ColumnName="assess_time" />
+                <ScalarProperty Name="drid" ColumnName="drid" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_checklist">
+            <EntityTypeMapping TypeName="sfjyModel.patient_checklist">
+              <MappingFragment StoreEntitySet="patient_checklist">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="fileid" ColumnName="fileid" />
+                <ScalarProperty Name="check_result" ColumnName="check_result" />
+                <ScalarProperty Name="check_time" ColumnName="check_time" />
+                <ScalarProperty Name="check_item" ColumnName="check_item" />
+                <ScalarProperty Name="hospital_id" ColumnName="hospital_id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="medical_rcd_id" ColumnName="medical_rcd_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_disease">
+            <EntityTypeMapping TypeName="sfjyModel.patient_disease">
+              <MappingFragment StoreEntitySet="patient_disease">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="drid" ColumnName="drid" />
+                <ScalarProperty Name="hospital_id" ColumnName="hospital_id" />
+                <ScalarProperty Name="sub_disease" ColumnName="sub_disease" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_druguse_rcd">
+            <EntityTypeMapping TypeName="sfjyModel.patient_druguse_rcd">
+              <MappingFragment StoreEntitySet="patient_druguse_rcd">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="less_num" ColumnName="less_num" />
+                <ScalarProperty Name="lastuse_time" ColumnName="lastuse_time" />
+                <ScalarProperty Name="usenum" ColumnName="usenum" />
+                <ScalarProperty Name="drugid" ColumnName="drugid" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_info">
+            <EntityTypeMapping TypeName="sfjyModel.patient_info">
+              <MappingFragment StoreEntitySet="patient_info">
+                <ScalarProperty Name="login_pwd" ColumnName="login_pwd" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="cardno" ColumnName="cardno" />
+                <ScalarProperty Name="cardtype" ColumnName="cardtype" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_medical_rcd">
+            <EntityTypeMapping TypeName="sfjyModel.patient_medical_rcd">
+              <MappingFragment StoreEntitySet="patient_medical_rcd">
+                <ScalarProperty Name="fileid" ColumnName="fileid" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="rcd_time" ColumnName="rcd_time" />
+                <ScalarProperty Name="rcd_result" ColumnName="rcd_result" />
+                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="drid" ColumnName="drid" />
+                <ScalarProperty Name="hospital_id" ColumnName="hospital_id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_order">
+            <EntityTypeMapping TypeName="sfjyModel.patient_order">
+              <MappingFragment StoreEntitySet="patient_order">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="service_money" ColumnName="service_money" />
+                <ScalarProperty Name="check_usetime" ColumnName="check_usetime" />
+                <ScalarProperty Name="check_time" ColumnName="check_time" />
+                <ScalarProperty Name="check_date" ColumnName="check_date" />
+                <ScalarProperty Name="service_type" ColumnName="service_type" />
+                <ScalarProperty Name="drid" ColumnName="drid" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_recipelist">
+            <EntityTypeMapping TypeName="sfjyModel.patient_recipelist">
+              <MappingFragment StoreEntitySet="patient_recipelist">
+                <ScalarProperty Name="fileid" ColumnName="fileid" />
+                <ScalarProperty Name="check_result" ColumnName="check_result" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="issue_time" ColumnName="issue_time" />
+                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="hospital_id" ColumnName="hospital_id" />
+                <ScalarProperty Name="medical_rcd_id" ColumnName="medical_rcd_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_recipelist_druguse">
+            <EntityTypeMapping TypeName="sfjyModel.patient_recipelist_druguse">
+              <MappingFragment StoreEntitySet="patient_recipelist_druguse">
+                <ScalarProperty Name="use_type" ColumnName="use_type" />
+                <ScalarProperty Name="use_num" ColumnName="use_num" />
+                <ScalarProperty Name="drugid" ColumnName="drugid" />
+                <ScalarProperty Name="recipelist_id" ColumnName="recipelist_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="promotion_coupons">
+            <EntityTypeMapping TypeName="sfjyModel.promotion_coupons">
+              <MappingFragment StoreEntitySet="promotion_coupons">
+                <ScalarProperty Name="issue_status" ColumnName="issue_status" />
+                <ScalarProperty Name="issue_num" ColumnName="issue_num" />
+                <ScalarProperty Name="enddate" ColumnName="enddate" />
+                <ScalarProperty Name="startdate" ColumnName="startdate" />
+                <ScalarProperty Name="values" ColumnName="values" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="promotion_coupons_cycle">
+            <EntityTypeMapping TypeName="sfjyModel.promotion_coupons_cycle">
+              <MappingFragment StoreEntitySet="promotion_coupons_cycle">
+                <ScalarProperty Name="use_time" ColumnName="use_time" />
+                <ScalarProperty Name="send_time" ColumnName="send_time" />
+                <ScalarProperty Name="issue_time" ColumnName="issue_time" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="coupons_id" ColumnName="coupons_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="promotion_coupons_detail">
+            <EntityTypeMapping TypeName="sfjyModel.promotion_coupons_detail">
+              <MappingFragment StoreEntitySet="promotion_coupons_detail">
+                <ScalarProperty Name="usetime" ColumnName="usetime" />
+                <ScalarProperty Name="sendtime" ColumnName="sendtime" />
+                <ScalarProperty Name="drid" ColumnName="drid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="business_type" ColumnName="business_type" />
+                <ScalarProperty Name="use_status" ColumnName="use_status" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="coupons_id" ColumnName="coupons_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="promotion_events">
+            <EntityTypeMapping TypeName="sfjyModel.promotion_events">
+              <MappingFragment StoreEntitySet="promotion_events">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="attachfile" ColumnName="attachfile" />
+                <ScalarProperty Name="enddate" ColumnName="enddate" />
+                <ScalarProperty Name="startdate" ColumnName="startdate" />
+                <ScalarProperty Name="face_type" ColumnName="face_type" />
+                <ScalarProperty Name="hospital_id" ColumnName="hospital_id" />
+                <ScalarProperty Name="contents" ColumnName="contents" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -12,13 +12,17 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class md_hospital
+    public partial class md_cashdraw_app
     {
         public int pkid { get; set; }
-        public string name { get; set; }
-        public int cityid { get; set; }
-        public string address { get; set; }
-        public string contact_tel { get; set; }
-        public string level { get; set; }
+        public string drid { get; set; }
+        public System.DateTime app_time { get; set; }
+        public decimal drawmoney { get; set; }
+        public string in_bank { get; set; }
+        public string in_bank_acc { get; set; }
+        public string opuser { get; set; }
+        public System.DateTime optime { get; set; }
+        public int opstatus { get; set; }
+        public string opremark { get; set; }
     }
 }

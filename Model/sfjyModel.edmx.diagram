@@ -6,6 +6,36 @@
     <edmx:Diagrams>
       <Diagram DiagramId="2b82fce171f54b3dbefca4b8a375c9e8" Name="Diagram1">
         <EntityTypeShape EntityType="sfjyModel.md_hospital" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sfjyModel.area_city" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="sfjyModel.area_district" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="sfjyModel.area_province" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="sfjyModel.chk_demo" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="sfjyModel.chk_info" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="sfjyModel.chk_type" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="sfjyModel.dr_addvisit" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="sfjyModel.dr_pre_addvisit" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="sfjyModel.dr_pre_visit" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="sfjyModel.dr_visit" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="sfjyModel.dr_visit_detail" Width="1.5" PointX="4.75" PointY="8.75" />
+        <EntityTypeShape EntityType="sfjyModel.file_check" Width="1.5" PointX="6.75" PointY="8.75" />
+        <EntityTypeShape EntityType="sfjyModel.md_cashdraw_app" Width="1.5" PointX="8.75" PointY="8.75" />
+        <EntityTypeShape EntityType="sfjyModel.md_docter" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="sfjyModel.md_dr_account" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="sfjyModel.md_druginfo" Width="1.5" PointX="10.75" PointY="5.75" />
+        <EntityTypeShape EntityType="sfjyModel.patient_address" Width="1.5" PointX="10.75" PointY="10.75" />
+        <EntityTypeShape EntityType="sfjyModel.patient_assess" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="sfjyModel.patient_checklist" Width="1.5" PointX="2.75" PointY="12.75" />
+        <EntityTypeShape EntityType="sfjyModel.patient_disease" Width="1.5" PointX="12.75" PointY="3.75" />
+        <EntityTypeShape EntityType="sfjyModel.patient_druguse_rcd" Width="1.5" PointX="4.75" PointY="12.75" />
+        <EntityTypeShape EntityType="sfjyModel.patient_info" Width="1.5" PointX="12.75" PointY="6.75" />
+        <EntityTypeShape EntityType="sfjyModel.patient_medical_rcd" Width="1.5" PointX="6.75" PointY="12.75" />
+        <EntityTypeShape EntityType="sfjyModel.patient_order" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="sfjyModel.patient_recipelist" Width="1.5" PointX="8.75" PointY="13.75" />
+        <EntityTypeShape EntityType="sfjyModel.patient_recipelist_druguse" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="sfjyModel.promotion_coupons" Width="1.5" PointX="14.75" PointY="3.75" />
+        <EntityTypeShape EntityType="sfjyModel.promotion_coupons_cycle" Width="1.5" PointX="14.75" PointY="7.75" />
+        <EntityTypeShape EntityType="sfjyModel.promotion_coupons_detail" Width="1.5" PointX="14.75" PointY="10.75" />
+        <EntityTypeShape EntityType="sfjyModel.promotion_events" Width="1.5" PointX="10.75" PointY="14.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
