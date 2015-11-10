@@ -19,5 +19,7 @@ namespace Model
         public int drid { get; set; }
         public System.DateTime assess_time { get; set; }
         public string assess_contents { get; set; }
+        public decimal points { get; set; }
+        public int star { get; set; }
     }
 }

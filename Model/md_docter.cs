@@ -27,5 +27,6 @@ namespace Model
         public string login_pwd { get; set; }
         public System.DateTime createtime { get; set; }
         public decimal current_income { get; set; }
+        public string photo { get; set; }
     }
 }

@@ -56,5 +56,6 @@ namespace Model
         public virtual DbSet<promotion_coupons_cycle> promotion_coupons_cycle { get; set; }
         public virtual DbSet<promotion_coupons_detail> promotion_coupons_detail { get; set; }
         public virtual DbSet<promotion_events> promotion_events { get; set; }
+        public virtual DbSet<patient_message> patient_message { get; set; }
     }
 }

@@ -12,19 +12,13 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class patient_info
+    public partial class patient_message
     {
         public int pkid { get; set; }
-        public string name { get; set; }
-        public string gender { get; set; }
-        public string cardtype { get; set; }
-        public string cardno { get; set; }
-        public System.DateTime birthday { get; set; }
+        public int patientid { get; set; }
+        public int drid { get; set; }
+        public int status { get; set; }
+        public string contents { get; set; }
         public System.DateTime createtime { get; set; }
-        public string login_pwd { get; set; }
-        public string alllergic_his { get; set; }
-        public string yibao_no { get; set; }
-        public string shebao_no { get; set; }
-        public string photo { get; set; }
     }
 }
