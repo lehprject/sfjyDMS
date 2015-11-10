@@ -766,7 +766,7 @@
           <Property Name="cardno" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="birthday" Type="DateTime" Nullable="false" />
           <Property Name="createtime" Type="DateTime" Nullable="false" />
-          <Property Name="login_pwd" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="login_pwd" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="alllergic_his" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="yibao_no" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="shebao_no" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
