@@ -140,6 +140,7 @@
     <Compile Include="Controllers\Patient\MedicalRcdController.cs" />
     <Compile Include="Controllers\Patient\RecipelistController.cs" />
     <Compile Include="Controllers\Patient\ReciptDrugController.cs" />
+    <Compile Include="Controllers\User\PromotionController.cs" />
     <Compile Include="Controllers\User\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
