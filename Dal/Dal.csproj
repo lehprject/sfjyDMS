@@ -61,6 +61,7 @@
     <Compile Include="Patient\patient_order_DA.cs" />
     <Compile Include="Patient\patient_recipelist_DA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\md_cashdraw_app_DA.cs" />
     <Compile Include="User\md_docter_DA.cs" />
   </ItemGroup>
   <ItemGroup>

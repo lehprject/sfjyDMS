@@ -8,7 +8,7 @@ using Model.ConfigClass;
 using MySql.Data.MySqlClient;
 using Share;
 
-namespace Dal.Patient
+namespace Dal
 {
     public class patient_order_DA : DataAccessBase
     {
