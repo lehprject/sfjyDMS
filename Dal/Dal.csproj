@@ -53,9 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\base_DA.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DataAccessBase.cs" />
     <Compile Include="Doctor\dr_visit_DA.cs" />
+    <Compile Include="Patient\patient_medical_rcd_DA.cs" />
+    <Compile Include="Patient\patient_recipelist_DA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

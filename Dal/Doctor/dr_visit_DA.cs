@@ -162,5 +162,137 @@ namespace Dal
         #endregion
          
         #endregion
+
+        #region  预约相关 dr_visit
+
+        #region 添加
+        public dr_pre_visit Add(dr_pre_visit info, out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                db.dr_pre_visit.Add(info);
+                db.SaveChanges();
+                return info;
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                error = Share.BaseTool.FormatExceptionMessage(ex);
+                return null;
+            }
+
+        }
+        #endregion
+
+        #region 修改
+
+        #endregion
+
+        #region 查询
+
+         
+        public List<dr_pre_visit> SearchPreVisitList( int visit_id, int patient_id, DateTime? pre_date1, DateTime? pre_date2,
+            string pre_time, int pre_type, DateTime? createtime1, DateTime? createtime2,
+             orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                #region Command
+
+                string selectSql = string.Format("select * from dr_pre_visit WHERE TRUE ");
+
+                StringBuilder conditionSb = new System.Text.StringBuilder();
+
+                List<MySqlParameter> paraList = new List<MySqlParameter>();
+                #endregion
+
+                #region 搜索条件  
+                if (visit_id > 0)
+                {
+                    conditionSb.Append(" AND visit_id == @visit_id ");
+                    paraList.Add(new MySqlParameter("visit_id", visit_id));
+                }
+
+                if (patient_id > 0)
+                {
+                    conditionSb.Append(" AND patient_id == @patient_id ");
+                    paraList.Add(new MySqlParameter("patient_id", patient_id));
+                }
+
+                if (pre_date1.HasValue)
+                {
+                    conditionSb.Append(" AND DATEDIFF(pre_date,@pre_date1) >= 0 ");
+                    paraList.Add(new MySqlParameter("pre_date1", pre_date1.Value));
+                }
+
+                if (pre_date2.HasValue)
+                {
+                    conditionSb.Append(" AND DATEDIFF(pre_date,@pre_date2) <= 0 ");
+                    paraList.Add(new MySqlParameter("pre_date2", pre_date2.Value));
+                }
+
+
+                if (!string.IsNullOrEmpty(pre_time))
+                {
+                    conditionSb.Append(" AND pre_time == @pre_time ");
+                    paraList.Add(new MySqlParameter("pre_time", pre_time));
+                }
+
+                if (pre_type > 0)
+                {
+                    conditionSb.Append(" AND pre_type == @pre_type ");
+                    paraList.Add(new MySqlParameter("pre_type", pre_type));
+                }
+
+                if (createtime1.HasValue)
+                {
+                    conditionSb.Append(" AND DATEDIFF(createtime,@createtime1) >= 0 ");
+                    paraList.Add(new MySqlParameter("createtime1", createtime1.Value));
+                }
+
+                if (createtime2.HasValue)
+                {
+                    conditionSb.Append(" AND DATEDIFF(createtime,@createtime2) <= 0 ");
+                    paraList.Add(new MySqlParameter("createtime2", createtime2.Value));
+                }
+
+                
+
+                #endregion
+
+                #region 排序 分页
+                string orderbyStr = string.Empty;
+                if (!string.IsNullOrEmpty(orderbyCol) && orderby.HasValue)
+                    orderbyStr = orderbyFormat.getSortStr(orderby.Value, orderbyCol);
+                else
+                    orderbyStr = " order by pkid ";
+
+                selectSql += conditionSb.ToString() + orderbyStr;
+                if (pageIndex > 0)
+                {
+                    selectSql += " LIMIT @pageIndex , @pageSize ";
+                    paraList.Add(new MySqlParameter("pageIndex", (pageIndex - 1) * pageSize));
+                    paraList.Add(new MySqlParameter("pageSize", pageSize));
+                }
+                #endregion
+
+                #region 执行
+
+                var resultList = db.Database.SqlQuery<dr_pre_visit>(selectSql, paraList.ToArray()).ToList();
+                return resultList;
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                error += BaseTool.FormatExceptionMessage(ex);
+                return null;
+            }
+        }
+
+
+        #endregion
+
+        #endregion
     }
 }

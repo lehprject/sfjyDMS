@@ -10,5 +10,6 @@ namespace Dal
      public class DataAccessBase
     {
          protected sfjyEntities db = new sfjyEntities();
+         protected MySqlHelper sqlHelper = new MySqlHelper();
     }
 }
