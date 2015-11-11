@@ -138,6 +138,7 @@
     <Compile Include="Controllers\Doctor\VisitController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Patient\MedicalRcdController.cs" />
+    <Compile Include="Controllers\Patient\OrderController.cs" />
     <Compile Include="Controllers\Patient\RecipelistController.cs" />
     <Compile Include="Controllers\Patient\ReciptDrugController.cs" />
     <Compile Include="Controllers\User\CashdrawController.cs" />
