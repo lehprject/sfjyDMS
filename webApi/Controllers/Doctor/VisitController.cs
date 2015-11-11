@@ -41,7 +41,7 @@ namespace webApi.Controllers.Doctor
         }
 
         // POST api/<controller>
-        public void Post([FromBody]dr_visit value)
+        public Model.ResponseMessage Post([FromBody]dr_visit value)
         {
             #region Bll
             dr_visit_Bll visitBll = new dr_visit_Bll();
@@ -49,14 +49,20 @@ namespace webApi.Controllers.Doctor
             visitBll.CreateVisit(value, out error); 
             #endregion
 
-            if (string.IsNullOrEmpty(error))
-            {
+            Model.ResponseMessage result = new ResponseMessage();
 
+            if (string.IsNullOrEmpty(error))
+            { 
+                result.bSuccess = true;
+                result.Extend1 = value.pkid.ToString();
             }
             else
             {
-
+                result.bSuccess = false;
+                result.Message = error;
             }
+
+            return result;
         }
 
         // PUT api/<controller>/5
