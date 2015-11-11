@@ -12,9 +12,10 @@ namespace webApi.Controllers.User
     public class PromotionController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public IEnumerable<promotion_events> Get()
         {
-            return new string[] { "value1", "value2" };
+            promotion_events_Bll eventBll=new promotion_events_Bll ();
+            return eventBll.GetPromotionEventList(0);//类型
         }
 
         // GET api/<controller>/5
