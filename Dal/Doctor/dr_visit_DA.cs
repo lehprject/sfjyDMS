@@ -15,7 +15,7 @@ namespace Dal
         #region  出诊相关 dr_visit
 
         #region 添加
-        public dr_visit Add(dr_visit info, out string error)
+        public dr_visit CreateVisit(dr_visit info, out string error)
         {
             error = string.Empty;
             try
@@ -163,10 +163,10 @@ namespace Dal
          
         #endregion
 
-        #region  预约相关 dr_visit
+        #region  预约相关 dr_pre_visit
 
         #region 添加
-        public dr_pre_visit Add(dr_pre_visit info, out string error)
+        public dr_pre_visit CreatePreVisit(dr_pre_visit info, out string error)
         {
             error = string.Empty;
             try
