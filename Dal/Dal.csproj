@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="DataAccessBase.cs" />
+    <Compile Include="Doctor\dr_visit_DA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\md_docter_DA.cs" />
   </ItemGroup>
