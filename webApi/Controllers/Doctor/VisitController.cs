@@ -34,12 +34,17 @@ namespace webApi.Controllers.Doctor
         // GET api/<controller>/5
         public dr_visit Get(int id)
         {
-            return null;
+            #region Bll
+            dr_visit_Bll visitBll = new dr_visit_Bll();
+            #endregion
         }
 
         // POST api/<controller>
         public void Post([FromBody]dr_visit value)
         {
+            #region Bll
+            dr_visit_Bll visitBll = new dr_visit_Bll();
+            #endregion
         }
 
         // PUT api/<controller>/5
