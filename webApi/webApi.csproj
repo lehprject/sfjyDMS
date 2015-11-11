@@ -143,7 +143,9 @@
     </Compile>
     <Compile Include="Controllers\Patient\RecipelistController.cs" />
     <Compile Include="Controllers\Patient\ReciptDrugController.cs" />
-    <Compile Include="Controllers\User\CashdrawController.cs" />
+    <Compile Include="Controllers\User\CashdrawController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\User\PromotionController.cs" />
     <Compile Include="Controllers\User\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

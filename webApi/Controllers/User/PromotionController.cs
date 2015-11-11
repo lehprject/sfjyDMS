@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Model;
+using Bll;
 
 namespace webApi.Controllers.User
 {
@@ -16,9 +18,12 @@ namespace webApi.Controllers.User
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public promotion_events Get(int id)
         {
-            return "value";
+            #region Bll
+            Base_Bll bll = new Base_Bll();
+            return bll.GetInfo<promotion_events>(id);
+            #endregion
         }
 
         // POST api/<controller>
