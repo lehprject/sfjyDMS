@@ -43,6 +43,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Doctor\dr_visit_Bll.cs" />
     <Compile Include="Patient\patient_medical_rcd_Bll.cs" />
+    <Compile Include="Patient\patient_order_Bll.cs" />
     <Compile Include="Patient\patient_recipelist_Bll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\md_docter_Bll.cs" />
