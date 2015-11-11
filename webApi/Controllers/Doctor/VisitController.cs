@@ -35,7 +35,8 @@ namespace webApi.Controllers.Doctor
         public dr_visit Get(int id)
         {
             #region Bll
-            dr_visit_Bll visitBll = new dr_visit_Bll();
+            Base_Bll bll = new Base_Bll();
+            return bll.GetInfo<dr_visit>(id);
             #endregion
         }
 
@@ -44,7 +45,18 @@ namespace webApi.Controllers.Doctor
         {
             #region Bll
             dr_visit_Bll visitBll = new dr_visit_Bll();
+            string error = string.Empty;
+            visitBll.CreateVisit(value, out error); 
             #endregion
+
+            if (string.IsNullOrEmpty(error))
+            {
+
+            }
+            else
+            {
+
+            }
         }
 
         // PUT api/<controller>/5
