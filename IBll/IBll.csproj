@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\IBase_Bll.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Doctor\Idr_visit_Bll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
