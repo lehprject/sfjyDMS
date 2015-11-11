@@ -10,7 +10,7 @@ using Model.ConfigClass;
 
 namespace webApi.Controllers.Patient
 {
-    public class ReciptDrugController : ApiController
+    public class ReciptDrugController : BaseApiController
     {
         // GET api/<controller>
         public IEnumerable<string> Get()
