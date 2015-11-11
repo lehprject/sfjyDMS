@@ -7,13 +7,8 @@ using Model;
 
 namespace Dal
 {
-    public class md_docter_DA
+    public class md_docter_DA : DataAccessBase
     {
-        #region fields
-        MySqlHelper sqlHelper = new MySqlHelper();
-        sfjyEntities db = new sfjyEntities();
-        #endregion
-
         #region 查询
 
         public md_docter GetDocterById(int id)
