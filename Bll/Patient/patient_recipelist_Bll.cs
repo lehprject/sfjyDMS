@@ -11,7 +11,7 @@ using Share;
 
 namespace Bll
 {
-    public class patient_recipelist_Bll
+    public class patient_recipelist_Bll:Ipatient_recipelist_Bll
     {
         #region  处方相关 patient_recipelist
 
