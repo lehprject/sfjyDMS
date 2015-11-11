@@ -4,21 +4,39 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Model;
+using Bll;
 
 namespace webApi.Controllers.Patient
 {
-    public class OrderController : ApiController
+    public class OrderController : BaseApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public IEnumerable<patient_order> Get(int? pageindex)
         {
-            return new string[] { "value1", "value2" };
+            if (pageindex.HasValue == false)
+                pageindex = 1;
+
+            patient_order_Bll Bll = new patient_order_Bll();
+            string error = string.Empty;
+            int service_type = 0;
+            var resultList = Bll.SearchPatientOrderList(0, DoctorID, service_type, null,
+       null, null, pageindex.Value, PageSize, out  error);
+            return resultList;
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public IEnumerable<patient_order> Get(int patient_id, int? pageindex)
         {
-            return "value";
+            if (pageindex.HasValue == false)
+                pageindex = 1;
+
+            patient_order_Bll Bll = new patient_order_Bll();
+            string error = string.Empty;
+            int service_type = 0;
+            var resultList = Bll.SearchPatientOrderList(0, DoctorID, service_type, null,
+       null, null, pageindex.Value, PageSize, out  error);
+            return resultList;
         }
 
         // POST api/<controller>

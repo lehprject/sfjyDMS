@@ -9,6 +9,6 @@ namespace IBll
 {
     public interface Imd_cashdraw_app_Bll
     {
-        md_cashdraw_app CreateVisit(md_cashdraw_app info, out string error);
+        md_cashdraw_app CreateCashdrawApp(md_cashdraw_app info, out string error);
     }
 }

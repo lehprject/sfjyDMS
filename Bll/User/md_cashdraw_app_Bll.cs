@@ -14,7 +14,7 @@ namespace Bll
     public class md_cashdraw_app_Bll:Imd_cashdraw_app_Bll
     {
         #region 添加
-        public md_cashdraw_app CreateVisit(md_cashdraw_app info, out string error)
+        public md_cashdraw_app CreateCashdrawApp(md_cashdraw_app info, out string error)
         {
             error = string.Empty;
             try
