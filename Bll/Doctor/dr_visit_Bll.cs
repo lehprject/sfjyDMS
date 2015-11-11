@@ -130,6 +130,13 @@ namespace Bll
             }
         }
 
+        public List<dr_pre_visit> GetPreVisitListByVisitID(int visitID)
+        {
+            dr_visit_DA da = new dr_visit_DA();
+            var resultList = da.GetPreVisitListByVisitID(visitID);
+            return resultList;
+        }
+
 
         #endregion
 

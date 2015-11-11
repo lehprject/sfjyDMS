@@ -4,6 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Bll;
+using Model;
+using Share;
 
 namespace webApi.Controllers.Doctor
 {
@@ -16,9 +19,15 @@ namespace webApi.Controllers.Doctor
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public List<dr_pre_visit> Get([FromBody] int visitid)
         {
-            return "value";
+            #region Bll
+            string error = string.Empty;
+            dr_visit_Bll visitBll = new dr_visit_Bll();
+            var resultList = visitBll.GetPreVisitListByVisitID(visitid);
+            #endregion
+
+            return resultList;
         }
 
         // POST api/<controller>

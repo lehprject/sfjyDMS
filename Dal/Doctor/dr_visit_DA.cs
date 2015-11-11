@@ -290,6 +290,10 @@ namespace Dal
             }
         }
 
+        public List<dr_pre_visit> GetPreVisitListByVisitID(int visitID)
+        {
+            return db.dr_pre_visit.Where(t => t.visit_id == visitID).ToList();
+        }
 
         #endregion
 
