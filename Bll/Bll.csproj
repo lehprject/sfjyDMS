@@ -42,6 +42,8 @@
     <Compile Include="Base\Base_Bll.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Doctor\dr_visit_Bll.cs" />
+    <Compile Include="Patient\patient_medical_rcd_Bll.cs" />
+    <Compile Include="Patient\patient_recipelist_Bll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\md_docter_Bll.cs" />
   </ItemGroup>
@@ -63,9 +65,7 @@
       <Name>Share</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Patient\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
