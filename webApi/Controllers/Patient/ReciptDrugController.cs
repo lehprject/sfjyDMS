@@ -4,6 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Bll;
+using Model;
+using Model.ConfigClass;
 
 namespace webApi.Controllers.Patient
 {
@@ -16,9 +19,11 @@ namespace webApi.Controllers.Patient
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public IEnumerable<patient_recipelist_druguse> Get(int recipelist_id)
         {
-            return "value";
+            patient_recipelist_Bll reciptBll = new patient_recipelist_Bll();
+            var resultList = reciptBll.GetRecipeDrugListByReciptID(recipelist_id);
+            return resultList;
         }
 
         // POST api/<controller>
