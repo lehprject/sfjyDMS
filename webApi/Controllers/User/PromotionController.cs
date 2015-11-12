@@ -4,21 +4,27 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Model;
+using Bll;
 
 namespace webApi.Controllers.User
 {
     public class PromotionController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public IEnumerable<promotion_events> Get()
         {
-            return new string[] { "value1", "value2" };
+            promotion_events_Bll eventBll=new promotion_events_Bll ();
+            return eventBll.GetPromotionEventList(0);//类型
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public promotion_events Get(int id)
         {
-            return "value";
+            #region Bll
+            Base_Bll bll = new Base_Bll();
+            return bll.GetInfo<promotion_events>(id);
+            #endregion
         }
 
         // POST api/<controller>

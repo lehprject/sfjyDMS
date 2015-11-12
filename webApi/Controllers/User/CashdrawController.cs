@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Model;
+using Bll;
 
 namespace webApi.Controllers.User
 {
@@ -21,9 +23,24 @@ namespace webApi.Controllers.User
             return "value";
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        public Model.ResponseMessage Post([FromBody]md_cashdraw_app info)
         {
+            md_cashdraw_app_Bll cashdrawBll = new md_cashdraw_app_Bll();
+            string error = string.Empty;
+            cashdrawBll.CreateCashdrawApp(info, out error);
+
+            Model.ResponseMessage result = new ResponseMessage();
+            if (!string.IsNullOrEmpty(error))
+            {
+                result.bSuccess = true;
+            }
+            else
+            {
+                result.bSuccess = false;
+                result.Message = error;
+            }
+
+            return result;
         }
 
         // PUT api/<controller>/5
