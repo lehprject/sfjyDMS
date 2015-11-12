@@ -43,6 +43,11 @@ namespace Bll
                 return null;
             }
         }
+
+        public void SeachChkHistroy(int patient_id, int chk_type_id)
+        {
+
+        }
         #endregion
 
         #endregion
