@@ -42,6 +42,7 @@
     <Compile Include="Base\IBase_Bll.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Doctor\Idr_visit_Bll.cs" />
+    <Compile Include="Patient\Ipatient_info_Bll.cs" />
     <Compile Include="Patient\Ipatient_medical_rcd_Bll.cs" />
     <Compile Include="Patient\Ipatient_order_Bll.cs" />
     <Compile Include="Patient\Ipatient_recipelist_Bll.cs" />
