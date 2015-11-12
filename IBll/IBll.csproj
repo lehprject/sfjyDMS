@@ -45,7 +45,8 @@
     <Compile Include="MasterData\Imd_druginfo_Bll.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Patient\Ichk_info_Bll.cs" />
+    <Compile Include="MasterData\Ichk_info_Bll.cs" />
+    <Compile Include="Patient\Ipatient_checklist_Bll.cs" />
     <Compile Include="Patient\Ipatient_info_Bll.cs" />
     <Compile Include="Patient\Ipatient_medical_rcd_Bll.cs" />
     <Compile Include="Patient\Ipatient_order_Bll.cs" />
