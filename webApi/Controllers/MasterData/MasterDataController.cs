@@ -4,16 +4,21 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Model;
+using Bll;
 
 namespace webApi.Controllers.MasterData
 {
     public class MasterDataController : ApiController
     {
+        #region 医院
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public IEnumerable<md_hospital> Get()
         {
-            return new string[] { "value1", "value2" };
+            md_somebase_info_Bll basebll = new md_somebase_info_Bll();
+            return basebll.GetAllHospitalList();
         }
+        #endregion
 
         // GET api/<controller>/5
         public string Get(int id)

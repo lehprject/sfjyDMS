@@ -13,9 +13,11 @@ namespace Bll
 {
     public class promotion_events_Bll
     {
-        public List<promotion_events> GetPromotionEventList(int face_type)
+        #region 查询
+        public List<promotion_events> GetPromotionEventList(int face_type, orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
         {
-            return new promotion_events_DA().GetPromotionEventList(face_type);
+            return new promotion_events_DA().GetPromotionEventList(face_type,orderby,orderbyCol,pageIndex,pageSize,out error);
         }
+        #endregion
     }
 }

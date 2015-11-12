@@ -9,13 +9,30 @@ using Bll;
 
 namespace webApi.Controllers.User
 {
-    public class PromotionController : ApiController
+    public class PromotionController :BaseApiController
     {
         // GET api/<controller>
-        public IEnumerable<promotion_events> Get()
+        public IEnumerable<promotion_events> Get(int? pageindex)
         {
-            promotion_events_Bll eventBll=new promotion_events_Bll ();
-            return eventBll.GetPromotionEventList(0);//类型
+            if (pageindex.HasValue == false)
+                pageindex = 1;
+
+            promotion_events_Bll Bll = new promotion_events_Bll();
+            string error = string.Empty;
+            var resultList = Bll.GetPromotionEventList(0, null, null, pageindex.Value, PageSize, out error);
+            return resultList;
+        }
+
+        // GET api/<controller>/5
+        public IEnumerable<promotion_events> Get(int patient_id, int? pageindex)
+        {
+            if (pageindex.HasValue == false)
+                pageindex = 1;
+
+            promotion_events_Bll Bll = new promotion_events_Bll();
+            string error = string.Empty;
+            var resultList = Bll.GetPromotionEventList(0, null, null, pageindex.Value, PageSize, out error);
+            return resultList;
         }
 
         // GET api/<controller>/5

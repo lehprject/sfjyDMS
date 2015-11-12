@@ -34,10 +34,10 @@ namespace Dal
                 db.SaveChanges();
                 return info;
             }
-            catch (Exception ex)
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {
-                error += ex.ToString();
-                return info;
+                error = Share.BaseTool.FormatExceptionMessage(ex);
+                return null;
             }
         }
 
