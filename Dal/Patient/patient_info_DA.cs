@@ -25,7 +25,7 @@ namespace Dal
         /// <param name="alllergic_his"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public List<patient_disease> SearchPatientDiseaseList(string name, string mobile, string gender, string cardtype, string cardno, DateTime? createtime,
+        public List<patient_disease> SearchPatientDiseaseList(int hospital_id,int drid, string name, string gender, string cardtype, string cardno, DateTime? createtime,
             string alllergic_his,out string error)
         {
             error = string.Empty;
@@ -41,16 +41,22 @@ namespace Dal
                 #endregion
 
                 #region 搜索条件
+                if (hospital_id>0)
+                {
+                    conditionSb.Append(" AND d.hospital_id = @hospital_id ");
+                    paraList.Add(new MySqlParameter("hospital_id", hospital_id));
+                }
+
+                if (drid > 0)
+                {
+                    conditionSb.Append(" AND d.drid = @drid ");
+                    paraList.Add(new MySqlParameter("drid", drid));
+                }
+
                 if (!string.IsNullOrEmpty(name))
                 {
                     conditionSb.Append(" AND info.name = @name ");
                     paraList.Add(new MySqlParameter("name", name));
-                }
-
-                if (!string.IsNullOrEmpty(mobile))
-                {
-                    conditionSb.Append(" AND info.mobile = @mobile ");
-                    paraList.Add(new MySqlParameter("mobile", mobile));
                 }
 
                 if (!string.IsNullOrEmpty(gender))
@@ -86,13 +92,6 @@ namespace Dal
 
                 conditionSb.Append(" group by d.sub_disease ");
 
-                #endregion
-
-                #region 排序 分页
-                string orderbyStr = string.Empty;
-                orderbyStr = " order by d.pkid ";
-
-                selectSql += conditionSb.ToString() + orderbyStr;
                 #endregion
 
                 #region 执行

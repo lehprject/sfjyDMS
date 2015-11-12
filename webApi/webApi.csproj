@@ -152,6 +152,7 @@
     <Compile Include="Controllers\Doctor\PreVisitController.cs" />
     <Compile Include="Controllers\Doctor\VisitController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MasterData\DruginfoController.cs" />
     <Compile Include="Controllers\Patient\DiseaseController.cs" />
     <Compile Include="Controllers\Patient\MedicalRcdController.cs" />
     <Compile Include="Controllers\Patient\OrderController.cs">

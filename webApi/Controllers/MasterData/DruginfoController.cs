@@ -4,21 +4,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Model;
-using Bll;
 
-namespace webApi.Controllers.Patient
+namespace webApi.Controllers.MasterData
 {
-    public class DiseaseController : BaseApiController
+    public class DruginfoController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<patient_disease> Get(string name)
+        public IEnumerable<string> Get()
         {
-            //分组查询
-            string error = string.Empty;
-            patient_info_Bll infobll = new patient_info_Bll();
-            var resultlist = infobll.SearchPatientDiseaseList(0, DoctorID, name, null, null, null, null,null, out error);
-            return resultlist;
+            return new string[] { "value1", "value2" };
         }
 
         // GET api/<controller>/5
