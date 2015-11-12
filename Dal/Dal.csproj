@@ -57,6 +57,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="DataAccessBase.cs" />
     <Compile Include="Doctor\dr_visit_DA.cs" />
+    <Compile Include="MasterData\md_druginfo_DA.cs" />
     <Compile Include="Patient\chk_info_DA.cs" />
     <Compile Include="Patient\patient_info_DA.cs" />
     <Compile Include="Patient\patient_medical_rcd_DA.cs" />
