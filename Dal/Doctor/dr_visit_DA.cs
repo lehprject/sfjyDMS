@@ -210,13 +210,13 @@ namespace Dal
                 #region 搜索条件  
                 if (visit_id > 0)
                 {
-                    conditionSb.Append(" AND visit_id == @visit_id ");
+                    conditionSb.Append(" AND visit_id = @visit_id ");
                     paraList.Add(new MySqlParameter("visit_id", visit_id));
                 }
 
                 if (patient_id > 0)
                 {
-                    conditionSb.Append(" AND patient_id == @patient_id ");
+                    conditionSb.Append(" AND patient_id = @patient_id ");
                     paraList.Add(new MySqlParameter("patient_id", patient_id));
                 }
 
@@ -235,13 +235,13 @@ namespace Dal
 
                 if (!string.IsNullOrEmpty(pre_time))
                 {
-                    conditionSb.Append(" AND pre_time == @pre_time ");
+                    conditionSb.Append(" AND pre_time = @pre_time ");
                     paraList.Add(new MySqlParameter("pre_time", pre_time));
                 }
 
                 if (pre_type > 0)
                 {
-                    conditionSb.Append(" AND pre_type == @pre_type ");
+                    conditionSb.Append(" AND pre_type = @pre_type ");
                     paraList.Add(new MySqlParameter("pre_type", pre_type));
                 }
 

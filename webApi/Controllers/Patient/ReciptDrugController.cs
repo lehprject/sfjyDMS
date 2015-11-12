@@ -19,16 +19,46 @@ namespace webApi.Controllers.Patient
         }
 
         // GET api/<controller>/5
-        public IEnumerable<patient_recipelist_druguse> Get(int recipelist_id)
+        //public IEnumerable<patient_recipelist_druguse> Get(int recipelist_id)
+        //{
+        //    patient_recipelist_Bll reciptBll = new patient_recipelist_Bll();
+        //    var resultList = reciptBll.GetRecipeDrugListByReciptID(recipelist_id);
+        //    return resultList;
+        //}
+
+        //public IEnumerable<string> GetHi()
+        //{
+        //    return new[] { "hi", "hello" };
+        //}
+
+        //public IEnumerable<string> Get(string p)
+        //{
+        //    return new[] { "hi", "hello",p };
+        //}
+
+        public IEnumerable<string> Get(DateTime d)
         {
-            patient_recipelist_Bll reciptBll = new patient_recipelist_Bll();
-            var resultList = reciptBll.GetRecipeDrugListByReciptID(recipelist_id);
-            return resultList;
+            return new[] { "hi", "hello", "1" };
+        }
+
+        public IEnumerable<string> Get(DateTime d,int a)
+        {
+            return new[] { "hi", "hello", "2" };
+        }
+
+
+        public class vm_parameter
+        {
+            public int orderid { get; set; }
+
+            public patient_recipelist_druguse[] jsondata { get; set; }
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public object Post1([FromBody]vm_parameter b, int orderid)
         {
+            
+            return b.jsondata;
         }
 
         // PUT api/<controller>/5

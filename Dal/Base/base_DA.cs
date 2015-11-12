@@ -93,7 +93,7 @@ namespace Dal
             string tableName = type.Name;
             if (type.GetProperty(columnName) == null)
                 return default(T);
-            string sql = string.Format("select * from {0} where  {1} == @pkid ", tableName, columnName);
+            string sql = string.Format("select * from {0} where  {1} = @pkid ", tableName, columnName);
 
             #region execute
 
