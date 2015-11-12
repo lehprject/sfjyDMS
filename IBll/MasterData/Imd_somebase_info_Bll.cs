@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model;
 
-namespace IBll.MasterData
+namespace IBll
 {
-    class Imd_somebase_info_Bll
+    public interface Imd_somebase_info_Bll
     {
+        List<md_hospital> GetAllHospitalList();
     }
 }
