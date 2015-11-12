@@ -35,7 +35,7 @@
       <HintPath>..\..\dll files\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
-      <HintPath>..\..\dll\NPOI.dll</HintPath>
+      <HintPath>bin\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
