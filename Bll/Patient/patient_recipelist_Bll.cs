@@ -16,7 +16,7 @@ namespace Bll
         #region  处方相关 patient_recipelist
 
         #region 添加
-        public bool CreateReciptList(patient_medical_rcd info, List<patient_recipelist_druguse> drugList, out string error)
+        public bool CreateReciptList(patient_recipelist info, List<patient_recipelist_druguse> drugList, out string error)
         {
             error = string.Empty;
             try
@@ -69,7 +69,7 @@ namespace Bll
         #region  处方用药相关 patient_recipelist_druguse
 
         #region 添加
-        public patient_medical_rcd Add(patient_medical_rcd info, out string error)
+        public patient_recipelist_druguse Add(patient_recipelist_druguse info, out string error)
         {
             error = string.Empty;
             try

@@ -13,7 +13,7 @@ namespace IBll
         #region  处方相关 patient_recipelist
 
         #region 添加
-        bool CreateReciptList(patient_medical_rcd info, List<patient_recipelist_druguse> drugList, out string error);
+        bool CreateReciptList(patient_recipelist info, List<patient_recipelist_druguse> drugList, out string error);
         #endregion
 
         #region 修改
@@ -34,7 +34,7 @@ namespace IBll
         #region  处方用药相关 patient_recipelist_druguse
 
         #region 添加
-        patient_medical_rcd Add(patient_medical_rcd info, out string error);
+        patient_recipelist_druguse Add(patient_recipelist_druguse info, out string error);
         #endregion
 
         #region 修改

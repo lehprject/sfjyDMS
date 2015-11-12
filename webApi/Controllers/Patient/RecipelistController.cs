@@ -28,7 +28,7 @@ namespace webApi.Controllers.Patient
         }
 
         // POST api/<controller>
-        public Model.ResponseMessage Post([FromBody]patient_medical_rcd info, List<patient_recipelist_druguse> drugList)
+        public Model.ResponseMessage Post([FromBody]patient_recipelist info, List<patient_recipelist_druguse> drugList)
         {
             patient_recipelist_Bll reciptBll = new patient_recipelist_Bll();
             string error = string.Empty;
