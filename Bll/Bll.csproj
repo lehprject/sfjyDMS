@@ -42,6 +42,7 @@
     <Compile Include="Base\Base_Bll.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Doctor\dr_visit_Bll.cs" />
+    <Compile Include="MasterData\md_druginfo_Bll.cs" />
     <Compile Include="Patient\patient_info_Bll.cs" />
     <Compile Include="Patient\patient_medical_rcd_Bll.cs" />
     <Compile Include="Patient\patient_order_Bll.cs" />
