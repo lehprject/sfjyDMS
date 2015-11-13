@@ -149,6 +149,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
+    <Compile Include="Controllers\Doctor\AddVisitController.cs" />
+    <Compile Include="Controllers\Doctor\PreAddVisitController.cs" />
     <Compile Include="Controllers\Doctor\PreVisitController.cs" />
     <Compile Include="Controllers\Doctor\VisitController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
