@@ -29,7 +29,7 @@ namespace Dal
                 error = Share.BaseTool.FormatExceptionMessage(ex);
                 return null;
             }
-           
+
         }
         #endregion
 
@@ -67,7 +67,7 @@ namespace Dal
                 #region Command
 
                 string selectSql = string.Format("select * from dr_visit WHERE TRUE ");
-                 
+
                 StringBuilder conditionSb = new System.Text.StringBuilder();
 
                 List<MySqlParameter> paraList = new List<MySqlParameter>();
@@ -85,7 +85,7 @@ namespace Dal
                     conditionSb.Append("AND drid = @drid");
                     paraList.Add(new MySqlParameter("drid", drid));
                 }
-                 
+
                 if (visit_date1.HasValue)
                 {
                     conditionSb.Append(" AND DATEDIFF(visit_date,@visit_date1) >= 0 ");
@@ -104,7 +104,7 @@ namespace Dal
                     paraList.Add(new MySqlParameter("visit_time", visit_time));
                 }
 
-                if(service_type > 0)
+                if (service_type > 0)
                 {
                     conditionSb.Append("AND service_type = @service_type");
                     paraList.Add(new MySqlParameter("service_type", service_type));
@@ -160,7 +160,7 @@ namespace Dal
         }
 
         #endregion
-         
+
         #endregion
 
         #region  预约相关 dr_pre_visit
@@ -190,9 +190,9 @@ namespace Dal
 
         #region 查询
 
-         
-        public List<dr_pre_visit> SearchPreVisitList( int visit_id, int patient_id, DateTime? pre_date1, DateTime? pre_date2,
-            string pre_time, int pre_type, DateTime? createtime1, DateTime? createtime2,
+
+        public List<dr_pre_visit> SearchPreVisitList(int drid, int visit_id, int patient_id, DateTime? pre_date1, DateTime? pre_date2,
+            string pre_time, int pre_type, DateTime? createtime1, DateTime? createtime2, int status , DateTime? visit_date1, DateTime? visit_date2,
              orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
         {
             error = string.Empty;
@@ -200,64 +200,83 @@ namespace Dal
             {
                 #region Command
 
-                string selectSql = string.Format("select * from dr_pre_visit WHERE TRUE ");
+                string selectSql = string.Format("select * from dr_pre_visit pre left join dr_visit on pre.visit_id=dr_visit.pkid WHERE TRUE ");
 
                 StringBuilder conditionSb = new System.Text.StringBuilder();
 
                 List<MySqlParameter> paraList = new List<MySqlParameter>();
                 #endregion
 
-                #region 搜索条件  
+                #region 搜索条件
+                if (drid > 0)
+                {
+                    conditionSb.Append(" AND dr_visit.drid = @drid ");
+                    paraList.Add(new MySqlParameter("drid", drid));
+                }
+
                 if (visit_id > 0)
                 {
-                    conditionSb.Append(" AND visit_id = @visit_id ");
+                    conditionSb.Append(" AND pre.visit_id = @visit_id ");
                     paraList.Add(new MySqlParameter("visit_id", visit_id));
                 }
 
                 if (patient_id > 0)
                 {
-                    conditionSb.Append(" AND patient_id = @patient_id ");
+                    conditionSb.Append(" AND pre.patient_id = @patient_id ");
                     paraList.Add(new MySqlParameter("patient_id", patient_id));
                 }
 
                 if (pre_date1.HasValue)
                 {
-                    conditionSb.Append(" AND DATEDIFF(pre_date,@pre_date1) >= 0 ");
+                    conditionSb.Append(" AND DATEDIFF(pre.pre_date,@pre_date1) >= 0 ");
                     paraList.Add(new MySqlParameter("pre_date1", pre_date1.Value));
                 }
 
                 if (pre_date2.HasValue)
                 {
-                    conditionSb.Append(" AND DATEDIFF(pre_date,@pre_date2) <= 0 ");
+                    conditionSb.Append(" AND DATEDIFF(pre.pre_date,@pre_date2) <= 0 ");
                     paraList.Add(new MySqlParameter("pre_date2", pre_date2.Value));
                 }
 
 
                 if (!string.IsNullOrEmpty(pre_time))
                 {
-                    conditionSb.Append(" AND pre_time = @pre_time ");
+                    conditionSb.Append(" AND pre.pre_time = @pre_time ");
                     paraList.Add(new MySqlParameter("pre_time", pre_time));
                 }
 
                 if (pre_type > 0)
                 {
-                    conditionSb.Append(" AND pre_type = @pre_type ");
+                    conditionSb.Append(" AND pre.pre_type = @pre_type ");
                     paraList.Add(new MySqlParameter("pre_type", pre_type));
                 }
 
-                if (createtime1.HasValue)
+                if (visit_date1.HasValue)
                 {
-                    conditionSb.Append(" AND DATEDIFF(createtime,@createtime1) >= 0 ");
+                    conditionSb.Append(" AND DATEDIFF(pre.createtime,@createtime1) >= 0 ");
                     paraList.Add(new MySqlParameter("createtime1", createtime1.Value));
                 }
 
                 if (createtime2.HasValue)
                 {
-                    conditionSb.Append(" AND DATEDIFF(createtime,@createtime2) <= 0 ");
+                    conditionSb.Append(" AND DATEDIFF(pre.createtime,@createtime2) <= 0 ");
                     paraList.Add(new MySqlParameter("createtime2", createtime2.Value));
                 }
 
-                
+                conditionSb.Append(" AND dr_visit.status = @status ");
+                paraList.Add(new MySqlParameter("status", status));
+
+                if (visit_date1.HasValue)
+                {
+                    conditionSb.Append(" AND DATEDIFF(dr_visit.visit_date,@visit_date1) >= 0 ");
+                    paraList.Add(new MySqlParameter("visit_date1", visit_date1.Value));
+                }
+
+                if (visit_date2.HasValue)
+                {
+                    conditionSb.Append(" AND DATEDIFF(dr_visit.visit_date,@visit_date2) <= 0 ");
+                    paraList.Add(new MySqlParameter("visit_date2", visit_date2.Value));
+                }
 
                 #endregion
 

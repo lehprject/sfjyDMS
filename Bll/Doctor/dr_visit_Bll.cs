@@ -110,16 +110,16 @@ namespace Bll
         #region 查询
 
 
-        public List<dr_pre_visit> SearchPreVisitList(int visit_id, int patient_id, DateTime? pre_date1, DateTime? pre_date2,
-            string pre_time, int pre_type, DateTime? createtime1, DateTime? createtime2,
+        public List<dr_pre_visit> SearchPreVisitList(int drid, int visit_id, int patient_id, DateTime? pre_date1, DateTime? pre_date2,
+            string pre_time, int pre_type, DateTime? createtime1, DateTime? createtime2, int status, DateTime? visit_date1, DateTime? visit_date2,
              orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
         {
             error = string.Empty;
             try
             {
                 dr_visit_DA da = new dr_visit_DA();
-                var resultList = da.SearchPreVisitList(visit_id, patient_id, pre_date1, pre_date2,
-                                     pre_time, pre_type, createtime1, createtime2,
+                var resultList = da.SearchPreVisitList(drid ,visit_id, patient_id, pre_date1, pre_date2,
+                                     pre_time, pre_type, createtime1, createtime2, status , visit_date1, visit_date2,
                                       orderby, orderbyCol, pageIndex, pageSize, out  error);
                 return resultList;
             }

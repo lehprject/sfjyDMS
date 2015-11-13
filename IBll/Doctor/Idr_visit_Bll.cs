@@ -43,8 +43,8 @@ namespace IBll
         #region 查询
 
 
-        List<dr_pre_visit> SearchPreVisitList(int visit_id, int patient_id, DateTime? pre_date1, DateTime? pre_date2,
-            string pre_time, int pre_type, DateTime? createtime1, DateTime? createtime2,
+        List<dr_pre_visit> SearchPreVisitList(int drid, int visit_id, int patient_id, DateTime? pre_date1, DateTime? pre_date2,
+            string pre_time, int pre_type, DateTime? createtime1, DateTime? createtime2, int status, DateTime? visit_date1, DateTime? visit_date2,
              orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error);
         List<dr_pre_visit> GetPreVisitListByVisitID(int visitID);
 
