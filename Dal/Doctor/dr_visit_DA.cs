@@ -200,7 +200,7 @@ namespace Dal
             {
                 #region Command
 
-                string selectSql = string.Format("select * from dr_pre_visit pre left join dr_visit on pre.visit_id=dr_visit.pkid WHERE TRUE ");
+                string selectSql = string.Format("select *,COALESCE(info.name,'') as patient_name,info.gender as gender from dr_pre_visit pre left join dr_visit on pre.visit_id=dr_visit.pkid left join patient_info info on pre.patient_id=info.pkid WHERE TRUE ");
 
                 StringBuilder conditionSb = new System.Text.StringBuilder();
 
@@ -285,7 +285,7 @@ namespace Dal
                 if (!string.IsNullOrEmpty(orderbyCol) && orderby.HasValue)
                     orderbyStr = orderbyFormat.getSortStr(orderby.Value, orderbyCol);
                 else
-                    orderbyStr = " order by pkid ";
+                    orderbyStr = " order by pre.pkid ";
 
                 selectSql += conditionSb.ToString() + orderbyStr;
                 if (pageIndex > 0)

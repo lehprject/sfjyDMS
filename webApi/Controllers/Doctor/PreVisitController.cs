@@ -10,12 +10,20 @@ using Share;
 
 namespace webApi.Controllers.Doctor
 {
-    public class PreVisitController : ApiController
+    public class PreVisitController : BaseApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public IEnumerable<dr_pre_visit> Get(int? pageindex, bool flag)
         {
-            return new string[] { "value1", "value2" };
+            if (pageindex.HasValue == false)
+                pageindex = 1;
+
+            dr_visit_Bll visitBll = new dr_visit_Bll();
+            string error = string.Empty;
+            var resultList = visitBll.SearchPreVisitList(DoctorID, 0, 0, null, null,
+            null, 0, null, null, 0, null, null,
+             null, null, pageindex.Value, PageSize, out error);
+            return resultList;
         }
 
         // GET api/<controller>/5
