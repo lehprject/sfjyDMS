@@ -13,7 +13,7 @@ namespace Dal
     public class patient_order_DA : DataAccessBase
     {
         #region 查询
-        public List<patient_order> SearchPatientOrderList(int patient_id, int drid, int service_type, DateTime? createtime,
+        public List<patient_order> SearchPatientOrderList(int patient_id, int drid, int service_type, DateTime? createtime1, DateTime? createtime2,
             orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
         {
             error = string.Empty;
@@ -47,10 +47,16 @@ namespace Dal
                     paraList.Add(new MySqlParameter("service_type", service_type));
                 }
 
-                if (createtime.HasValue)
+                if (createtime1.HasValue)
                 {
-                    conditionSb.Append(" AND DATEDIFF(createtime,@createtime) >= 0 ");
-                    paraList.Add(new MySqlParameter("createtime", createtime.Value));
+                    conditionSb.Append(" AND DATEDIFF(createtime,@createtime1) >= 0 ");
+                    paraList.Add(new MySqlParameter("createtime1", createtime1.Value));
+                }
+
+                if (createtime2.HasValue)
+                {
+                    conditionSb.Append(" AND DATEDIFF(createtime,@createtime2) <= 0 ");
+                    paraList.Add(new MySqlParameter("createtime2", createtime2.Value));
                 }
 
                 #endregion

@@ -25,7 +25,7 @@ namespace Dal
         /// <param name="alllergic_his"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public List<patient_disease> SearchPatientDiseaseList(int hospital_id,int drid, string name, string gender, string cardtype, string cardno, DateTime? createtime,
+        public List<patient_disease> SearchPatientDiseaseList(int hospital_id, int drid, string name, string gender, string cardtype, string cardno, DateTime? createtime1, DateTime? createtime2,
             string alllergic_his,out string error)
         {
             error = string.Empty;
@@ -78,10 +78,16 @@ namespace Dal
                 }
 
 
-                if (createtime.HasValue)
+                if (createtime1.HasValue)
                 {
-                    conditionSb.Append(" AND info.createtime = @createtime ");
-                    paraList.Add(new MySqlParameter("createtime", createtime));
+                    conditionSb.Append(" AND DATEDIFF(createtime,@createtime1) >= 0 ");
+                    paraList.Add(new MySqlParameter("createtime1", createtime1.Value));
+                }
+
+                if (createtime2.HasValue)
+                {
+                    conditionSb.Append(" AND DATEDIFF(createtime,@createtime2) <= 0 ");
+                    paraList.Add(new MySqlParameter("createtime2", createtime2.Value));
                 }
 
                 if (!string.IsNullOrEmpty(alllergic_his))

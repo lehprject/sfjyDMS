@@ -17,14 +17,17 @@ namespace webApi.Controllers.Patient
             //分组查询
             string error = string.Empty;
             patient_info_Bll infobll = new patient_info_Bll();
-            var resultlist = infobll.SearchPatientDiseaseList(0, DoctorID, name, null, null, null, null,null, out error);
+            var resultlist = infobll.SearchPatientDiseaseList(0, DoctorID, name, null, null,null, null, null,null, out error);
             return resultlist;
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public patient_info Get(int id)
         {
-            return "value";
+            #region Bll
+            Base_Bll bll = new Base_Bll();
+            return bll.GetInfo<patient_info>(id);
+            #endregion
         }
 
         // POST api/<controller>

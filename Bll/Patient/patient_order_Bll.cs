@@ -33,14 +33,14 @@ namespace Bll
         /// <param name="pageSize"></param>
         /// <param name="error"></param>
         /// <returns>null则出错</returns>
-        public List<patient_order> SearchPatientOrderList(int patient_id, int drid, int service_type, DateTime? createtime,
+        public List<patient_order> SearchPatientOrderList(int patient_id, int drid, int service_type, DateTime? createtime, DateTime? createtime2,
        orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
         {
             error = string.Empty;
             try
             {
                 patient_order_DA da = new patient_order_DA();
-                var resultList = da.SearchPatientOrderList(patient_id, drid, service_type, createtime,
+                var resultList = da.SearchPatientOrderList(patient_id, drid, service_type, createtime,createtime2,
                                     orderby, orderbyCol, pageIndex, pageSize, out   error);
                 return resultList;
             }

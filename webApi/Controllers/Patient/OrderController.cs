@@ -20,7 +20,7 @@ namespace webApi.Controllers.Patient
             patient_order_Bll Bll = new patient_order_Bll();
             string error = string.Empty;
             int service_type = 0;
-            var resultList = Bll.SearchPatientOrderList(0, DoctorID, service_type, null,
+            var resultList = Bll.SearchPatientOrderList(0, DoctorID, service_type, null,null,
        null, null, pageindex.Value, PageSize, out  error);
             return resultList;
         }
@@ -34,7 +34,7 @@ namespace webApi.Controllers.Patient
             patient_order_Bll Bll = new patient_order_Bll();
             string error = string.Empty;
             int service_type = 0;
-            var resultList = Bll.SearchPatientOrderList(0, DoctorID, service_type, null,
+            var resultList = Bll.SearchPatientOrderList(0, DoctorID, service_type, null,null,
        null, null, pageindex.Value, PageSize, out  error);
             return resultList;
         }

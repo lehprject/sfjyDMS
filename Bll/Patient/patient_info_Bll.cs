@@ -27,14 +27,14 @@ namespace Bll
         /// <param name="alllergic_his"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public List<patient_disease> SearchPatientDiseaseList(int hospital_id, int drid, string name, string gender, string cardtype, string cardno, DateTime? createtime,
+        public List<patient_disease> SearchPatientDiseaseList(int hospital_id, int drid, string name, string gender, string cardtype, string cardno, DateTime? createtime1, DateTime? createtime2,
            string alllergic_his, out string error)
         {
             error = string.Empty;
             try
             {
                 patient_info_DA da = new patient_info_DA();
-                var resultList = da.SearchPatientDiseaseList(hospital_id, drid,name, gender, cardtype, cardno, createtime,alllergic_his, out error);
+                var resultList = da.SearchPatientDiseaseList(hospital_id, drid, name, gender, cardtype, cardno, createtime1, createtime2,alllergic_his, out error);
                 return resultList;
             }
             catch (Exception ex)
