@@ -50,7 +50,7 @@ namespace Dal
             {
                 #region Command
 
-                string selectSql = string.Format("select * from patient_medical_rcd rcd left join patient_info info on rcd.patient_id=info.pkid WHERE TRUE ");
+                string selectSql = string.Format("select *,COALESCE(info.name,'') as patient_name,info.gender as gender from patient_medical_rcd rcd left join patient_info info on rcd.patient_id=info.pkid WHERE TRUE ");
 
                 StringBuilder conditionSb = new System.Text.StringBuilder();
 
@@ -143,7 +143,7 @@ namespace Dal
                 if (!string.IsNullOrEmpty(orderbyCol) && orderby.HasValue)
                     orderbyStr = orderbyFormat.getSortStr(orderby.Value, orderbyCol);
                 else
-                    orderbyStr = " order by pkid ";
+                    orderbyStr = " order by rcd.pkid ";
 
                 selectSql += conditionSb.ToString() + orderbyStr;
                 if (pageIndex > 0)

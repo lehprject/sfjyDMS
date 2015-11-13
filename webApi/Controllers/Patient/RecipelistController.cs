@@ -13,9 +13,16 @@ namespace webApi.Controllers.Patient
     public class RecipelistController : BaseApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public IEnumerable<patient_recipelist> Get(int? pageindex)
         {
-            return new string[] { "value1", "value2" };
+            if (pageindex.HasValue == false)
+                pageindex = 1;
+
+            patient_recipelist_Bll recipeBll = new patient_recipelist_Bll();
+            string error = string.Empty;
+            var resultList = recipeBll.SearchReciptList(DoctorID, 0, 0, 0, null, null, null, null, null, null, 0,
+             null, null, pageindex.Value, PageSize, out error);
+            return resultList;
         }
 
         // GET api/<controller>/5
@@ -35,9 +42,9 @@ namespace webApi.Controllers.Patient
             bool success = reciptBll.CreateReciptList(info, drugList, out error);
 
             Model.ResponseMessage result = new ResponseMessage();
-            if(success)
+            if (success)
             {
-                result.bSuccess = true; 
+                result.bSuccess = true;
             }
             else
             {
