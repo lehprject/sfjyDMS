@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Base\IBase_Bll.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Doctor\Idr_addvisit_Bll.cs" />
     <Compile Include="Doctor\Idr_visit_Bll.cs" />
     <Compile Include="MasterData\Imd_druginfo_Bll.cs">
       <SubType>Code</SubType>
