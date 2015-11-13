@@ -62,6 +62,7 @@
     <Compile Include="MasterData\chk_info_DA.cs" />
     <Compile Include="MasterData\md_somebase_info_DA.cs" />
     <Compile Include="Patient\patient_checklist_DA.cs" />
+    <Compile Include="Patient\patient_druguse_suggest_DA.cs" />
     <Compile Include="Patient\patient_info_DA.cs" />
     <Compile Include="Patient\patient_medical_rcd_DA.cs" />
     <Compile Include="Patient\patient_order_DA.cs" />
