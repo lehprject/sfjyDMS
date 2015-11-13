@@ -115,6 +115,12 @@
     <Compile Include="md_hospital.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="md_qrcode.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="md_user.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MySqlHelper.cs" />
     <Compile Include="MySqlHelperExtension.cs" />
     <Compile Include="patient_address.cs">
@@ -132,6 +138,12 @@
     <Compile Include="patient_druguse_rcd.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="patient_druguse_suggest.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="patient_druguse_suggest_rcd.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="patient_info.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
@@ -139,6 +151,12 @@
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="patient_message.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="patient_next_visit.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="patient_next_visit_date.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="patient_order.cs">

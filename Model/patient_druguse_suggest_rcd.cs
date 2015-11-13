@@ -12,13 +12,12 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class chk_demo
+    public partial class patient_druguse_suggest_rcd
     {
         public int pkid { get; set; }
-        public int typeid { get; set; }
-        public string chk_item { get; set; }
-        public string chk_value { get; set; }
-        public string chk_unit { get; set; }
-        public bool ipt_indicator { get; set; }
+        public int druguse_suggest_id { get; set; }
+        public int drugid { get; set; }
+        public decimal use_num { get; set; }
+        public string use_type { get; set; }
     }
 }

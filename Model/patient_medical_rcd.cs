@@ -25,6 +25,6 @@ namespace Model
         public System.DateTime createtime { get; set; }
         public int fileid { get; set; }
         public string next_chk_item { get; set; }
-        public string next_visit_item { get; set; }
+        public int next_visit_item_id { get; set; }
     }
 }

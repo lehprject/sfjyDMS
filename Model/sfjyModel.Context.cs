@@ -57,5 +57,11 @@ namespace Model
         public virtual DbSet<promotion_coupons_detail> promotion_coupons_detail { get; set; }
         public virtual DbSet<promotion_events> promotion_events { get; set; }
         public virtual DbSet<patient_message> patient_message { get; set; }
+        public virtual DbSet<md_qrcode> md_qrcode { get; set; }
+        public virtual DbSet<md_user> md_user { get; set; }
+        public virtual DbSet<patient_druguse_suggest> patient_druguse_suggest { get; set; }
+        public virtual DbSet<patient_druguse_suggest_rcd> patient_druguse_suggest_rcd { get; set; }
+        public virtual DbSet<patient_next_visit> patient_next_visit { get; set; }
+        public virtual DbSet<patient_next_visit_date> patient_next_visit_date { get; set; }
     }
 }

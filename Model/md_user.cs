@@ -12,13 +12,17 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class chk_demo
+    public partial class md_user
     {
         public int pkid { get; set; }
-        public int typeid { get; set; }
-        public string chk_item { get; set; }
-        public string chk_value { get; set; }
-        public string chk_unit { get; set; }
-        public bool ipt_indicator { get; set; }
+        public string name { get; set; }
+        public string loginname { get; set; }
+        public string loginpwd { get; set; }
+        public string tel { get; set; }
+        public string mobile { get; set; }
+        public string email { get; set; }
+        public string gender { get; set; }
+        public System.DateTime createtime { get; set; }
+        public bool isadmin { get; set; }
     }
 }

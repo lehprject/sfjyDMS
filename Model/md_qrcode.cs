@@ -12,13 +12,12 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class chk_demo
+    public partial class md_qrcode
     {
         public int pkid { get; set; }
-        public int typeid { get; set; }
-        public string chk_item { get; set; }
-        public string chk_value { get; set; }
-        public string chk_unit { get; set; }
-        public bool ipt_indicator { get; set; }
+        public int usertype { get; set; }
+        public int userid { get; set; }
+        public System.DateTime createtime { get; set; }
+        public string file_path { get; set; }
     }
 }

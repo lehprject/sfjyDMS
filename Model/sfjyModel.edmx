@@ -40,6 +40,7 @@
           <Property Name="chk_item" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="chk_value" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="chk_unit" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="ipt_indicator" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="chk_info">
           <Key>
@@ -219,6 +220,31 @@
           <Property Name="contact_tel" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="level" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <EntityType Name="md_qrcode">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usertype" Type="int" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="file_path" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="md_user">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="loginname" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="loginpwd" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="tel" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="mobile" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="isadmin" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="patient_address">
           <Key>
             <PropertyRef Name="pkid" />
@@ -279,6 +305,30 @@
           <Property Name="less_num" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
+        <EntityType Name="patient_druguse_suggest">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hospital_id" Type="int" Nullable="false" />
+          <Property Name="drid" Type="int" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="cust_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="issue_time" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="check_result" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="fileid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_druguse_suggest_rcd">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="druguse_suggest_id" Type="int" Nullable="false" />
+          <Property Name="drugid" Type="int" Nullable="false" />
+          <Property Name="use_num" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="use_type" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="patient_info">
           <Key>
             <PropertyRef Name="pkid" />
@@ -311,7 +361,7 @@
           <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="fileid" Type="int" Nullable="false" />
           <Property Name="next_chk_item" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="next_visit_item" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="next_visit_item_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="patient_message">
           <Key>
@@ -323,6 +373,21 @@
           <Property Name="status" Type="int" Nullable="false" />
           <Property Name="contents" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_next_visit">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="visit_item" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_next_visit_date">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="next_visit_id" Type="int" Nullable="false" />
+          <Property Name="visit_item_date" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="patient_order">
           <Key>
@@ -432,14 +497,20 @@
           <EntitySet Name="md_dr_account" EntityType="Self.md_dr_account" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="md_druginfo" EntityType="Self.md_druginfo" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="md_hospital" EntityType="Self.md_hospital" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="md_qrcode" EntityType="Self.md_qrcode" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="md_user" EntityType="Self.md_user" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_address" EntityType="Self.patient_address" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_assess" EntityType="Self.patient_assess" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_checklist" EntityType="Self.patient_checklist" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_disease" EntityType="Self.patient_disease" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_druguse_rcd" EntityType="Self.patient_druguse_rcd" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_druguse_suggest" EntityType="Self.patient_druguse_suggest" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_druguse_suggest_rcd" EntityType="Self.patient_druguse_suggest_rcd" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_info" EntityType="Self.patient_info" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_medical_rcd" EntityType="Self.patient_medical_rcd" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_message" EntityType="Self.patient_message" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_next_visit" EntityType="Self.patient_next_visit" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_next_visit_date" EntityType="Self.patient_next_visit_date" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_order" EntityType="Self.patient_order" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_recipelist" EntityType="Self.patient_recipelist" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_recipelist_druguse" EntityType="Self.patient_recipelist_druguse" Schema="sfjy" store:Type="Tables" />
@@ -496,6 +567,12 @@
           <EntitySet Name="promotion_coupons_detail" EntityType="sfjyModel.promotion_coupons_detail" />
           <EntitySet Name="promotion_events" EntityType="sfjyModel.promotion_events" />
           <EntitySet Name="patient_message" EntityType="sfjyModel.patient_message" />
+          <EntitySet Name="md_qrcode" EntityType="sfjyModel.md_qrcode" />
+          <EntitySet Name="md_user" EntityType="sfjyModel.md_user" />
+          <EntitySet Name="patient_druguse_suggest" EntityType="sfjyModel.patient_druguse_suggest" />
+          <EntitySet Name="patient_druguse_suggest_rcd" EntityType="sfjyModel.patient_druguse_suggest_rcd" />
+          <EntitySet Name="patient_next_visit" EntityType="sfjyModel.patient_next_visit" />
+          <EntitySet Name="patient_next_visit_date" EntityType="sfjyModel.patient_next_visit_date" />
         </EntityContainer>
         <EntityType Name="area_city">
           <Key>
@@ -532,6 +609,7 @@
           <Property Name="chk_item" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="chk_value" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="chk_unit" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ipt_indicator" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="chk_info">
           <Key>
@@ -792,7 +870,7 @@
           <Property Name="createtime" Type="DateTime" Nullable="false" />
           <Property Name="fileid" Type="Int32" Nullable="false" />
           <Property Name="next_chk_item" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="next_visit_item" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="next_visit_item_id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="patient_order">
           <Key>
@@ -895,6 +973,70 @@
           <Property Name="contents" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="createtime" Type="DateTime" Nullable="false" />
         </EntityType>
+        <EntityType Name="md_qrcode">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usertype" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="file_path" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="md_user">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="loginname" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="loginpwd" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="tel" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="isadmin" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_druguse_suggest">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hospital_id" Type="Int32" Nullable="false" />
+          <Property Name="drid" Type="Int32" Nullable="false" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="cust_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="issue_time" Type="DateTime" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="check_result" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fileid" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_druguse_suggest_rcd">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="druguse_suggest_id" Type="Int32" Nullable="false" />
+          <Property Name="drugid" Type="Int32" Nullable="false" />
+          <Property Name="use_num" Type="Decimal" Nullable="false" />
+          <Property Name="use_type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="patient_next_visit">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="visit_item" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="patient_next_visit_date">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="next_visit_id" Type="Int32" Nullable="false" />
+          <Property Name="visit_item_date" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -945,6 +1087,7 @@
           <EntitySetMapping Name="chk_demo">
             <EntityTypeMapping TypeName="sfjyModel.chk_demo">
               <MappingFragment StoreEntitySet="chk_demo">
+                <ScalarProperty Name="ipt_indicator" ColumnName="ipt_indicator" />
                 <ScalarProperty Name="chk_unit" ColumnName="chk_unit" />
                 <ScalarProperty Name="chk_value" ColumnName="chk_value" />
                 <ScalarProperty Name="chk_item" ColumnName="chk_item" />
@@ -1218,7 +1361,7 @@
           <EntitySetMapping Name="patient_medical_rcd">
             <EntityTypeMapping TypeName="sfjyModel.patient_medical_rcd">
               <MappingFragment StoreEntitySet="patient_medical_rcd">
-                <ScalarProperty Name="next_visit_item" ColumnName="next_visit_item" />
+                <ScalarProperty Name="next_visit_item_id" ColumnName="next_visit_item_id" />
                 <ScalarProperty Name="next_chk_item" ColumnName="next_chk_item" />
                 <ScalarProperty Name="fileid" ColumnName="fileid" />
                 <ScalarProperty Name="createtime" ColumnName="createtime" />
@@ -1338,6 +1481,76 @@
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="drid" ColumnName="drid" />
                 <ScalarProperty Name="patientid" ColumnName="patientid" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="md_qrcode">
+            <EntityTypeMapping TypeName="sfjyModel.md_qrcode">
+              <MappingFragment StoreEntitySet="md_qrcode">
+                <ScalarProperty Name="file_path" ColumnName="file_path" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="usertype" ColumnName="usertype" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="md_user">
+            <EntityTypeMapping TypeName="sfjyModel.md_user">
+              <MappingFragment StoreEntitySet="md_user">
+                <ScalarProperty Name="isadmin" ColumnName="isadmin" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="loginpwd" ColumnName="loginpwd" />
+                <ScalarProperty Name="loginname" ColumnName="loginname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_druguse_suggest">
+            <EntityTypeMapping TypeName="sfjyModel.patient_druguse_suggest">
+              <MappingFragment StoreEntitySet="patient_druguse_suggest">
+                <ScalarProperty Name="fileid" ColumnName="fileid" />
+                <ScalarProperty Name="check_result" ColumnName="check_result" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="issue_time" ColumnName="issue_time" />
+                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="drid" ColumnName="drid" />
+                <ScalarProperty Name="hospital_id" ColumnName="hospital_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_druguse_suggest_rcd">
+            <EntityTypeMapping TypeName="sfjyModel.patient_druguse_suggest_rcd">
+              <MappingFragment StoreEntitySet="patient_druguse_suggest_rcd">
+                <ScalarProperty Name="use_type" ColumnName="use_type" />
+                <ScalarProperty Name="use_num" ColumnName="use_num" />
+                <ScalarProperty Name="drugid" ColumnName="drugid" />
+                <ScalarProperty Name="druguse_suggest_id" ColumnName="druguse_suggest_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_next_visit">
+            <EntityTypeMapping TypeName="sfjyModel.patient_next_visit">
+              <MappingFragment StoreEntitySet="patient_next_visit">
+                <ScalarProperty Name="visit_item" ColumnName="visit_item" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_next_visit_date">
+            <EntityTypeMapping TypeName="sfjyModel.patient_next_visit_date">
+              <MappingFragment StoreEntitySet="patient_next_visit_date">
+                <ScalarProperty Name="visit_item_date" ColumnName="visit_item_date" />
+                <ScalarProperty Name="next_visit_id" ColumnName="next_visit_id" />
                 <ScalarProperty Name="pkid" ColumnName="pkid" />
               </MappingFragment>
             </EntityTypeMapping>
