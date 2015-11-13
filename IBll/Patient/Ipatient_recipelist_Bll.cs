@@ -23,7 +23,7 @@ namespace IBll
         #region 查询
 
 
-        List<patient_recipelist> SearchReciptList(int medical_rcd_id, int hospital_id, int patient_id, string cust_name,
+        List<patient_recipelist> SearchReciptList(int drid, int medical_rcd_id, int hospital_id, int patient_id, string cust_name,
             DateTime? issue_time1, DateTime? issue_time2, DateTime? createtime1, DateTime? createtime2, string check_result, int fileid,
              orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error);
 

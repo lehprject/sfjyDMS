@@ -77,7 +77,7 @@ namespace Dal
         #region 查询
 
 
-        public List<patient_recipelist> SearchReciptList(int medical_rcd_id ,int hospital_id ,int patient_id ,string cust_name ,
+        public List<patient_recipelist> SearchReciptList(int drid,int medical_rcd_id ,int hospital_id ,int patient_id ,string cust_name ,
             DateTime? issue_time1 ,DateTime? issue_time2 , DateTime? createtime1 ,DateTime? createtime2,string check_result ,int fileid, 
              orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
         {
@@ -86,7 +86,7 @@ namespace Dal
             {
                 #region Command
 
-                string selectSql = string.Format("select * from patient_recipelist WHERE TRUE ");
+                string selectSql = string.Format("select *,COALESCE(info.name,'') as patient_name,info.gender as gender from patient_recipelist rec left join patient_info info on rec.patient_id=info.pkid WHERE TRUE ");
 
                 StringBuilder conditionSb = new System.Text.StringBuilder();
 
@@ -94,6 +94,12 @@ namespace Dal
                 #endregion
 
                 #region 搜索条件
+
+                if (drid > 0)
+                {
+                    conditionSb.Append("AND drid = @drid");
+                    paraList.Add(new MySqlParameter("drid", drid));
+                }
 
                 if (medical_rcd_id > 0)
                 {
@@ -134,13 +140,13 @@ namespace Dal
 
                 if (createtime1.HasValue)
                 {
-                    conditionSb.Append(" AND DATEDIFF(createtime,@createtime1) >= 0 ");
+                    conditionSb.Append(" AND DATEDIFF(rec.createtime,@createtime1) >= 0 ");
                     paraList.Add(new MySqlParameter("createtime1", createtime1.Value));
                 }
 
                 if (createtime2.HasValue)
                 {
-                    conditionSb.Append(" AND DATEDIFF(createtime,@createtime2) <= 0 ");
+                    conditionSb.Append(" AND DATEDIFF(rec.createtime,@createtime2) <= 0 ");
                     paraList.Add(new MySqlParameter("createtime2", createtime2.Value));
                 }
 
@@ -163,7 +169,7 @@ namespace Dal
                 if (!string.IsNullOrEmpty(orderbyCol) && orderby.HasValue)
                     orderbyStr = orderbyFormat.getSortStr(orderby.Value, orderbyCol);
                 else
-                    orderbyStr = " order by pkid ";
+                    orderbyStr = " order by rec.pkid ";
 
                 selectSql += conditionSb.ToString() + orderbyStr;
                 if (pageIndex > 0)

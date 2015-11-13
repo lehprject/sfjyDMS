@@ -42,7 +42,7 @@ namespace Bll
         #region 查询
 
 
-        public List<patient_recipelist> SearchReciptList(int medical_rcd_id, int hospital_id, int patient_id, string cust_name,
+        public List<patient_recipelist> SearchReciptList(int drid, int medical_rcd_id, int hospital_id, int patient_id, string cust_name,
             DateTime? issue_time1, DateTime? issue_time2, DateTime? createtime1, DateTime? createtime2, string check_result, int fileid,
              orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
         {
@@ -50,7 +50,7 @@ namespace Bll
             try
             {
                 patient_recipelist_DA recipeDa = new patient_recipelist_DA();
-                var resultList = recipeDa.SearchReciptList(medical_rcd_id, hospital_id, patient_id, cust_name,
+                var resultList = recipeDa.SearchReciptList(drid,medical_rcd_id, hospital_id, patient_id, cust_name,
                                                             issue_time1, issue_time2, createtime1, createtime2, check_result, fileid,
                                                             orderby, orderbyCol, pageIndex, pageSize, out  error);
                 return resultList;
