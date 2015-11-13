@@ -55,7 +55,7 @@ namespace Dal
 
                 if (!string.IsNullOrEmpty(name))
                 {
-                    conditionSb.Append(" AND info.name = @name ");
+                    conditionSb.Append(" AND info.name LIKE CONCAT('%', @name, '%') ");
                     paraList.Add(new MySqlParameter("name", name));
                 }
 

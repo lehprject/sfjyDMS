@@ -30,13 +30,13 @@ namespace Dal
                 #region 搜索条件
                 if (!string.IsNullOrEmpty(drugname))
                 {
-                    conditionSb.Append("AND drugname = @drugname");
+                    conditionSb.Append(" AND drugname LIKE CONCAT('%', @drugname, '%') ");
                     paraList.Add(new MySqlParameter("drugname", drugname));
                 }
 
                 if (!string.IsNullOrEmpty(standard))
                 {
-                    conditionSb.Append("AND standard = @standard");
+                    conditionSb.Append(" AND standard LIKE CONCAT('%', @standard, '%') ");
                     paraList.Add(new MySqlParameter("standard", standard));
                 }
 
@@ -48,13 +48,13 @@ namespace Dal
 
                 if (!string.IsNullOrEmpty(cust_name))
                 {
-                    conditionSb.Append("AND cust_name = @cust_name");
+                    conditionSb.Append(" AND cust_name LIKE CONCAT('%', @cust_name, '%') ");
                     paraList.Add(new MySqlParameter("cust_name", cust_name));
                 }
 
                 if (!string.IsNullOrEmpty(sub_name))
                 {
-                    conditionSb.Append("AND sub_name = @sub_name");
+                    conditionSb.Append(" AND sub_name LIKE CONCAT('%', @sub_name, '%') ");
                     paraList.Add(new MySqlParameter("sub_name", sub_name));
                 }
 
