@@ -23,5 +23,6 @@ namespace Model
         public System.DateTime createtime { get; set; }
         public string check_result { get; set; }
         public int fileid { get; set; }
+        public int drid { get; set; }
     }
 }

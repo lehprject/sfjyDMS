@@ -177,6 +177,8 @@
           <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="current_income" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="photo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="certificate" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="md_dr_account">
           <Key>
@@ -343,6 +345,7 @@
           <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="medical_rcd_id" Type="int" Nullable="false" />
           <Property Name="hospital_id" Type="int" Nullable="false" />
+          <Property Name="drid" Type="int" Nullable="false" />
           <Property Name="patient_id" Type="int" Nullable="false" />
           <Property Name="cust_name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="issue_time" Type="datetime" Precision="0" Nullable="false" />
@@ -666,6 +669,8 @@
           <Property Name="createtime" Type="DateTime" Nullable="false" />
           <Property Name="current_income" Type="Decimal" Nullable="false" />
           <Property Name="photo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="certificate" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="md_dr_account">
           <Key>
@@ -816,6 +821,7 @@
           <Property Name="createtime" Type="DateTime" Nullable="false" />
           <Property Name="check_result" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="fileid" Type="Int32" Nullable="false" />
+          <Property Name="drid" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="patient_recipelist_druguse">
           <Key>
@@ -1077,6 +1083,8 @@
           <EntitySetMapping Name="md_docter">
             <EntityTypeMapping TypeName="sfjyModel.md_docter">
               <MappingFragment StoreEntitySet="md_docter">
+                <ScalarProperty Name="certificate" ColumnName="certificate" />
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="photo" ColumnName="photo" />
                 <ScalarProperty Name="current_income" ColumnName="current_income" />
                 <ScalarProperty Name="createtime" ColumnName="createtime" />
@@ -1243,6 +1251,7 @@
           <EntitySetMapping Name="patient_recipelist">
             <EntityTypeMapping TypeName="sfjyModel.patient_recipelist">
               <MappingFragment StoreEntitySet="patient_recipelist">
+                <ScalarProperty Name="drid" ColumnName="drid" />
                 <ScalarProperty Name="fileid" ColumnName="fileid" />
                 <ScalarProperty Name="check_result" ColumnName="check_result" />
                 <ScalarProperty Name="createtime" ColumnName="createtime" />

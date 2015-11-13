@@ -28,5 +28,7 @@ namespace Model
         public System.DateTime createtime { get; set; }
         public decimal current_income { get; set; }
         public string photo { get; set; }
+        public string email { get; set; }
+        public string certificate { get; set; }
     }
 }
