@@ -4,36 +4,64 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Bll;
+using Model;
+using Share;
 
 namespace webApi.Controllers.Doctor
 {
-    public class AddVisitController : ApiController
+    public class AddVisitController : BaseApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        public IEnumerable<dr_addvisit> Get(DateTime? visitdate, int? pageindex)
         {
-            return new string[] { "value1", "value2" };
+            #region 参数
+            if (pageindex.HasValue == false)
+            {
+                pageindex = 1;
+            }
+            #endregion
+
+            #region Bll
+            string error = string.Empty;
+            dr_addvisit_Bll visitBll = new dr_addvisit_Bll();
+            var resultList = visitBll.SearchAddVisitList(0, DoctorID, visitdate, visitdate, null, 0, 0, null, null, null, null, pageindex.Value, PageSize, out error);
+
+            return resultList;
+            #endregion
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public dr_addvisit Get(int id)
         {
-            return "value";
+            #region Bll
+            Base_Bll bll = new Base_Bll();
+            return bll.GetInfo<dr_addvisit>(id);
+            #endregion
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public Model.ResponseMessage Post([FromBody]dr_addvisit value)
         {
-        }
+            #region Bll
+            dr_addvisit_Bll visitBll = new dr_addvisit_Bll();
+            string error = string.Empty;
+            visitBll.CreateAddVisit(value, out error);
+            #endregion
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+            Model.ResponseMessage result = new ResponseMessage();
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            if (string.IsNullOrEmpty(error))
+            {
+                result.bSuccess = true;
+                result.Extend1 = value.pkid.ToString();
+            }
+            else
+            {
+                result.bSuccess = false;
+                result.Message = error;
+            }
+
+            return result;
         }
     }
 }

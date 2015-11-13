@@ -4,36 +4,37 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Bll;
+using Model;
+using Share;
 
 namespace webApi.Controllers.Doctor
 {
-    public class PreAddVisitController : ApiController
+    public class PreAddVisitController : BaseApiController 
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        public IEnumerable<dr_pre_addvisit> Get(int? pageindex, bool flag)
         {
-            return new string[] { "value1", "value2" };
+            if (pageindex.HasValue == false)
+                pageindex = 1;
+
+            dr_addvisit_Bll visitBll = new dr_addvisit_Bll();
+            string error = string.Empty;
+            var resultList = visitBll.SearchPreAddVisitList(DoctorID, 0, 0, null, null,
+            null, 0, null, null, 0, null, null,
+             null, null, pageindex.Value, PageSize, out error);
+            return resultList;
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public List<dr_pre_addvisit> Get([FromBody] int visitid)
         {
-            return "value";
-        }
+            #region Bll
+            string error = string.Empty;
+            dr_addvisit_Bll visitBll = new dr_addvisit_Bll();
+            var resultList = visitBll.GetPreAddVisitListByVisitID(visitid);
+            #endregion
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            return resultList;
         }
     }
 }
