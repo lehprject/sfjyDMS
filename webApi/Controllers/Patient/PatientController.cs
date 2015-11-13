@@ -9,7 +9,7 @@ using Bll;
 
 namespace webApi.Controllers.Patient
 {
-    public class DiseaseController : BaseApiController
+    public class PatientController : BaseApiController
     {
         // GET api/<controller>
         public IEnumerable<patient_disease> Get(string name)
