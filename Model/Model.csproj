@@ -68,6 +68,7 @@
     <Compile Include="area_province.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChildClass\child_patient_medical_rcd.cs" />
     <Compile Include="ChildClass\child_patient_recipelist.cs" />
     <Compile Include="ConfigClass\Enums.cs" />
     <Compile Include="chk_demo.cs">

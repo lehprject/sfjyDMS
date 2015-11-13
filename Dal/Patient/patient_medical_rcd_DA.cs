@@ -50,7 +50,7 @@ namespace Dal
             {
                 #region Command
 
-                string selectSql = string.Format("select * from patient_medical_rcd WHERE TRUE ");
+                string selectSql = string.Format("select * from patient_medical_rcd rcd left join patient_info info on rcd.patient_id=info.pkid WHERE TRUE ");
 
                 StringBuilder conditionSb = new System.Text.StringBuilder();
 
