@@ -10,7 +10,7 @@ using Share;
 
 namespace Dal
 {
-    public class chk_info_DA:DataAccessBase
+    public class chk_info_DA : DataAccessBase
     {
         #region 检查单 chk_info 相关
 
@@ -24,7 +24,7 @@ namespace Dal
 
         #region 查询
         public List<chk_info> SearchChkInfoList(
-             int medical_id ,   int patient_id ,   int chk_type_id ,   int chk_demo_id ,   int fileid ,
+             int medical_id, int patient_id, int chk_type_id, int chk_demo_id, int fileid, int drid,
             orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
         {
             error = string.Empty;
@@ -32,7 +32,7 @@ namespace Dal
             {
                 #region Command
 
-                string selectSql = string.Format("select * from chk_info WHERE TRUE ");
+                string selectSql = string.Format("select *,pat.name as patient_name,chk_type.name as chk_name,rcd.createtime as chk_time from chk_info chk left join patient_medical_rcd rcd on chk.medical_id=rcd.pkid left join patient_info pat on chk.patient_id=pat.pkid left join chk_type on chk.chk_type_id on chk_type.pkid WHERE TRUE ");
 
                 StringBuilder conditionSb = new System.Text.StringBuilder();
 
@@ -48,7 +48,7 @@ namespace Dal
 
                 if (patient_id > 0)
                 {
-                    conditionSb.Append(" AND patient_id = @patient_id ");
+                    conditionSb.Append(" AND chk.patient_id = @patient_id ");
                     paraList.Add(new MySqlParameter("patient_id", patient_id));
                 }
 
@@ -69,7 +69,13 @@ namespace Dal
                     conditionSb.Append(" AND fileid = @fileid ");
                     paraList.Add(new MySqlParameter("fileid", fileid));
                 }
-                 
+
+                if (drid > 0)
+                {
+                    conditionSb.Append(" AND patient_medical_rcd.drid = @drid ");
+                    paraList.Add(new MySqlParameter("drid", drid));
+                }
+
                 #endregion
 
                 #region 排序 分页
@@ -77,7 +83,7 @@ namespace Dal
                 if (!string.IsNullOrEmpty(orderbyCol) && orderby.HasValue)
                     orderbyStr = orderbyFormat.getSortStr(orderby.Value, orderbyCol);
                 else
-                    orderbyStr = " order by pkid ";
+                    orderbyStr = " order by chk.pkid ";
 
                 selectSql += conditionSb.ToString() + orderbyStr;
                 if (pageIndex > 0)
@@ -107,7 +113,7 @@ namespace Dal
         #region 检查单类型 chk_type 相关
 
         #region 添加
-        
+
         #endregion
 
         #region 修改
@@ -138,7 +144,7 @@ namespace Dal
                     conditionSb.Append(" AND name like CONCAT('%'@,name,'%') ");
                     paraList.Add(new MySqlParameter("name", name));
                 }
-                 
+
 
                 #endregion
 
