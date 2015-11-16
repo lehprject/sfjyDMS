@@ -25,8 +25,18 @@ namespace webApi.Controllers.Patient
             return resultList;
         }
 
+        public patient_recipelist Get(int recipeId)
+        {
+            Base_Bll bll = new Base_Bll();
+            patient_recipelist info = bll.GetInfo<patient_recipelist>(recipeId);
+
+            bll.GetFor(info, t => new { t.patient_name,t.gender,t.birth,t.alllergic_his });
+
+            return info;
+        }
+
         // GET api/<controller>/5
-        public patient_medical_rcd Get(int id)
+        public patient_medical_rcd Get(int id,bool flag)
         {
             Base_Bll bll = new Base_Bll();
             patient_medical_rcd info = bll.GetInfo<patient_medical_rcd>(id);
