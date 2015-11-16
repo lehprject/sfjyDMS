@@ -65,6 +65,7 @@
     <Compile Include="Patient\patient_druguse_suggest_DA.cs" />
     <Compile Include="Patient\patient_info_DA.cs" />
     <Compile Include="Patient\patient_medical_rcd_DA.cs" />
+    <Compile Include="Patient\patient_message_DA.cs" />
     <Compile Include="Patient\patient_order_DA.cs" />
     <Compile Include="Patient\patient_recipelist_DA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

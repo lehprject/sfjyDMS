@@ -50,6 +50,7 @@
     <Compile Include="Patient\patient_druguse_suggest_Bll.cs" />
     <Compile Include="Patient\patient_info_Bll.cs" />
     <Compile Include="Patient\patient_medical_rcd_Bll.cs" />
+    <Compile Include="Patient\patient_message_Bll.cs" />
     <Compile Include="Patient\patient_order_Bll.cs" />
     <Compile Include="Patient\patient_recipelist_Bll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
