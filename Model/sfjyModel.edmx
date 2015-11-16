@@ -145,6 +145,17 @@
           <Property Name="check_user" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
+        <EntityType Name="md_bank">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bank" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="card_no" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="card_person" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="bank_remark" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
         <EntityType Name="md_cashdraw_app">
           <Key>
             <PropertyRef Name="pkid" />
@@ -153,8 +164,7 @@
           <Property Name="drid" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="app_time" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="drawmoney" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="in_bank" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="in_bank_acc" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="in_bank" Type="int" Nullable="false" />
           <Property Name="opuser" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="optime" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="opstatus" Type="int" Nullable="false" />
@@ -177,9 +187,15 @@
           <Property Name="login_pwd" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="current_income" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="photo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="certificate" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="md_docter_files">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="file_type" Type="int" Nullable="false" />
+          <Property Name="file_path" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="md_dr_account">
           <Key>
@@ -345,6 +361,10 @@
           <Property Name="yibao_no" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="shebao_no" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="photo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="disease_his" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="family_his" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="mobileno" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="patient_medical_rcd">
           <Key>
@@ -492,8 +512,10 @@
           <EntitySet Name="dr_visit" EntityType="Self.dr_visit" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="dr_visit_detail" EntityType="Self.dr_visit_detail" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="file_check" EntityType="Self.file_check" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="md_bank" EntityType="Self.md_bank" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="md_cashdraw_app" EntityType="Self.md_cashdraw_app" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="md_docter" EntityType="Self.md_docter" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="md_docter_files" EntityType="Self.md_docter_files" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="md_dr_account" EntityType="Self.md_dr_account" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="md_druginfo" EntityType="Self.md_druginfo" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="md_hospital" EntityType="Self.md_hospital" Schema="sfjy" store:Type="Tables" />
@@ -573,6 +595,8 @@
           <EntitySet Name="patient_druguse_suggest_rcd" EntityType="sfjyModel.patient_druguse_suggest_rcd" />
           <EntitySet Name="patient_next_visit" EntityType="sfjyModel.patient_next_visit" />
           <EntitySet Name="patient_next_visit_date" EntityType="sfjyModel.patient_next_visit_date" />
+          <EntitySet Name="md_bank" EntityType="sfjyModel.md_bank" />
+          <EntitySet Name="md_docter_files" EntityType="sfjyModel.md_docter_files" />
         </EntityContainer>
         <EntityType Name="area_city">
           <Key>
@@ -722,8 +746,7 @@
           <Property Name="drid" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="app_time" Type="DateTime" Nullable="false" />
           <Property Name="drawmoney" Type="Decimal" Nullable="false" />
-          <Property Name="in_bank" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="in_bank_acc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="in_bank" Type="Int32" Nullable="false" />
           <Property Name="opuser" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="optime" Type="DateTime" Nullable="false" />
           <Property Name="opstatus" Type="Int32" Nullable="false" />
@@ -746,9 +769,7 @@
           <Property Name="login_pwd" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="createtime" Type="DateTime" Nullable="false" />
           <Property Name="current_income" Type="Decimal" Nullable="false" />
-          <Property Name="photo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="certificate" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="md_dr_account">
           <Key>
@@ -854,6 +875,10 @@
           <Property Name="yibao_no" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="shebao_no" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="photo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="disease_his" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="family_his" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="mobileno" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="patient_medical_rcd">
           <Key>
@@ -1037,6 +1062,25 @@
           <Property Name="next_visit_id" Type="Int32" Nullable="false" />
           <Property Name="visit_item_date" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="md_bank">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bank" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="card_no" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="card_person" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="bank_remark" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="md_docter_files">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="file_type" Type="Int32" Nullable="false" />
+          <Property Name="file_path" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1214,7 +1258,6 @@
                 <ScalarProperty Name="opstatus" ColumnName="opstatus" />
                 <ScalarProperty Name="optime" ColumnName="optime" />
                 <ScalarProperty Name="opuser" ColumnName="opuser" />
-                <ScalarProperty Name="in_bank_acc" ColumnName="in_bank_acc" />
                 <ScalarProperty Name="in_bank" ColumnName="in_bank" />
                 <ScalarProperty Name="drawmoney" ColumnName="drawmoney" />
                 <ScalarProperty Name="app_time" ColumnName="app_time" />
@@ -1226,9 +1269,7 @@
           <EntitySetMapping Name="md_docter">
             <EntityTypeMapping TypeName="sfjyModel.md_docter">
               <MappingFragment StoreEntitySet="md_docter">
-                <ScalarProperty Name="certificate" ColumnName="certificate" />
                 <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="photo" ColumnName="photo" />
                 <ScalarProperty Name="current_income" ColumnName="current_income" />
                 <ScalarProperty Name="createtime" ColumnName="createtime" />
                 <ScalarProperty Name="login_pwd" ColumnName="login_pwd" />
@@ -1343,6 +1384,10 @@
           <EntitySetMapping Name="patient_info">
             <EntityTypeMapping TypeName="sfjyModel.patient_info">
               <MappingFragment StoreEntitySet="patient_info">
+                <ScalarProperty Name="mobileno" ColumnName="mobileno" />
+                <ScalarProperty Name="family_his" ColumnName="family_his" />
+                <ScalarProperty Name="disease_his" ColumnName="disease_his" />
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="photo" ColumnName="photo" />
                 <ScalarProperty Name="shebao_no" ColumnName="shebao_no" />
                 <ScalarProperty Name="yibao_no" ColumnName="yibao_no" />
@@ -1551,6 +1596,27 @@
               <MappingFragment StoreEntitySet="patient_next_visit_date">
                 <ScalarProperty Name="visit_item_date" ColumnName="visit_item_date" />
                 <ScalarProperty Name="next_visit_id" ColumnName="next_visit_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="md_bank">
+            <EntityTypeMapping TypeName="sfjyModel.md_bank">
+              <MappingFragment StoreEntitySet="md_bank">
+                <ScalarProperty Name="bank_remark" ColumnName="bank_remark" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="card_person" ColumnName="card_person" />
+                <ScalarProperty Name="card_no" ColumnName="card_no" />
+                <ScalarProperty Name="bank" ColumnName="bank" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="md_docter_files">
+            <EntityTypeMapping TypeName="sfjyModel.md_docter_files">
+              <MappingFragment StoreEntitySet="md_docter_files">
+                <ScalarProperty Name="file_path" ColumnName="file_path" />
+                <ScalarProperty Name="file_type" ColumnName="file_type" />
                 <ScalarProperty Name="pkid" ColumnName="pkid" />
               </MappingFragment>
             </EntityTypeMapping>

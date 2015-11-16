@@ -23,8 +23,8 @@ namespace Model
                     obj.drid = string.Empty;
                     obj.app_time = DateTime.Now;
                     obj.drawmoney = 0;
-                    obj.in_bank = string.Empty;
-                    obj.in_bank_acc = string.Empty;
+                    obj.in_bank = 0;
+                    //obj.in_bank_acc = string.Empty;
                     obj.opuser = string.Empty;
                     obj.optime=DateTime.Now;
                     obj.opstatus=0;

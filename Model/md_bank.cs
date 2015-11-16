@@ -12,21 +12,13 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class md_docter
+    public partial class md_bank
     {
         public int pkid { get; set; }
-        public int hispital_id { get; set; }
-        public string name { get; set; }
-        public string gender { get; set; }
-        public string title { get; set; }
-        public string position { get; set; }
-        public string cust_name { get; set; }
-        public string sub_name { get; set; }
-        public string birthday { get; set; }
-        public string contact_tel { get; set; }
-        public string login_pwd { get; set; }
+        public string bank { get; set; }
+        public string card_no { get; set; }
+        public string card_person { get; set; }
         public System.DateTime createtime { get; set; }
-        public decimal current_income { get; set; }
-        public string email { get; set; }
+        public string bank_remark { get; set; }
     }
 }
