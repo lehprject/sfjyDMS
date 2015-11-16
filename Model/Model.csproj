@@ -98,6 +98,7 @@
     <Compile Include="dr_visit_detail.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityRelation.cs" />
     <Compile Include="file_check.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
