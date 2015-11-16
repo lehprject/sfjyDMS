@@ -162,6 +162,7 @@
     <Compile Include="Controllers\Patient\OrderController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\Patient\PatientMessageController.cs" />
     <Compile Include="Controllers\Patient\RecipelistController.cs" />
     <Compile Include="Controllers\Patient\ReciptDrugController.cs" />
     <Compile Include="Controllers\Patient\SuggestController.cs" />
