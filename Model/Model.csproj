@@ -101,10 +101,16 @@
     <Compile Include="file_check.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="md_bank.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="md_cashdraw_app.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="md_docter.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="md_docter_files.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="md_druginfo.cs">

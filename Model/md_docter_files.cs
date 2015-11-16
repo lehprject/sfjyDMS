@@ -12,16 +12,10 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class md_cashdraw_app
+    public partial class md_docter_files
     {
         public int pkid { get; set; }
-        public string drid { get; set; }
-        public System.DateTime app_time { get; set; }
-        public decimal drawmoney { get; set; }
-        public int in_bank { get; set; }
-        public string opuser { get; set; }
-        public System.DateTime optime { get; set; }
-        public int opstatus { get; set; }
-        public string opremark { get; set; }
+        public int file_type { get; set; }
+        public string file_path { get; set; }
     }
 }

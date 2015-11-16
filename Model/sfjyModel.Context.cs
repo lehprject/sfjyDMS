@@ -63,5 +63,7 @@ namespace Model
         public virtual DbSet<patient_druguse_suggest_rcd> patient_druguse_suggest_rcd { get; set; }
         public virtual DbSet<patient_next_visit> patient_next_visit { get; set; }
         public virtual DbSet<patient_next_visit_date> patient_next_visit_date { get; set; }
+        public virtual DbSet<md_bank> md_bank { get; set; }
+        public virtual DbSet<md_docter_files> md_docter_files { get; set; }
     }
 }

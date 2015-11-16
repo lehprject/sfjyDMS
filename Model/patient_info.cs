@@ -26,5 +26,9 @@ namespace Model
         public string yibao_no { get; set; }
         public string shebao_no { get; set; }
         public string photo { get; set; }
+        public string email { get; set; }
+        public string disease_his { get; set; }
+        public string family_his { get; set; }
+        public string mobileno { get; set; }
     }
 }
