@@ -45,5 +45,20 @@ namespace Bll
         }
         #endregion
         #endregion
+
+
+        #region 患者地址
+
+        /// <summary>
+        /// 查询患者默认地址
+        /// </summary>
+        /// <param name="patientid"></param>
+        /// <returns></returns>
+        public patient_address GetDefaultPatientAddressByPatientId(int patientid)
+        {
+            return new patient_info_DA().GetDefaultPatientAddressByPatientId(patientid);
+        }
+
+        #endregion
     }
 }

@@ -114,5 +114,14 @@ namespace Dal
         }
 
         #endregion
+
+        #region 患者地址
+
+        public patient_address GetDefaultPatientAddressByPatientId(int patientid)
+        {
+            return db.patient_address.FirstOrDefault(m => m.patient_id == patientid && m.isdefault == true);
+        }
+
+        #endregion
     }
 }

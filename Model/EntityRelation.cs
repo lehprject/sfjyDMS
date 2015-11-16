@@ -73,20 +73,15 @@ namespace Model
 
 
             #region patient_recipelist_druguse
-            //EntityConfigContainer.SetupFor<patient_recipelist_druguse>(() =>
-            //{
-            //    EntityConfigContainer.ForMember<patient_recipelist_druguse, md_druginfo>(t => t.patient_name, r => r.name,
-            //        t => t.patient_id, r => r.pkid);
+            EntityConfigContainer.SetupFor<patient_recipelist_druguse>(() =>
+            {
+                EntityConfigContainer.ForMember<patient_recipelist_druguse, md_druginfo>(t => t.commonname, r => r.commonname,
+                    t => t.drugid, r => r.pkid);
 
-            //    EntityConfigContainer.ForMember<patient_recipelist, patient_info>(t => t.gender, r => r.gender,
-            //       t => t.patient_id, r => r.pkid);
+                EntityConfigContainer.ForMember<patient_recipelist_druguse, md_druginfo>(t => t.standard, r => r.standard,
+                   t => t.drugid, r => r.pkid);
 
-            //    EntityConfigContainer.ForMember<patient_recipelist, patient_info>(t => t.birth, r => r.birthday,
-            //       t => t.patient_id, r => r.pkid);
-
-            //    EntityConfigContainer.ForMember<patient_recipelist, patient_info>(t => t.alllergic_his, r => r.alllergic_his,
-            //    t => t.patient_id, r => r.pkid);
-            //});
+            });
             #endregion
         }
 

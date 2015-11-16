@@ -19,6 +19,6 @@ namespace Model
 
         public string address { get; set; }
 
-        public List<patient_recipelist_druguse> druglist { get; set; }
+        public List<patient_recipelist_druguse> druguselist { get; set; }
     }
 }

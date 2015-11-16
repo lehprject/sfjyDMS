@@ -7,6 +7,7 @@ using System.Web.Http;
 using Bll;
 using Model;
 using Model.ConfigClass;
+using Share;
 
 namespace webApi.Controllers.Patient
 {
@@ -25,13 +26,30 @@ namespace webApi.Controllers.Patient
             return resultList;
         }
 
+        /// <summary>
+        /// 查询处方详细信息及处方列表信息
+        /// </summary>
+        /// <param name="recipeId"></param>
+        /// <returns></returns>
         public patient_recipelist Get(int recipeId)
         {
             Base_Bll bll = new Base_Bll();
             patient_recipelist info = bll.GetInfo<patient_recipelist>(recipeId);
-
             bll.GetFor(info, t => new { t.patient_name,t.gender,t.birth,t.alllergic_his });
 
+            List<patient_recipelist_druguse> druguselist = new patient_recipelist_Bll().GetRecipeDrugListByReciptID(recipeId);
+            bll.GetFor(druguselist, t => new { t.commonname, t.standard });
+
+            info.druguselist = druguselist;
+
+            if (info.birth.Year != Share.BaseTool.MiniDate.Year)
+            {
+                int age = DateTime.Now.Year - info.birth.Year;
+                if (DateTime.Now < info.birth.AddYears(age)) age--;
+                info.patient_age = age;
+            }
+            patient_address address = new patient_info_Bll().GetDefaultPatientAddressByPatientId(info.patient_id);
+            info.address = address.contact_add;
             return info;
         }
 
