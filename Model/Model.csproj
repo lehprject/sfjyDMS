@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper">
-      <HintPath>bin\AutoMapper.dll</HintPath>
+      <HintPath>..\..\dll\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -68,6 +68,7 @@
     <Compile Include="area_province.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChildClass\child_chk_info.cs" />
     <Compile Include="ChildClass\child_dr_pre_visit.cs" />
     <Compile Include="ChildClass\child_patient_medical_rcd.cs" />
     <Compile Include="ChildClass\child_patient_recipelist.cs" />

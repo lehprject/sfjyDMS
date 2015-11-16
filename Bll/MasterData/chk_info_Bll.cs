@@ -25,7 +25,7 @@ namespace Bll
 
         #region 查询
         public List<chk_info> SearchChkInfoList(
-             int medical_id, int patient_id, int chk_type_id, int chk_demo_id, int fileid,
+             int medical_id, int patient_id, int chk_type_id, int chk_demo_id, int fileid, int drid,
             orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
         {
             error = string.Empty;
@@ -33,7 +33,7 @@ namespace Bll
             {
                 chk_info_DA chkDa = new chk_info_DA();
                 var resultList = chkDa.SearchChkInfoList(
-                                                   medical_id,   patient_id,   chk_type_id,   chk_demo_id,   fileid,
+                                                   medical_id,   patient_id,   chk_type_id,   chk_demo_id,   fileid,drid,
                                                   orderby,   orderbyCol,   pageIndex,   pageSize, out   error);
                 return resultList;
             }

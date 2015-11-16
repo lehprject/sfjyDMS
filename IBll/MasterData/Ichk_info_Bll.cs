@@ -22,7 +22,7 @@ namespace IBll
 
         #region 查询
         List<chk_info> SearchChkInfoList(
-             int medical_id, int patient_id, int chk_type_id, int chk_demo_id, int fileid,
+             int medical_id, int patient_id, int chk_type_id, int chk_demo_id, int fileid, int drid,
             orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error);
         #endregion
 
