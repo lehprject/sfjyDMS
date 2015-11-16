@@ -134,6 +134,19 @@ namespace Dal
          
         #endregion
 
+        #region 关联查询
+        public void GetFor<T>(T info, Expression<Func<T, object>> selector)
+        {
+            EntityConfigContainer.GetFor(info, selector);
+        }
+
+        public void GetFor<T>(IEnumerable<T> list, Expression<Func<T, object>> selector)
+        {
+
+            EntityConfigContainer.GetFor(list, selector);
+        }
+        #endregion
+
     }
 
    

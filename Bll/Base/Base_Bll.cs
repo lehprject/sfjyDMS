@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Model;
 using IBll;
 using Dal;
+using System.Linq.Expressions;
 
 namespace Bll
 {
@@ -34,6 +35,43 @@ namespace Bll
 
         #region 关联查询
 
+        /// <summary>
+        /// 获取对象关联其它表的属性
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="info"></param>
+        /// <param name="selector">如 t => new { t.memberno,t.provincename }</param>
+        public void GetFor<T>(T info, Expression<Func<T, object>> selector)
+        {
+            try
+            {
+                baseDa.GetFor<T>(info, selector);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+
+        /// <summary>
+        /// 获取列表的关联其它表的属性
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="selector">如 t => new { t.memberno,t.provincename }</param>
+        public void GetFor<T>(IEnumerable<T> list, Expression<Func<T, object>> selector)
+        {
+            try
+            {
+                baseDa.GetFor<T>(list, selector);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
         #endregion
     }
 }
