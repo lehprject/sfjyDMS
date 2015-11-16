@@ -17,5 +17,15 @@ namespace Model
         /// 性别
         /// </summary>
         public string gender { get; set; }
+
+        public DateTime birth { get; set; }
+
+        public int patient_age { get; set; }
+
+        public string address { get; set; }
+
+        public string hospital_name { get; set; }
+
+        public string doctor_name { get; set; }
     }
 }

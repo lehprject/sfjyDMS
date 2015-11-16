@@ -53,7 +53,6 @@ namespace Model
     {
         static EntityConfigContainer()
         {
-
             #region patient_recipelist
             EntityConfigContainer.SetupFor<patient_recipelist>(() =>
             {
@@ -71,7 +70,6 @@ namespace Model
             });
             #endregion
 
-
             #region patient_recipelist_druguse
             EntityConfigContainer.SetupFor<patient_recipelist_druguse>(() =>
             {
@@ -83,6 +81,28 @@ namespace Model
 
             });
             #endregion
+
+            #region patient_medical_rcd
+            EntityConfigContainer.SetupFor<patient_medical_rcd>(() =>
+            {
+                EntityConfigContainer.ForMember<patient_medical_rcd, patient_info>(t => t.patient_name, r => r.name,
+                    t => t.patient_id, r => r.pkid);
+
+                EntityConfigContainer.ForMember<patient_medical_rcd, patient_info>(t => t.gender, r => r.gender,
+                  t => t.patient_id, r => r.pkid);
+
+                EntityConfigContainer.ForMember<patient_medical_rcd, patient_info>(t => t.birth, r => r.birthday,
+                   t => t.patient_id, r => r.pkid);
+
+                EntityConfigContainer.ForMember<patient_medical_rcd, md_hospital>(t => t.hospital_name, r => r.name,
+                   t => t.hospital_id, r => r.pkid);
+
+                EntityConfigContainer.ForMember<patient_medical_rcd, md_docter>(t => t.doctor_name, r => r.name,
+                   t => t.drid, r => r.pkid);
+
+            });
+            #endregion
+
         }
 
         #region Method

@@ -40,6 +40,29 @@ namespace webApi.Controllers.Patient
             return resultList;
         }
 
+        /// <summary>
+        /// 查询单个诊断相关信息
+        /// </summary>
+        /// <param name="rcdid"></param>
+        /// <returns></returns>
+        public patient_medical_rcd Get(int rcdid)
+        {
+            Base_Bll bll = new Base_Bll();
+            patient_medical_rcd info = bll.GetInfo<patient_medical_rcd>(rcdid);
+
+            bll.GetFor(info, t => new { t.patient_name, t.gender, t.birth, t.hospital_name, t.doctor_name });
+            if (info.birth.Year != Share.BaseTool.MiniDate.Year)
+            {
+                int age = DateTime.Now.Year - info.birth.Year;
+                if (DateTime.Now < info.birth.AddYears(age)) age--;
+                info.patient_age = age;
+            }
+            patient_address address = new patient_info_Bll().GetDefaultPatientAddressByPatientId(info.patient_id);
+            info.address = address.contact_add;
+
+            return info;
+        }
+
         // POST api/<controller>
         public Model.ResponseMessage Post([FromBody]patient_medical_rcd value)
         {
