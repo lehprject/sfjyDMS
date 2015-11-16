@@ -12,9 +12,34 @@ namespace webApi.Controllers.Patient
 {
     public class PatientMessageController : BaseApiController
     {
-        public IEnumerable<patient_message> GetListForDoctor(int pageindex)
+        public IEnumerable<patient_message> GetListForDr(int pageindex)
         {
-            return null;
+            patient_message_Bll messageBll = new patient_message_Bll();
+            string error = string.Empty;
+            var resultList = messageBll.SearchMessgaeList(DoctorID,0,0,null,null,null,pageindex,PageSize,out error);
+            return resultList;
+        }
+
+        public Model.ResponseMessage Post([FromBody] patient_message info)
+        {
+            patient_message_Bll messageBll = new patient_message_Bll();
+            string error = string.Empty;
+            info = messageBll.CreateMessage(info, out error);
+
+            Model.ResponseMessage result = new ResponseMessage();
+
+            if (string.IsNullOrEmpty(error))
+            {
+                result.bSuccess = true;
+                result.Extend1 = info.pkid.ToString();
+            }
+            else
+            {
+                result.bSuccess = false;
+                result.Message = error;
+            }
+
+            return result;
         }
     }
 }
