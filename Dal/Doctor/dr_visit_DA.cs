@@ -263,9 +263,12 @@ namespace Dal
                     paraList.Add(new MySqlParameter("createtime2", createtime2.Value));
                 }
 
-                conditionSb.Append(" AND dr_visit.status = @status ");
-                paraList.Add(new MySqlParameter("status", status));
-
+                if (status > 0)
+                {
+                    conditionSb.Append(" AND dr_visit.status = @status ");
+                    paraList.Add(new MySqlParameter("status", status));
+                }
+                 
                 if (visit_date1.HasValue)
                 {
                     conditionSb.Append(" AND DATEDIFF(dr_visit.visit_date,@visit_date1) >= 0 ");
