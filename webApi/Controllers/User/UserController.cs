@@ -10,8 +10,13 @@ using Share;
 
 namespace webApi.Controllers.User
 {
-    public class UserController : ApiController
+    public class UserController : BaseApiController
     {
+        public string Get()
+        {
+            return "fdfd";
+        }
+
         // GET api/<controller>
         public Model.ResponseMessage Get(string loginname, string loginpwd)
         {
@@ -27,6 +32,7 @@ namespace webApi.Controllers.User
                 if (string.IsNullOrEmpty(error))
                 {
                     result.bSuccess = true;
+                    result.Message = "登录成功";
                 }
                 else
                 {
@@ -47,41 +53,65 @@ namespace webApi.Controllers.User
             #endregion
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]md_docter value)
+        // PUT api/< >/5
+        public ResponseMessage Put(int id, [FromBody]md_docter value)
         {
-            string error = string.Empty;
-            string keyvalue = string.Empty;
-            md_docter_Bll bll = new md_docter_Bll();
-            bll.UpdateDocter(value, out error);
-        }
-
-        public ResponseMessage Put(int id, string oldpwd, string newpwd)
-        {
-            string error = string.Empty;
-            Base_Bll bll = new Base_Bll();
-            md_docter info = bll.GetInfo<md_docter>(id);
-            string encryptKey = string.Empty;
-            var password = BaseTool.EncryptDES(oldpwd, encryptKey);
-
             Model.ResponseMessage result = new ResponseMessage();
-            if (info.login_pwd == oldpwd)
-            {
-                var newpassword = BaseTool.EncryptDES(oldpwd, encryptKey);
-                info.login_pwd = newpassword;
-                info = new md_docter_Bll().UpdateDocter(info, out error);
+            string error = string.Empty;
 
-                if (string.IsNullOrEmpty(error))
-                {
-                    result.bSuccess = true;
-                }
-                else
-                {
-                    result.bSuccess = false;
-                    result.Message = error;
-                }
+            Base_Bll bll = new Base_Bll();
+            var info = bll.GetInfo<md_docter>(DoctorID);
+            info.login_pwd=value.oldpwd;
+            md_docter_Bll docbll = new md_docter_Bll();
+            docbll.UpdateDocter(info, out error);
+            if (string.IsNullOrEmpty(error))
+            {
+                result.bSuccess = true;
+                result.Message = "修改成功";
+            }
+            else
+            {
+                result.bSuccess = false;
+                result.Message = error;
             }
 
+            return result;
+            
+        }
+
+        public ResponseMessage Post([FromBody]md_docter value)
+        {
+            Model.ResponseMessage result = new ResponseMessage();
+            try
+            {
+                string error = string.Empty;
+                Base_Bll bll = new Base_Bll();
+                md_docter info = bll.GetInfo<md_docter>(DoctorID);
+                string encryptKey = string.Empty;
+                var password = BaseTool.EncryptDES(value.oldpwd, encryptKey);
+
+                if (info.login_pwd == password)
+                {
+                    var newpassword = BaseTool.EncryptDES(value.login_pwd, encryptKey);
+                    info.login_pwd = newpassword;
+                    info = new md_docter_Bll().UpdateDocter(info, out error);
+
+                    if (string.IsNullOrEmpty(error))
+                    {
+                        result.bSuccess = true;
+                        result.Message = "修改成功";
+                    }
+                    else
+                    {
+                        result.bSuccess = false;
+                        result.Message = error;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                result.bSuccess=false;
+            }
             return result;
         }
     }
