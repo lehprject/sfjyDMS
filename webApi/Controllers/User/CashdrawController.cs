@@ -9,7 +9,7 @@ using Bll;
 
 namespace webApi.Controllers.User
 {
-    public class CashdrawController : ApiController
+    public class CashdrawController : BaseApiController
     {
         // GET api/<controller>
         public IEnumerable<string> Get()
@@ -27,7 +27,13 @@ namespace webApi.Controllers.User
         {
             md_cashdraw_app_Bll cashdrawBll = new md_cashdraw_app_Bll();
             string error = string.Empty;
-            cashdrawBll.CreateCashdrawApp(info, out error);
+
+            md_cashdraw_app cashdraw = new md_cashdraw_app();
+            cashdraw.Initial();
+            cashdraw.drid = DoctorID.ToString();
+            cashdraw.drawmoney = info.drawmoney;
+            cashdraw.in_bank = info.in_bank;
+            cashdrawBll.CreateCashdrawApp(cashdraw, out error);
 
             Model.ResponseMessage result = new ResponseMessage();
             if (!string.IsNullOrEmpty(error))
