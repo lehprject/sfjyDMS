@@ -19,7 +19,7 @@ namespace webApi.Controllers.User
 
             promotion_events_Bll Bll = new promotion_events_Bll();
             string error = string.Empty;
-            var resultList = Bll.GetPromotionEventList(0, null, null, pageindex.Value, PageSize, out error);
+            var resultList = Bll.GetPromotionEventList(0, 0, null, null, null, null, null, null, null, null, pageindex.Value, PageSize, out error);
             return resultList;
         }
 
@@ -31,7 +31,7 @@ namespace webApi.Controllers.User
 
             promotion_events_Bll Bll = new promotion_events_Bll();
             string error = string.Empty;
-            var resultList = Bll.GetPromotionEventList(0, null, null, pageindex.Value, PageSize, out error);
+            var resultList = Bll.GetPromotionEventList(0,0, null, null, null, null, null, null, null, null, pageindex.Value, PageSize, out error);
             return resultList;
         }
 
