@@ -79,7 +79,8 @@ namespace Dal
 
                 #region 执行
 
-                var resultList = db.Database.SqlQuery<patient_order>(selectSql, paraList.ToArray()).ToList();
+                //var resultList = db.Database.SqlQuery<patient_order>(selectSql, paraList.ToArray()).ToList();
+                var resultList = sqlHelper.ExecuteObjects<patient_order>(selectSql, paraList.ToArray()).ToList();
                 return resultList;
                 #endregion
             }
