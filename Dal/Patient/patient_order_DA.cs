@@ -21,7 +21,7 @@ namespace Dal
             {
                 #region Command
 
-                string selectSql = string.Format("select * from patient_order left join patient_info on patient_order.patient_id = patient_info.pkid WHERE TRUE ");
+                string selectSql = string.Format("select *,patient_info.name as patient_name from patient_order left join patient_info on patient_order.patient_id = patient_info.pkid WHERE TRUE ");
 
                 StringBuilder conditionSb = new System.Text.StringBuilder();
 
@@ -66,7 +66,7 @@ namespace Dal
                 if (!string.IsNullOrEmpty(orderbyCol) && orderby.HasValue)
                     orderbyStr = orderbyFormat.getSortStr(orderby.Value, orderbyCol);
                 else
-                    orderbyStr = " order by pkid ";
+                    orderbyStr = " order by patient_order.pkid ";
 
                 selectSql += conditionSb.ToString() + orderbyStr;
                 if (pageIndex > 0)
