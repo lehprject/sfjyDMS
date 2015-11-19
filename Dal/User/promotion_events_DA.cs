@@ -18,7 +18,6 @@ namespace Dal
             error = string.Empty;
             try
             {
-                DateTime today = DateTime.Now;
                 string selectSql = "select * from promotion_events where true";
                 StringBuilder conditionSb = new System.Text.StringBuilder();
 
@@ -26,19 +25,16 @@ namespace Dal
 
                 if (face_type > 0)
                 {
-                    conditionSb.Append("AND face_type = @face_type");
+                    conditionSb.Append(" AND face_type = @face_type ");
                     paraList.Add(new MySqlParameter("face_type", face_type));
                 }
-
-                conditionSb.Append("AND enddate >= @enddate");
-                paraList.Add(new MySqlParameter("enddate", today));
 
                 #region 排序 分页
                 string orderbyStr = string.Empty;
                 if (!string.IsNullOrEmpty(orderbyCol) && orderby.HasValue)
                     orderbyStr = orderbyFormat.getSortStr(orderby.Value, orderbyCol);
                 else
-                    orderbyStr = " order by pkid ";
+                    orderbyStr = " order by pkid desc";
 
                 selectSql += conditionSb.ToString() + orderbyStr;
                 if (pageIndex > 0)
@@ -50,7 +46,7 @@ namespace Dal
 
                 #endregion
 
-                var resultList = db.Database.SqlQuery<promotion_events>(selectSql, paraList.ToArray()).ToList();
+                var resultList = sqlHelper.ExecuteObjects<promotion_events>(selectSql, paraList.ToArray()).ToList();
                 return resultList;
             }
             catch (Exception ex)
