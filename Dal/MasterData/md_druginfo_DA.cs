@@ -78,7 +78,7 @@ namespace Dal
 
                 #region 执行
 
-                var resultList = db.Database.SqlQuery<md_druginfo>(selectSql, paraList.ToArray()).ToList();
+                var resultList = sqlHelper.ExecuteObjects<md_druginfo>(selectSql, paraList.ToArray()).ToList();
                 return resultList;
                 #endregion
             }
