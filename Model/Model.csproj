@@ -89,10 +89,16 @@
     <Compile Include="dr_addvisit.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="dr_message.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="dr_pre_addvisit.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="dr_pre_visit.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dr_recall_rcd.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="dr_visit.cs">

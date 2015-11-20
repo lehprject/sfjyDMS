@@ -16,5 +16,6 @@ namespace Model
     {
         public int pkid { get; set; }
         public string visit_item { get; set; }
+        public int drid { get; set; }
     }
 }

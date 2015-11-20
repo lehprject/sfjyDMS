@@ -12,11 +12,13 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class patient_next_visit_date
+    public partial class dr_recall_rcd
     {
         public int pkid { get; set; }
-        public int next_visit_id { get; set; }
-        public string visit_item_date { get; set; }
-        public string visit_content { get; set; }
+        public int drid { get; set; }
+        public System.DateTime createtime { get; set; }
+        public string opuser { get; set; }
+        public System.DateTime optime { get; set; }
+        public int opstatus { get; set; }
     }
 }

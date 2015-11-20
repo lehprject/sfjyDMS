@@ -46,6 +46,8 @@
         <EntityTypeShape EntityType="sfjyModel.md_bank" Width="1.5" PointX="17.375" PointY="6.75" />
         <EntityTypeShape EntityType="sfjyModel.md_docter_files" Width="1.5" PointX="7.375" PointY="17.75" />
         <EntityTypeShape EntityType="sfjyModel.promotion_coupons_usecase" Width="1.5" PointX="17.375" PointY="9.75" />
+        <EntityTypeShape EntityType="sfjyModel.dr_message" Width="1.5" PointX="13.375" PointY="17.75" />
+        <EntityTypeShape EntityType="sfjyModel.dr_recall_rcd" Width="1.5" PointX="15.375" PointY="17.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

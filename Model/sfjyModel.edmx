@@ -76,6 +76,19 @@
           <Property Name="remarks" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
+        <EntityType Name="dr_message">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="drid" Type="int" Nullable="false" />
+          <Property Name="msg_content" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="attach_file1" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="attach_file2" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="attach_file3" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="dr_pre_addvisit">
           <Key>
             <PropertyRef Name="pkid" />
@@ -101,6 +114,17 @@
           <Property Name="pre_type" Type="int" Nullable="false" />
           <Property Name="remarks" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dr_recall_rcd">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="drid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="opuser" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="optime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="opstatus" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="dr_visit">
           <Key>
@@ -400,6 +424,7 @@
           </Key>
           <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="visit_item" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="drid" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="patient_next_visit_date">
           <Key>
@@ -408,6 +433,7 @@
           <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="next_visit_id" Type="int" Nullable="false" />
           <Property Name="visit_item_date" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="visit_content" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="patient_order">
           <Key>
@@ -519,8 +545,10 @@
           <EntitySet Name="chk_info" EntityType="Self.chk_info" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="chk_type" EntityType="Self.chk_type" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="dr_addvisit" EntityType="Self.dr_addvisit" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="dr_message" EntityType="Self.dr_message" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="dr_pre_addvisit" EntityType="Self.dr_pre_addvisit" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="dr_pre_visit" EntityType="Self.dr_pre_visit" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="dr_recall_rcd" EntityType="Self.dr_recall_rcd" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="dr_visit" EntityType="Self.dr_visit" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="dr_visit_detail" EntityType="Self.dr_visit_detail" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="file_check" EntityType="Self.file_check" Schema="sfjy" store:Type="Tables" />
@@ -611,6 +639,8 @@
           <EntitySet Name="md_bank" EntityType="sfjyModel.md_bank" />
           <EntitySet Name="md_docter_files" EntityType="sfjyModel.md_docter_files" />
           <EntitySet Name="promotion_coupons_usecase" EntityType="sfjyModel.promotion_coupons_usecase" />
+          <EntitySet Name="dr_message" EntityType="sfjyModel.dr_message" />
+          <EntitySet Name="dr_recall_rcd" EntityType="sfjyModel.dr_recall_rcd" />
         </EntityContainer>
         <EntityType Name="area_city">
           <Key>
@@ -1068,6 +1098,7 @@
           </Key>
           <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="visit_item" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="drid" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="patient_next_visit_date">
           <Key>
@@ -1076,6 +1107,7 @@
           <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="next_visit_id" Type="Int32" Nullable="false" />
           <Property Name="visit_item_date" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="visit_content" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="md_bank">
           <Key>
@@ -1106,6 +1138,30 @@
           <Property Name="case_pamars_value" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="case_remark" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="createtime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dr_message">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="drid" Type="Int32" Nullable="false" />
+          <Property Name="msg_content" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="attach_file1" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="attach_file2" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="attach_file3" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dr_recall_rcd">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="drid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="opuser" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="optime" Type="DateTime" Nullable="false" />
+          <Property Name="opstatus" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1613,6 +1669,7 @@
           <EntitySetMapping Name="patient_next_visit">
             <EntityTypeMapping TypeName="sfjyModel.patient_next_visit">
               <MappingFragment StoreEntitySet="patient_next_visit">
+                <ScalarProperty Name="drid" ColumnName="drid" />
                 <ScalarProperty Name="visit_item" ColumnName="visit_item" />
                 <ScalarProperty Name="pkid" ColumnName="pkid" />
               </MappingFragment>
@@ -1621,6 +1678,7 @@
           <EntitySetMapping Name="patient_next_visit_date">
             <EntityTypeMapping TypeName="sfjyModel.patient_next_visit_date">
               <MappingFragment StoreEntitySet="patient_next_visit_date">
+                <ScalarProperty Name="visit_content" ColumnName="visit_content" />
                 <ScalarProperty Name="visit_item_date" ColumnName="visit_item_date" />
                 <ScalarProperty Name="next_visit_id" ColumnName="next_visit_id" />
                 <ScalarProperty Name="pkid" ColumnName="pkid" />
@@ -1656,6 +1714,32 @@
                 <ScalarProperty Name="case_pamars_value" ColumnName="case_pamars_value" />
                 <ScalarProperty Name="case_pamars" ColumnName="case_pamars" />
                 <ScalarProperty Name="coupons_id" ColumnName="coupons_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dr_message">
+            <EntityTypeMapping TypeName="sfjyModel.dr_message">
+              <MappingFragment StoreEntitySet="dr_message">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="attach_file3" ColumnName="attach_file3" />
+                <ScalarProperty Name="attach_file2" ColumnName="attach_file2" />
+                <ScalarProperty Name="attach_file1" ColumnName="attach_file1" />
+                <ScalarProperty Name="msg_content" ColumnName="msg_content" />
+                <ScalarProperty Name="drid" ColumnName="drid" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dr_recall_rcd">
+            <EntityTypeMapping TypeName="sfjyModel.dr_recall_rcd">
+              <MappingFragment StoreEntitySet="dr_recall_rcd">
+                <ScalarProperty Name="opstatus" ColumnName="opstatus" />
+                <ScalarProperty Name="optime" ColumnName="optime" />
+                <ScalarProperty Name="opuser" ColumnName="opuser" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="drid" ColumnName="drid" />
                 <ScalarProperty Name="pkid" ColumnName="pkid" />
               </MappingFragment>
             </EntityTypeMapping>
