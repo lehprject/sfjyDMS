@@ -32,6 +32,34 @@ namespace Model
                     return;
                 }
             }
+            {
+                dr_recall_rcd obj = vobj as dr_recall_rcd;
+                if (obj != null)
+                {
+                    obj.pkid = 0;
+                    obj.drid = 0;
+                    obj.createtime = DateTime.Now;     
+                    obj.opuser = string.Empty;
+                    obj.optime = DateTime.Now;
+                    obj.opstatus = 0;
+                    return;
+                }
+            }
+            {
+                dr_message obj = vobj as dr_message;
+                if (obj != null)
+                {
+                    obj.pkid = 0;
+                    obj.drid = 0;
+                    obj.createtime = DateTime.Now;
+                    obj.msg_content = string.Empty;
+                    obj.attach_file1 = string.Empty;
+                    obj.attach_file2 = string.Empty;
+                    obj.attach_file3 = string.Empty;
+                    obj.status = 0;
+                    return;
+                }
+            }
         }
         #endregion
     }

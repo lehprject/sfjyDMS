@@ -9,7 +9,7 @@ using Dal;
 using Model.ConfigClass;
 using Share;
 
-namespace Bll.Doctor
+namespace Bll
 {
     public class dr_recall_rcd_Bll : Idr_recall_rcd_Bll
     {
