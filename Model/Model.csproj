@@ -188,6 +188,9 @@
     <Compile Include="promotion_coupons_detail.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="promotion_coupons_usecase.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="promotion_events.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>

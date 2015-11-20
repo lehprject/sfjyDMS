@@ -12,15 +12,13 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class promotion_coupons
+    public partial class promotion_coupons_usecase
     {
         public int pkid { get; set; }
-        public string name { get; set; }
-        public decimal values { get; set; }
-        public System.DateTime startdate { get; set; }
-        public System.DateTime enddate { get; set; }
-        public int issue_num { get; set; }
-        public int issue_status { get; set; }
-        public int events_id { get; set; }
+        public int coupons_id { get; set; }
+        public string case_pamars { get; set; }
+        public string case_pamars_value { get; set; }
+        public string case_remark { get; set; }
+        public System.DateTime createtime { get; set; }
     }
 }

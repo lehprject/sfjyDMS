@@ -459,6 +459,7 @@
           <Property Name="enddate" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="issue_num" Type="int" Nullable="false" />
           <Property Name="issue_status" Type="int" Nullable="false" />
+          <Property Name="events_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="promotion_coupons_cycle">
           <Key>
@@ -484,6 +485,17 @@
           <Property Name="drid" Type="int" Nullable="false" />
           <Property Name="sendtime" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="usetime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="promotion_coupons_usecase">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="coupons_id" Type="int" Nullable="false" />
+          <Property Name="case_pamars" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="case_pamars_value" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="case_remark" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="promotion_events">
           <Key>
@@ -539,6 +551,7 @@
           <EntitySet Name="promotion_coupons" EntityType="Self.promotion_coupons" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="promotion_coupons_cycle" EntityType="Self.promotion_coupons_cycle" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="promotion_coupons_detail" EntityType="Self.promotion_coupons_detail" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="promotion_coupons_usecase" EntityType="Self.promotion_coupons_usecase" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="promotion_events" EntityType="Self.promotion_events" Schema="sfjy" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -597,6 +610,7 @@
           <EntitySet Name="patient_next_visit_date" EntityType="sfjyModel.patient_next_visit_date" />
           <EntitySet Name="md_bank" EntityType="sfjyModel.md_bank" />
           <EntitySet Name="md_docter_files" EntityType="sfjyModel.md_docter_files" />
+          <EntitySet Name="promotion_coupons_usecase" EntityType="sfjyModel.promotion_coupons_usecase" />
         </EntityContainer>
         <EntityType Name="area_city">
           <Key>
@@ -947,6 +961,7 @@
           <Property Name="enddate" Type="DateTime" Nullable="false" />
           <Property Name="issue_num" Type="Int32" Nullable="false" />
           <Property Name="issue_status" Type="Int32" Nullable="false" />
+          <Property Name="events_id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="promotion_coupons_cycle">
           <Key>
@@ -1080,6 +1095,17 @@
           <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="file_type" Type="Int32" Nullable="false" />
           <Property Name="file_path" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="promotion_coupons_usecase">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="coupons_id" Type="Int32" Nullable="false" />
+          <Property Name="case_pamars" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="case_pamars_value" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="case_remark" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1466,6 +1492,7 @@
           <EntitySetMapping Name="promotion_coupons">
             <EntityTypeMapping TypeName="sfjyModel.promotion_coupons">
               <MappingFragment StoreEntitySet="promotion_coupons">
+                <ScalarProperty Name="events_id" ColumnName="events_id" />
                 <ScalarProperty Name="issue_status" ColumnName="issue_status" />
                 <ScalarProperty Name="issue_num" ColumnName="issue_num" />
                 <ScalarProperty Name="enddate" ColumnName="enddate" />
@@ -1617,6 +1644,18 @@
               <MappingFragment StoreEntitySet="md_docter_files">
                 <ScalarProperty Name="file_path" ColumnName="file_path" />
                 <ScalarProperty Name="file_type" ColumnName="file_type" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="promotion_coupons_usecase">
+            <EntityTypeMapping TypeName="sfjyModel.promotion_coupons_usecase">
+              <MappingFragment StoreEntitySet="promotion_coupons_usecase">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="case_remark" ColumnName="case_remark" />
+                <ScalarProperty Name="case_pamars_value" ColumnName="case_pamars_value" />
+                <ScalarProperty Name="case_pamars" ColumnName="case_pamars" />
+                <ScalarProperty Name="coupons_id" ColumnName="coupons_id" />
                 <ScalarProperty Name="pkid" ColumnName="pkid" />
               </MappingFragment>
             </EntityTypeMapping>

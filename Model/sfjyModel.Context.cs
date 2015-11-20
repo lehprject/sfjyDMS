@@ -65,5 +65,6 @@ namespace Model
         public virtual DbSet<patient_next_visit_date> patient_next_visit_date { get; set; }
         public virtual DbSet<md_bank> md_bank { get; set; }
         public virtual DbSet<md_docter_files> md_docter_files { get; set; }
+        public virtual DbSet<promotion_coupons_usecase> promotion_coupons_usecase { get; set; }
     }
 }
