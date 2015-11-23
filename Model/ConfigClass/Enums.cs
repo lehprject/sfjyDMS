@@ -62,5 +62,14 @@ namespace Model.ConfigClass
         姓名 = 2,
         购药时间 = 3
     }
+
+    /// <summary>
+    /// 提现申请处理状态
+    /// </summary>
+    public enum CashdrawStatus
+    {
+        未处理 = 0,
+        已处理 = 1
+    }
     #endregion
 }

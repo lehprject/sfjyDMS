@@ -60,6 +60,19 @@ namespace Model
                     return;
                 }
             }
+            {
+                md_dr_account obj = vobj as md_dr_account;
+                if (obj != null)
+                {
+                    obj.pkid = 0;
+                    obj.dr_id = 0;
+                    obj.createtime = DateTime.Now;
+                    obj.income_type = 0;
+                    obj.money = 0;
+                    obj.remarks = string.Empty;
+                    return;
+                }
+            }
         }
         #endregion
     }

@@ -15,6 +15,8 @@ namespace IBll
         md_docter GetDocterById(int id);
         md_docter LoginUtil(string loginname, string loginpass, string keyvalue, out string error);
 
+        List<md_docter> GetDoctorByIds(List<string> ids);
+
         #endregion
 
         #region 修改

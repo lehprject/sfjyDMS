@@ -10,8 +10,190 @@
     <title></title>
 </head>
 <body>
-    <div>
-    
-    </div>
+    <form id="form1" class="form-inline">
+        <%--        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        --%>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>接待时间</td>
+                                <td style="width: 15%">
+                                    <div id="date1Container">
+                                        <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" />
+
+                                    </div>
+                                </td>
+                                <td>至</td>
+                                <td style="width: 15%">
+                                    <div id="date2Container">
+                                        <input type="text" class="form-control" id="date2Input" name="date2" placeholder="" />
+                                    </div>
+                                </td>
+                                <td>处理状态</td>
+                                <td>
+                                    <asp:DropDownList ID="dllopstatus" runat="server" CssClass="form-control" DataValueField="value" DataTextField="text"></asp:DropDownList>
+                                </td>
+                                <td>所属连锁</td>
+                                <td>
+                                    <select id="chainformid" name="chainformid" class="form-control" style="width: 90%; display: inline">
+                                        <option></option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select id="storeid" name="storeid" class="form-control" style="width: 90%; display: inline">
+                                        <option></option>
+                                    </select>
+                                </td>
+                                <td style="width:12%">
+                                    <button name="action" type="submit" class="btn btn-primary" value="search">查询</button>
+                                    <button name="action" type="submit" class="btn btn-primary" value="export">导出</button>
+                                </td>
+                            </tr>
+                        </table>
+                        <%--
+                    </div>
+                </div>
+            </div>
+        </div>--%>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table id="tbList" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>关键字</th>
+                                    <th>咨询次数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @*<asp:Repeater ID="rpKeyWord" runat="server" ItemType="scModel.vm_keyword" SelectMethod="GetKeyWordList" ViewStateMode="Disabled">
+                                        <itemtemplate>
+                                            <tr>
+                                                <td><%# Item.drugname %></td>
+                                                <td><%# Item.request_time %></td>
+                                            </tr>
+                                        </itemtemplate>
+                                    </asp:Repeater>*@
+                            </tbody>
+                        </table>
+                        <div class="col-lg-12">
+                            <uc:Pager runat="server" ID="pager1" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </body>
 </html>
+
+@*<asp:Content ID="Content3" ContentPlaceHolderID="foot" runat="Server">
+    <script src="../Scripts/datepicker/bootstrap-datepicker.js"></script>
+    <script src="../Scripts/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="../Scripts/select2/select2.js"></script>
+    <script src="../Scripts/select2/select2-zh-CN.js"></script>
+    <script id="scDatepicker">
+        $('#date1Container input').datepicker({
+            format: 'yyyy-mm-dd',
+            todayBtn: "linked",
+            language: "zh-CN",
+            multidate: 1,
+            multidateSeparator: ",",
+            forceParse: false,
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('#date2Container input').datepicker({
+            format: 'yyyy-mm-dd',
+            todayBtn: "linked",
+            language: "zh-CN",
+            multidate: 1,
+            multidateSeparator: ",",
+            forceParse: false,
+            autoclose: true,
+            todayHighlight: true
+        });
+    </script>
+    <script>
+        var $ddlchainform = $('#chainformid');
+        var $ddlstore = $('#storeid');
+
+        $ddlchainform.select2({
+            placeholder: "连锁",
+            allowClear: true,
+            language: "zh-CN",
+            ajax: {
+                contentType: "application/x-www-form-urlencoded",
+                url: "<%: UrlPrefix %>/Handlers/master/storeHandler.ashx",
+                dataType: 'json',
+                delay: 500,
+                data: function (params) {
+                    return {
+                        action: "searchchainform",
+                        nameparams: params.term,
+                        format: "select",
+                    }
+                },
+                processResults: function (data, page) {
+                    if (data == null || data == undefined) {
+                        return;
+                    }
+                    return {
+                        results: data
+                    };
+                },
+            },
+            minimumInputLength: 1
+        }).on("select2:select", function (e) {
+            /*enable 门店*/
+        });
+
+        $ddlstore.select2({
+            placeholder: "门店",
+            allowClear: true,
+            language: "zh-CN",
+            ajax: {
+                contentType: "application/x-www-form-urlencoded",
+                url: "<%: UrlPrefix %>/Handlers/master/storeHandler.ashx",
+                dataType: 'json',
+                delay: 500,
+                data: function (params) {
+                    return {
+                        action: "searchstore",
+                        nameparams: params.term,
+                        format: "select",
+                        chainformid: $ddlchainform.val()
+                    }
+                },
+                processResults: function (data, page) {
+                    if (data == null || data == undefined) {
+                        return;
+                    }
+                    return {
+                        results: data
+                    };
+                },
+            },
+            minimumInputLength: 1
+        });
+
+        var chainformData=<%= chainformData%>;
+        var storeData=<%= storeData%>;
+        /*默认选中*/
+        if (chainformData != null && chainformData != undefined) {
+            $ddlchainform.append(new Option(chainformData.formname, chainformData.pkid));
+            $ddlchainform.val(chainformData.pkid).trigger('change');
+        }
+        if (chainformData != null && chainformData != undefined) {
+            $ddlstore.append(new Option(storeData.storename, storeData.pkid));
+            $ddlstore.val(storeData.pkid).trigger('change');
+        }
+    </script>
+</asp:Content>*@
+
+
+

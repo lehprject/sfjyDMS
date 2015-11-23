@@ -99,6 +99,16 @@ namespace Dal
             }
         }
 
+        public List<md_cashdraw_app> GetCashdrawByIds(List<int> ids)
+        {
+            string id = string.Join(",", ids.Select(t => t));
+            string sql = @"SELECT *                       
+                            FROM md_cashdraw_app                             
+                            where FIND_IN_SET(pkid,@ids)";
+            List<md_cashdraw_app> resultlist = sqlHelper.ExecuteObjects<md_cashdraw_app>(sql, new MySqlParameter("ids", id));
+            return resultlist;
+        }
+
         #endregion
 
         #region 添加
@@ -122,7 +132,7 @@ namespace Dal
 
         #region 修改
 
-        public md_cashdraw_app UpdateDocter(md_cashdraw_app info, out string error)
+        public md_cashdraw_app UpdateCashdraw(md_cashdraw_app info, out string error)
         {
             error = string.Empty;
             try

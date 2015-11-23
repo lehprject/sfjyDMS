@@ -31,6 +31,11 @@ namespace Bll
             }
         }
 
+        public List<md_cashdraw_app> GetCashdrawByIds(List<int> ids)
+        {
+            return new md_cashdraw_app_DA().GetCashdrawByIds(ids);
+        }
+
         #endregion
         #region 添加
 
@@ -60,13 +65,13 @@ namespace Bll
 
         #region 修改
 
-        public md_cashdraw_app UpdateDocter(md_cashdraw_app info, out string error)
+        public md_cashdraw_app UpdateCashdraw(md_cashdraw_app info, out string error)
         {
             error = string.Empty;
             try
             {
                 md_cashdraw_app_DA da = new md_cashdraw_app_DA();
-                da.UpdateDocter(info, out error);
+                da.UpdateCashdraw(info, out error);
                 return info;
             }
             catch (Exception ex)

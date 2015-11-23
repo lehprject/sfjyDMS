@@ -63,6 +63,10 @@
       <Project>{b9ad910d-ff4e-4988-9fcc-897cfec24445}</Project>
       <Name>Bll</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IBll\IBll.csproj">
+      <Project>{d4d73ba7-95e4-4086-8f28-dd3c9550b708}</Project>
+      <Name>IBll</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{3db0ccce-8bbd-4fd3-a805-a939917fd897}</Project>
       <Name>Model</Name>

@@ -58,6 +58,16 @@ namespace Bll
             }
         }
 
+        /// <summary>
+        /// 根据医生id集合查询
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public List<md_docter> GetDoctorByIds(List<string> ids)
+        {
+            return new md_docter_DA().GetDoctorByIds(ids);
+        }
+
         #endregion
 
         #region 修改
