@@ -1,0 +1,61 @@
+﻿ 
+
+@{
+    Layout = null;
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/BUI/bui-min.css" rel="stylesheet" />
+    <link href="~/Content/BUI/dpl-min.css" rel="stylesheet" />
+    <link href="~/Content/BUI/main-min.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <!--header-->
+    <div class="header">
+        <div class="dl-title">
+            <a href="" title="随访家园后台系统" target="_blank">
+                <span class="dl-title-text">随访家园后台系统</span>
+            </a>
+        </div>
+        <div class="dl-log">
+            欢迎您，<span class="dl-log-user">用户名</span> 
+            <a href="#"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
+        </div>
+    </div>
+    <!--Top Nav and Content-->
+    <div class="content">
+        <div class="dl-main-nav">
+            <ul id="J_Nav" class="nav-list ks-clear">
+                @{ int loop = 0; }
+                @foreach (var Item in ViewBag.topmanuList)
+                {
+                    <li class="nav-item @(loop == 0 ? " dl-selected":"")" >
+                        <div class="nav-item-inner nav-@Item.FunctionId">@Item.FunctionName</div>
+                    </li>
+                    loop++;
+                } 
+            </ul>
+        </div>
+
+        <ul id="J_NavContent" class="dl-tab-conten"></ul>
+    </div>
+    <!--Script-->
+    <script src="~/Scripts/BUI/jquery-1.8.1.min.js"></script>
+    <script src="~/Scripts/BUI/bui.js"></script>
+    <script src="~/Scripts/BUI/config.js"></script>
+    <script>
+        BUI.use('common/main', function () {
+            var config = @Html.Raw( ViewBag.configJson );
+            new PageUtil.MainPage({
+                modulesConfig: config
+            });
+        });
+    </script>
+</body>
+</html>

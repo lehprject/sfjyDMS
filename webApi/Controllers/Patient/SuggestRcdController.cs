@@ -12,31 +12,46 @@ namespace webApi.Controllers.Patient
 {
     public class SuggestRcdController : BaseApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        #region 测试
+        public string GetMyName()
         {
-            return new string[] { "value1", "value2" };
+            return "Charles";
         }
 
-        // GET api/<controller>/5
+        public string Get()
+        {
+            return "SuggestRcdController:Get()";
+        }
+
         public string Get(int id)
         {
-            return "value";
+            return "SuggestRcdController:Get(int id):" + id.ToString() ;
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        //与Get(int id) 冲突
+        //public string Get2(int id)
+        //{
+        //    return "SuggestRcdController:Get2(int id):" + id.ToString();
+        //}
+
+        public string Post(int id)
         {
+            return "SuggestRcdController:Post(int id):" + id.ToString();
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        #region 2个参数
+        //public string GetTwoP(int p1, int p2)
+        //{
+        //    return "GetTwoP(int p1, int p2)";
+        //}
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
+        public string GetTwoP(int p1,int p2,int? p3)
         {
+            // 不 与GetTwoP(int p1, int p2)冲突！！
+            return "GetTwoP(int p1,int p2,int? p3)";
         }
+        #endregion
+
+        #endregion
     }
 }

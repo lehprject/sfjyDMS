@@ -1,0 +1,24 @@
+﻿
+首先
+必须加入特性 data-val="true",才会进行检验。
+
+规则:
+data-val-required="错误提示的信息" 必输字段  
+data-val-email="错误提示的信息" 必须输入正确格式的电子邮件 
+data-val-url="错误提示的信息" 必须输入正确格式的网址 
+data-val-date="错误提示的信息" 必须输入正确格式的日期 
+data-val-digits="错误提示的信息" 整数 
+data-val-number="错误提示的信息" 可包括小数点,和正负号
+data-val-length="错误提示的信息"  关联 data-val-length-min="5" data-val-length-max="20",指定最大最小字符长度
+data-val-range="错误提示的信息" 关联 data-val-range-min="0" data-val-range-max="100",指定最大最小值
+data-val-regex="错误提示的信息" 关联 data-val-regex-pattern="正则表达",如"(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}"
+data-val-equalto="错误提示的信息 关联 data-val-equalto-other="另一个input的id",指定两个input值要相等
+data-val-remote="错误提示的信息" data-val-remote-url="使用ajax调用检验"
+
+展示错误消息:
+1. 集中在一个地方显示
+<div id="errorSummary" data-valmsg-summary="true" class="error">
+    <ul><li style="display:none"></li></ul> 
+</div>
+2. 在出错的地方分别显示
+<span data-valmsg-for="被检验的name" data-valmsg-replace="true"></span>
