@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace Controllers
 {
-    public class UserController:Controller
+    public class UserController : Controller
     {
         #region Container页面
 
@@ -22,7 +22,7 @@ namespace Controllers
 
             Helpers.RoleAuthorizationHelper authHelper = new Helpers.RoleAuthorizationHelper(AuthorizationList);
             ViewBag.configJson = JsonConvert.SerializeObject(authHelper.ToBuiConfigList(AuthorizationList));
-            ViewBag.topmanuList = AuthorizationList.FindAll(t => t.Level == 1); 
+            ViewBag.topmanuList = AuthorizationList.FindAll(t => t.Level == 1);
 
 
             return View();
@@ -57,47 +57,58 @@ namespace Controllers
             {
                 List<RoleAuthorization> list = new List<RoleAuthorization>();
                 #region 构造测试数据
-                 
+
                 int functionId = 1;
-                //欢迎登录页
+
                 {
-                    RoleAuthorization mainInfo = new RoleAuthorization() { Level = 1, FunctionId = functionId++, FunctionName = "系统设置", ParentId = 0, Url = "" };
+                    RoleAuthorization mainInfo = new RoleAuthorization() { Level = 1, FunctionId = functionId++, FunctionName = "系统管理", ParentId = 0, Url = "" };
                     list.Add(mainInfo);
 
                     int order = 1;
-                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "欢迎页", ParentId = mainInfo.FunctionId, Url = "/Index", Order = order++ });
-                }
-                 
+                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "二维码管理", ParentId = mainInfo.FunctionId, Url = "/Index", Order = order++ });
+                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "提现管理", ParentId = mainInfo.FunctionId, Url = "/Index", Order = order++ });
 
-                //产品管理
+                }
+
+
+                //助理平台
                 {
-                    RoleAuthorization mainInfo = new RoleAuthorization() { Level = 1, FunctionId = functionId++, FunctionName = "产品管理", ParentId = 0, Url = "" };
+                    RoleAuthorization mainInfo = new RoleAuthorization() { Level = 1, FunctionId = functionId++, FunctionName = "助理工作台", ParentId = 0, Url = "" };
                     list.Add(mainInfo);
                     int order = 1;
-                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "产品资料查询", ParentId = mainInfo.FunctionId, Url = "/master/ProductList", Order = order++ });
+                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "附件审核", ParentId = mainInfo.FunctionId, Url = "/master/UploadProducts", Order = order++ });
+                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "病历管理", ParentId = mainInfo.FunctionId, Url = "/master/UploadProducts", Order = order++ });
+                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "检查单", ParentId = mainInfo.FunctionId, Url = "/master/UploadProducts", Order = order++ });
+                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "处方单", ParentId = mainInfo.FunctionId, Url = "/master/UploadProducts", Order = order++ });
 
-                    {
-                        RoleAuthorization subInfo = new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "产品资料维护", ParentId = mainInfo.FunctionId, Url = "/master/EditProductList", Order = order++ };
-                        list.Add(subInfo);
+                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "留言管理", ParentId = mainInfo.FunctionId, Url = "/master/NewProductApp", Order = order++ });
+                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "回拨记录", ParentId = mainInfo.FunctionId, Url = "/master/NewProductApp", Order = order++ });
 
-
-                        int subOrder = 1;
-                        list.Add(new RoleAuthorization() { Level = 3, FunctionId = functionId++, FunctionName = "新增产品", ParentId = subInfo.FunctionId, Url = "/master/NewProduct", ReferenceUrl = subInfo.Url, Order = subOrder++ });
-                    }
-
-                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "产品上架", ParentId = mainInfo.FunctionId, Url = "/master/UploadProducts", Order = order++ });
-
-                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "新品申请", ParentId = mainInfo.FunctionId, Url = "/master/NewProductApp", Order = order++ });
-
-                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "产品审批", ParentId = mainInfo.FunctionId, Url = "/master/NewProductChk", Order = order++ });
-
-                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "连锁产品库", ParentId = mainInfo.FunctionId, Url = "/master/MyProductList", Order = order++ });
-
-                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "缺货管理", ParentId = mainInfo.FunctionId, Url = "/master/UpdateProducts", Order = order++ });
-
-                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "产品关联", ParentId = mainInfo.FunctionId, Url = "/master/ProductRelated", Order = order++ });
                 }
-                 
+                //医生管理
+                {
+                    RoleAuthorization mainInfo = new RoleAuthorization() { Level = 1, FunctionId = functionId++, FunctionName = "医生管理", ParentId = 0, Url = "" };
+                    list.Add(mainInfo);
+                    int order = 1;
+
+                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "医生列表", ParentId = mainInfo.FunctionId, Url = "/master/UploadProducts", Order = order++ });
+                }
+                //患者管理
+                {
+                    RoleAuthorization mainInfo = new RoleAuthorization() { Level = 1, FunctionId = functionId++, FunctionName = "患者管理", ParentId = 0, Url = "" };
+                    list.Add(mainInfo);
+                    int order = 1;
+
+                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "患者列表", ParentId = mainInfo.FunctionId, Url = "/master/UploadProducts", Order = order++ });
+                }
+                //活动管理
+                {
+                    RoleAuthorization mainInfo = new RoleAuthorization() { Level = 1, FunctionId = functionId++, FunctionName = "活动管理", ParentId = 0, Url = "" };
+                    list.Add(mainInfo);
+                    int order = 1;
+
+                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "活动列表", ParentId = mainInfo.FunctionId, Url = "/master/UploadProducts", Order = order++ });
+                }
 
                 Helpers.RoleAuthorizationHelper helper = new Helpers.RoleAuthorizationHelper(list);
                 list.FindAll(t => t.Level == 1).ForEach(
