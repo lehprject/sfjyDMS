@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="ChildClass\child_chk_info.cs" />
     <Compile Include="ChildClass\child_dr_pre_visit.cs" />
+    <Compile Include="ChildClass\child_md_cashdraw_app.cs" />
     <Compile Include="ChildClass\child_md_docter.cs" />
     <Compile Include="ChildClass\child_patient_medical_rcd.cs" />
     <Compile Include="ChildClass\child_patient_order.cs" />
