@@ -58,6 +58,7 @@
     <Compile Include="Patient\Ipatient_order_Bll.cs" />
     <Compile Include="Patient\Ipatient_recipelist_Bll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\Imd_account_Bll.cs" />
     <Compile Include="User\Imd_cashdraw_app_Bll.cs" />
     <Compile Include="User\Imd_docter_Bll.cs" />
     <Compile Include="User\Ipromotion_events_Bll.cs" />
