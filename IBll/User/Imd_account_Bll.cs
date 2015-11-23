@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model;
 
-namespace IBll.User
+namespace IBll
 {
-    class Imd_account_Bll
+    public interface Imd_account_Bll
     {
+        #region 添加
+        md_dr_account CreateAccount(md_dr_account info, out string error);       
+        #endregion
     }
 }

@@ -15,13 +15,13 @@ namespace Bll
     {
         #region 查询
 
-         public List<md_cashdraw_app> SearchCashdrapList(int drid, DateTime? app_time1, DateTime? app_time2, string opuser, DateTime? optime1, DateTime? optime2, int opstatus, orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
+         public List<md_cashdraw_app> SearchCashdrawList(int drid, DateTime? app_time1, DateTime? app_time2, string opuser, DateTime? optime1, DateTime? optime2, int opstatus, orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
         {
             error = string.Empty;
             try
             {
                 md_cashdraw_app_DA da = new md_cashdraw_app_DA();
-                var resultList = da.SearchCashdrapList( drid, app_time1, app_time2,  opuser, optime1,  optime2, opstatus, orderby, orderbyCol, pageIndex, pageSize, out error);
+                var resultList = da.SearchCashdrawList(drid, app_time1, app_time2, opuser, optime1, optime2, opstatus, orderby, orderbyCol, pageIndex, pageSize, out error);
                 return resultList;
             }
             catch (Exception ex)

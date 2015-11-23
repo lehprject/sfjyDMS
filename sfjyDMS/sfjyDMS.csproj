@@ -578,6 +578,7 @@
     <Content Include="Scripts\UEditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="Scripts\UEditor\third-party\video-js\font\vjs.woff" />
     <Content Include="Views\User\Container.cshtml" />
+    <Content Include="Views\Doctor\cashdrawList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
