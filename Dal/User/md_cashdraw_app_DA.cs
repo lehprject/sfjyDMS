@@ -14,24 +14,29 @@ namespace Dal
     {
         #region 查询
 
-        public List<md_cashdraw_app> SearchCashdrawList(int drid, DateTime? app_time1, DateTime? app_time2, string opuser, DateTime? optime1, DateTime? optime2, int opstatus, orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
+        public List<md_cashdraw_app> SearchCashdrawList(int drid, DateTime? app_time1, DateTime? app_time2, string opuser, DateTime? optime1, DateTime? optime2, int opstatus, orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize,out int record, out string error)
         {
             error = string.Empty;
+            record = 0;
             try
             {
                 #region Command
+                //string selectSql = string.Format("select cash.drid,app_time,drawmoney,in_bank,opuser,optime,opstatus,opremark,cash.pkid as pkid from md_cashdraw_app cash WHERE TRUE ");
 
-                string selectSql = string.Format("select *,md_hospital.name as hospital,md_docter.name as doctor_name, md_bank.bank as bank from md_cashdraw_app cashdraw left join md_bank on cashdraw.in_bank = md_bank.pkid left join md_docter on cashdraw.drid=md_docter.pkid left join md_hospital on md_docter.hispital_id=md_hospital.pkid WHERE TRUE ");
+                //string selectSql = string.Format("select cash.drid,app_time,drawmoney,in_bank,opuser,optime,opstatus,opremark,cash.pkid as pkid,md_docter.name as doctor_name from md_cashdraw_app cash left join md_docter on cash.drid=md_docter.pkid WHERE TRUE ");
+                string selectSql = string.Format("select cash.drid,app_time,drawmoney,in_bank,opuser,optime,opstatus,opremark,cash.pkid as pkid,md_hospital.name as hospital,md_docter.name as doctor_name, md_bank.bank as bank from md_cashdraw_app cash left join md_bank on cash.in_bank = md_bank.pkid left join md_docter on cash.drid=md_docter.pkid left join md_hospital on md_docter.hispital_id=md_hospital.pkid WHERE TRUE ");
+                string countSql = string.Format("select cash.drid,app_time,drawmoney,in_bank,opuser,optime,opstatus,opremark,cash.pkid as pkid,md_hospital.name as hospital,md_docter.name as doctor_name, md_bank.bank as bank from md_cashdraw_app cash left join md_bank on cash.in_bank = md_bank.pkid left join md_docter on cash.drid=md_docter.pkid left join md_hospital on md_docter.hispital_id=md_hospital.pkid WHERE TRUE ");
 
                 StringBuilder conditionSb = new System.Text.StringBuilder();
 
                 List<MySqlParameter> paraList = new List<MySqlParameter>();
+                List<md_cashdraw_app> resultList = new List<md_cashdraw_app>();
                 #endregion
 
                 #region 搜索条件
                 if (drid > 0)
                 {
-                    conditionSb.Append("AND cashdraw.drid = @drid");
+                    conditionSb.Append("AND cash.drid = @drid");
                     paraList.Add(new MySqlParameter("drid", drid));
                 }
 
@@ -41,7 +46,7 @@ namespace Dal
                     paraList.Add(new MySqlParameter("opuser", opuser));
                 }
 
-                conditionSb.Append("AND opstatus = @opstatus");
+                conditionSb.Append(" AND opstatus = @opstatus ");
                 paraList.Add(new MySqlParameter("opstatus", opstatus));
 
                 if (app_time1.HasValue)
@@ -75,9 +80,13 @@ namespace Dal
                 if (!string.IsNullOrEmpty(orderbyCol) && orderby.HasValue)
                     orderbyStr = orderbyFormat.getSortStr(orderby.Value, orderbyCol);
                 else
-                    orderbyStr = " order by patient_order.pkid ";
+                    orderbyStr = " order by cash.pkid ";
 
                 selectSql += conditionSb.ToString() + orderbyStr;
+
+                countSql += conditionSb.ToString();
+                countSql = string.Format("SELECT COUNT(*) FROM ({0}) AS t", countSql);
+
                 if (pageIndex > 0)
                 {
                     selectSql += " LIMIT @pageIndex , @pageSize ";
@@ -86,9 +95,14 @@ namespace Dal
                 }
                 #endregion
 
-                #region 执行
+                #region 执行    
 
-                var resultList = sqlHelper.ExecuteObjects<md_cashdraw_app>(selectSql, paraList.ToArray()).ToList();
+                //共多少行
+                record = sqlHelper.ExecuteScalar<int>(countSql, paraList.ToArray());
+                //if (record == 0)
+                //    return resultList;
+
+                resultList = sqlHelper.ExecuteObjects<md_cashdraw_app>(selectSql, paraList.ToArray()).ToList();
                 return resultList;
                 #endregion
             }

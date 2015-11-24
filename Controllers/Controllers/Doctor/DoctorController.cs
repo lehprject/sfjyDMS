@@ -12,27 +12,54 @@ using Model.ConfigClass;
 using System.Collections.Generic;
 using System;
 using Bll;
+using Share;
 
 namespace Controllers
 {
     public class DoctorController : Controller
     {
         #region 查询提现申请列表
-        public ActionResult CashdrawList(int? pageIndex = 1)
-        {
-            if (pageIndex <= 1)
-                pageIndex = 1;
-            //状态
-            List<SelectListItem> status = (Share.EnumOperate.ToKeyValues(typeof(CashdrawStatus))
-                .Select(t => new SelectListItem() { Value = t.Key.ToString(), Text = t.Value, Selected = t.Key == 0 })).ToList();
-            ViewBag.status = status;
 
-            string error = string.Empty;
-            List<md_cashdraw_app> resultlist = new md_cashdraw_app_Bll().SearchCashdrawList(1, null, null, null, null, null, 0, null, null, pageIndex.Value, 20, out error);
+        public ActionResult CashdrawList()
+        {
+            List<SelectListItem> status = (Share.EnumOperate.ToKeyValues(typeof(CashdrawStatus))
+               .Select(t => new SelectListItem() { Value = t.Key.ToString(), Text = t.Value, Selected = t.Key == 0 })).ToList();
+            ViewBag.status = status;
             return View();
         }
 
-        public ActionResult CashdrawList(int statu, DateTime? date1, DateTime? date2, int? pageIndex = 1)
+        public JsonResult Cashdraws(int? pageIndex = 1)
+        {
+            Base_Bll bll = new Base_Bll();
+            var info = bll.GetInfo<md_cashdraw_app>(1);
+
+            if (pageIndex <= 1)
+                pageIndex = 1;
+            //状态
+            List<SelectListItem> status = (Share.EnumOperate.ToKeyValues(typeof(CashdrawStatus))
+                .Select(t => new SelectListItem() { Value = t.Key.ToString(), Text = t.Value, Selected = t.Key == 0 })).ToList();
+            ViewBag.status = status;
+
+            string error = string.Empty;
+            int record = 0;
+            List<md_cashdraw_app> resultlist = new md_cashdraw_app_Bll().SearchCashdrawList(1, null, null, null, null, null, 0, null, null, pageIndex.Value, 2, out record, out error);
+            if (resultlist != null)
+            {
+                foreach (var item in resultlist)
+                {
+                    item.apptime = item.app_time.ToString("yyyy - MM - dd");
+                    item._optime = item.optime.ToString("yyyy - MM - dd");
+                }
+                PagingResponse<md_cashdraw_app> pagingResponse = new PagingResponse<md_cashdraw_app>();
+                pagingResponse.TotalRecord = record;
+                pagingResponse.ResultList = resultlist;
+                var jsonResult = Json(pagingResponse, JsonRequestBehavior.AllowGet);
+                return jsonResult;
+            }
+            return null;
+        }
+
+        public JsonResult CashdrawList1(int statu, DateTime? date1, DateTime? date2, int? pageIndex = 1)
         {
             if (pageIndex <= 1)
                 pageIndex = 1;
@@ -43,17 +70,48 @@ namespace Controllers
 
 
             string error = string.Empty;
-            List<md_cashdraw_app> resultlist = new md_cashdraw_app_Bll().SearchCashdrawList(1, date1, date2, null, null, null, statu, null, null, pageIndex.Value, 20, out error);
-            return View();
+            int record = 0;
+            List<md_cashdraw_app> resultlist = new md_cashdraw_app_Bll().SearchCashdrawList(1, date1, date2, null, null, null, statu, null, null, pageIndex.Value, 2,out record, out error);
+            if (resultlist != null)
+            {
+                foreach(var item in resultlist)
+                {
+                    item.apptime = item.app_time.ToString("yyyy - MM - dd");
+                    item._optime = item.optime.ToString("yyyy - MM - dd");
+                }
+
+
+                PagingResponse<md_cashdraw_app> pagingResponse = new PagingResponse<md_cashdraw_app>();
+                pagingResponse.TotalRecord = record;
+                pagingResponse.ResultList = resultlist;
+                var jsonResult = Json(pagingResponse, JsonRequestBehavior.AllowGet);
+                return jsonResult;
+            }
+
+            return null;
         }
 
         #endregion
 
         #region 处理提现申请
 
-        public ActionResult UpdateCashdrawList()
+        public ActionResult UpdateCashdrawList(string idstr)
         {
+
+            //idstr = "1,2";
             var ids = new List<int>();
+
+            if (!string.IsNullOrEmpty(idstr))
+            {
+                if (idstr.Contains(','))
+                {
+                    var values = idstr.Split(',');
+                    foreach (var item in values)
+                    {
+                        ids.Add(BaseTool.GetIntNumber(item));
+                    }
+                }
+            }
             md_cashdraw_app_Bll cashdrawBll = new md_cashdraw_app_Bll();
             md_docter_Bll doctorBll = new md_docter_Bll();
             List<md_cashdraw_app> cashdrawlist = cashdrawBll.GetCashdrawByIds(ids);
@@ -69,7 +127,7 @@ namespace Controllers
 
             foreach (var item in doctorlist)
             {
-                var list = cashdrawlist.Where(m => m.drid == item.ToString()).ToList();
+                var list = cashdrawlist.Where(m => m.drid == item.pkid.ToString()).ToList();
                 if (list.Any())
                 {
                     var money = list.Select(m => m.drawmoney).Sum();

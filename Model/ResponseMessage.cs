@@ -151,4 +151,11 @@ namespace Model
 
         public object ResultList { get; set; }
     }
+
+    public class PagingResponse<T>
+    {
+        public int TotalRecord { get; set; }
+
+        public List<T> ResultList { get; set; }
+    }
 }

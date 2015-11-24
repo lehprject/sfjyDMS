@@ -1,199 +1,121 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<link href="@Url.Content("~/Content/datepicker/bootstrap-datepicker3.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/select2/select2.css")" rel="stylesheet" type="text/css" />
+<form id="form1" class="form-inline">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <td>状态</td>
+                            <td>
+                                <select id="storeid" name="storeid" class="form-control" style="width: 90%; display: inline">
+                                </select>
+                            </td>
+                            <td>申请时间</td>
+                            <td style="width: 15%">
+                                <div id="date1Container">
+                                    <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" />
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <form id="form1" class="form-inline">
-        <%--        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        --%>
-                        <table class="table table-bordered">
-                            <tr>
-                                <td>接待时间</td>
-                                <td style="width: 15%">
-                                    <div id="date1Container">
-                                        <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" />
+                                </div>
+                            </td>
+                            <td>至</td>
+                            <td style="width: 15%">
+                                <div id="date2Container">
 
-                                    </div>
-                                </td>
-                                <td>至</td>
-                                <td style="width: 15%">
-                                    <div id="date2Container">
-                                        <input type="text" class="form-control" id="date2Input" name="date2" placeholder="" />
-                                    </div>
-                                </td>
-                                <td>处理状态</td>
-                                <td>
-                                    <asp:DropDownList ID="dllopstatus" runat="server" CssClass="form-control" DataValueField="value" DataTextField="text"></asp:DropDownList>
-                                </td>
-                                <td>所属连锁</td>
-                                <td>
-                                    <select id="chainformid" name="chainformid" class="form-control" style="width: 90%; display: inline">
-                                        <option></option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select id="storeid" name="storeid" class="form-control" style="width: 90%; display: inline">
-                                        <option></option>
-                                    </select>
-                                </td>
-                                <td style="width:12%">
-                                    <button name="action" type="submit" class="btn btn-primary" value="search">查询</button>
-                                    <button name="action" type="submit" class="btn btn-primary" value="export">导出</button>
-                                </td>
-                            </tr>
-                        </table>
-                        <%--
-                    </div>
-                </div>
-            </div>
-        </div>--%>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <table id="tbList" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>关键字</th>
-                                    <th>咨询次数</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @*<asp:Repeater ID="rpKeyWord" runat="server" ItemType="scModel.vm_keyword" SelectMethod="GetKeyWordList" ViewStateMode="Disabled">
-                                        <itemtemplate>
-                                            <tr>
-                                                <td><%# Item.drugname %></td>
-                                                <td><%# Item.request_time %></td>
-                                            </tr>
-                                        </itemtemplate>
-                                    </asp:Repeater>*@
-                            </tbody>
-                        </table>
-                        <div class="col-lg-12">
-                            <uc:Pager runat="server" ID="pager1" />
-                        </div>
-                    </div>
+                                    <input type="text" class="form-control" id="date2Input" name="date2" placeholder="" />
+                                </div>
+                            </td>
+                            <td style="width:12%">
+                                <button id="action" name="action" type="button" class="btn btn-primary" value="search">查询</button>
+                            </td>
+                        </tr>
+                    </table>
+
+
                 </div>
             </div>
         </div>
-    </form>
-</body>
-</html>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
 
-@*<asp:Content ID="Content3" ContentPlaceHolderID="foot" runat="Server">
+                    <table class="table table-striped" id="tbDetailList">
+                        <thead>
+                            <tr>
+                                <th>勾选</th>
+                                <th>申请人</th>
+                                <th>申请时间</th>
+                                <th>所属医院</th>
+                                <th>提现金额</th>
+                                <th>转入银行</th>
+                                <th>转入账号</th>
+                                <th>处理状态</th>
+                                <th>处理人</th>
+                                <th>处理时间</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cashdrawListContainer"></tbody>
+                    </table>
+                    <div class="row-fluid" id="cashdrawpage"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <tr>
+            <td>
+                <input type="checkbox" name="selectall" id="selectall" />全选
+                &nbsp;&nbsp;&nbsp;<button id="bulk" name="action" type="button" class="btn btn-primary" value="search">批量处理</button>
+            </td>
+        </tr>
+    </table>
+</form>
+@section scripts{
     <script src="../Scripts/datepicker/bootstrap-datepicker.js"></script>
     <script src="../Scripts/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>
-    <script src="../Scripts/select2/select2.js"></script>
-    <script src="../Scripts/select2/select2-zh-CN.js"></script>
-    <script id="scDatepicker">
-        $('#date1Container input').datepicker({
-            format: 'yyyy-mm-dd',
-            todayBtn: "linked",
-            language: "zh-CN",
-            multidate: 1,
-            multidateSeparator: ",",
-            forceParse: false,
-            autoclose: true,
-            todayHighlight: true
-        });
-
-        $('#date2Container input').datepicker({
-            format: 'yyyy-mm-dd',
-            todayBtn: "linked",
-            language: "zh-CN",
-            multidate: 1,
-            multidateSeparator: ",",
-            forceParse: false,
-            autoclose: true,
-            todayHighlight: true
-        });
+    <script src="../Scripts/jquery.twbsPagination.js"></script>
+    <script src="../Scripts/handlebars-v3.0.3.js"></script>
+    <script id="cashdrawTemplate" type="text/x-handlebars-template">
+        {{#each this}}
+        <tr>
+            <td><input type="checkbox" name="select" value="{{pkid}}" /></td>
+            <td>{{doctor_name}}</td>
+            <td>{{apptime}}</td>
+            <td>{{hospital}}</td>
+            <td>{{drawmoney}}</td>
+            <td>{{bank}}</td>
+            <td>{{card_no}}</td>
+            <td>{{opstatus}}</td>
+            <td>{{opuser}}</td>
+            <td>{{_optime}}</td>
+        </tr>
+        {{/each}}
     </script>
-    <script>
-        var $ddlchainform = $('#chainformid');
-        var $ddlstore = $('#storeid');
 
-        $ddlchainform.select2({
-            placeholder: "连锁",
-            allowClear: true,
-            language: "zh-CN",
-            ajax: {
-                contentType: "application/x-www-form-urlencoded",
-                url: "<%: UrlPrefix %>/Handlers/master/storeHandler.ashx",
-                dataType: 'json',
-                delay: 500,
-                data: function (params) {
-                    return {
-                        action: "searchchainform",
-                        nameparams: params.term,
-                        format: "select",
-                    }
-                },
-                processResults: function (data, page) {
-                    if (data == null || data == undefined) {
-                        return;
-                    }
-                    return {
-                        results: data
-                    };
-                },
-            },
-            minimumInputLength: 1
-        }).on("select2:select", function (e) {
-            /*enable 门店*/
-        });
-
-        $ddlstore.select2({
-            placeholder: "门店",
-            allowClear: true,
-            language: "zh-CN",
-            ajax: {
-                contentType: "application/x-www-form-urlencoded",
-                url: "<%: UrlPrefix %>/Handlers/master/storeHandler.ashx",
-                dataType: 'json',
-                delay: 500,
-                data: function (params) {
-                    return {
-                        action: "searchstore",
-                        nameparams: params.term,
-                        format: "select",
-                        chainformid: $ddlchainform.val()
-                    }
-                },
-                processResults: function (data, page) {
-                    if (data == null || data == undefined) {
-                        return;
-                    }
-                    return {
-                        results: data
-                    };
-                },
-            },
-            minimumInputLength: 1
-        });
-
-        var chainformData=<%= chainformData%>;
-        var storeData=<%= storeData%>;
-        /*默认选中*/
-        if (chainformData != null && chainformData != undefined) {
-            $ddlchainform.append(new Option(chainformData.formname, chainformData.pkid));
-            $ddlchainform.val(chainformData.pkid).trigger('change');
-        }
-        if (chainformData != null && chainformData != undefined) {
-            $ddlstore.append(new Option(storeData.storename, storeData.pkid));
-            $ddlstore.val(storeData.pkid).trigger('change');
-        }
+    <script type="text/javascript">
+        (function () {
+            var statusData= @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.status));
+            if(statusData!=null){
+                for (var n = 0; n < statusData.length; n++) {
+                    $('#storeid').append("<option value='" + statusData[n].Value + "'>" + statusData[n].Text + "</option>");
+                }
+            }
+        })();
     </script>
-</asp:Content>*@
+
+    <script src="../Scripts/Pages/Share.js"></script>
+    <script src="../Scripts/Pages/doctor/cashrawList.js"></script>
+}
+
+
 
 
 

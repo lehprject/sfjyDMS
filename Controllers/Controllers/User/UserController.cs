@@ -66,7 +66,7 @@ namespace Controllers
 
                     int order = 1;
                     list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "二维码管理", ParentId = mainInfo.FunctionId, Url = "/Index", Order = order++ });
-                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "提现管理", ParentId = mainInfo.FunctionId, Url = "/Index", Order = order++ });
+                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "提现管理", ParentId = mainInfo.FunctionId, Url = "/Doctor/cashdrawList", Order = order++ });
 
                 }
 
