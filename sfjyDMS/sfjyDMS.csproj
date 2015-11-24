@@ -281,6 +281,7 @@
     <Content Include="Scripts\Morris\morris.min.js" />
     <Content Include="Scripts\Morris\raphael-min.js" />
     <Content Include="Scripts\Morris\raphael.js" />
+    <Content Include="Scripts\Pages\cashrawList.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sb-admin-2.js" />
