@@ -57,6 +57,7 @@
     <Compile Include="Controllers\Promotion\PromotionController.cs" />
     <Compile Include="Controllers\User\UserController.cs" />
     <Compile Include="Helpers\RoleAuthorizationHelper.cs" />
+    <Compile Include="Helpers\SelectHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

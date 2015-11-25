@@ -221,6 +221,7 @@
     </Compile>
     <Compile Include="ViewModel\BUI.cs" />
     <Compile Include="ViewModel\RoleAuthorization.cs" />
+    <Compile Include="ViewModel\vm_SelectInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

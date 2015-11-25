@@ -108,6 +108,11 @@ namespace Dal
             }
         }
 
+        public List<promotion_events> GetAllPromotionEventl()
+        {
+            return db.promotion_events.ToList();
+        }
+
         #endregion
 
         #region 添加

@@ -30,6 +30,11 @@ namespace Bll
             return new promotion_events_DA().GetPromotionEventList(hospital_id, face_type, startdate1, startdate2, enddate1, enddate2,
              createtime1, createtime2, orderby, orderbyCol, pageIndex, pageSize, out record, out error);
         }
+
+        public List<promotion_events> GetAllPromotionEventl()
+        {
+            return new promotion_events_DA().GetAllPromotionEventl();
+        }
         #endregion
 
         #region 添加
