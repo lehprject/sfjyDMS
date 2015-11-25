@@ -14,7 +14,7 @@ namespace Dal
     {
         #region 活动相关
         #region 查询
-        public List<promotion_events> GetPromotionEventList(int hospital_id, int face_type, DateTime? startdate1, DateTime? startdate2, DateTime? enddate1, DateTime? enddate2,
+        public List<promotion_events> GetPromotionEventList(string name, int hospital_id, int face_type, DateTime? startdate1, DateTime? startdate2, DateTime? enddate1, DateTime? enddate2,
              DateTime? createtime1, DateTime? createtime2, orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out int record, out string error)
         {
             error = string.Empty;
@@ -28,6 +28,12 @@ namespace Dal
                 List<MySqlParameter> paraList = new List<MySqlParameter>();
 
                 #region 条件
+                if(!string.IsNullOrEmpty(name))
+                {
+                    conditionSb.Append(" AND name LIKE CONCAT('%', @name, '%') ");
+                    paraList.Add(new MySqlParameter("name", name));
+                }
+
                 if (face_type > 0)
                 {
                     conditionSb.Append(" AND face_type = @face_type ");
@@ -140,7 +146,7 @@ namespace Dal
 
         #region 添加
 
-        public bool CreateCouponsList(promotion_coupons info, List<promotion_coupons_detail> detailList, List<promotion_coupons_usecase> usecaselist, out string error)
+        public bool CreatePromotionCoupons(promotion_coupons info, List<promotion_coupons_detail> detailList, List<promotion_coupons_usecase> usecaselist, out string error)
         {
             error = string.Empty;
             try
@@ -168,6 +174,7 @@ namespace Dal
                             if (item.pkid == 0)
                             {
                                 item.coupons_id = info.pkid;
+
                                 db.promotion_coupons_detail.Add(item);
                                 db.SaveChanges();
                             }

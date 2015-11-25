@@ -24,10 +24,10 @@ namespace Bll
         /// <param name="pageSize"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public List<promotion_events> GetPromotionEventList(int hospital_id, int face_type, DateTime? startdate1, DateTime? startdate2, DateTime? enddate1, DateTime? enddate2,
+        public List<promotion_events> GetPromotionEventList(string name, int hospital_id, int face_type, DateTime? startdate1, DateTime? startdate2, DateTime? enddate1, DateTime? enddate2,
              DateTime? createtime1, DateTime? createtime2, orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out int record, out string error)
         {
-            return new promotion_events_DA().GetPromotionEventList(hospital_id, face_type, startdate1, startdate2, enddate1, enddate2,
+            return new promotion_events_DA().GetPromotionEventList(name,hospital_id, face_type, startdate1, startdate2, enddate1, enddate2,
              createtime1, createtime2, orderby, orderbyCol, pageIndex, pageSize, out record, out error);
         }
 
@@ -38,7 +38,7 @@ namespace Bll
         #endregion
 
         #region 添加
-        promotion_events CreatePromotion(promotion_events info, out string error)
+        public promotion_events CreatePromotion(promotion_events info, out string error)
         {
             error = string.Empty;
             try
@@ -60,13 +60,13 @@ namespace Bll
 
         #region 添加
 
-        public bool CreateCouponsList(promotion_coupons info, List<promotion_coupons_detail> detailList, List<promotion_coupons_usecase> usecaselist, out string error)
+        public bool CreatePromotionCoupons(promotion_coupons info, List<promotion_coupons_detail> detailList, List<promotion_coupons_usecase> usecaselist, out string error)
         {
             error = string.Empty;
             try
             {
                 promotion_events_DA recipeDa = new promotion_events_DA();
-                bool success = recipeDa.CreateCouponsList(info, detailList,usecaselist, out error);
+                bool success = recipeDa.CreatePromotionCoupons(info, detailList, usecaselist, out error);
                 return success;
 
             }

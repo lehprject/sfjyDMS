@@ -583,6 +583,7 @@
     <Content Include="Scripts\UEditor\third-party\video-js\font\vjs.woff" />
     <Content Include="Views\User\Container.cshtml" />
     <Content Include="Views\Doctor\cashdrawList.cshtml" />
+    <Content Include="Views\Promotion\PromotionCouponsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

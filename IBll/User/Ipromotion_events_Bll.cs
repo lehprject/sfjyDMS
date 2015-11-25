@@ -12,7 +12,7 @@ namespace IBll
     {
         #region 活动相关
         #region 查询
-        List<promotion_events> GetPromotionEventList(int hospital_id, int face_type, DateTime? startdate1, DateTime? startdate2, DateTime? enddate1, DateTime? enddate2,
+        List<promotion_events> GetPromotionEventList(string name, int hospital_id, int face_type, DateTime? startdate1, DateTime? startdate2, DateTime? enddate1, DateTime? enddate2,
              DateTime? createtime1, DateTime? createtime2, orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out int record, out string error);
 
         List<promotion_events> GetAllPromotionEventl();
@@ -26,7 +26,7 @@ namespace IBll
 
         #region 优惠券相关
         #region 添加
-        bool CreateCouponsList(promotion_coupons info, List<promotion_coupons_detail> detailList, List<promotion_coupons_usecase> usecaselist, out string error);
+        bool CreatePromotionCoupons(promotion_coupons info, List<promotion_coupons_detail> detailList, List<promotion_coupons_usecase> usecaselist, out string error);
 
         #endregion
 

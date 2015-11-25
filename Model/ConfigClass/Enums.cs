@@ -71,5 +71,15 @@ namespace Model.ConfigClass
         未处理 = 0,
         已处理 = 1
     }
+
+
+    /// <summary>
+    /// 优惠券状态
+    /// </summary>
+    public enum CouponsStatus
+    {
+        无效 = 0,
+        有效 = 1
+    }
     #endregion
 }
