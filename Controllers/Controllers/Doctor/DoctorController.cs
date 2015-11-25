@@ -59,7 +59,7 @@ namespace Controllers
             return null;
         }
 
-        public JsonResult CashdrawList1(int statu, DateTime? date1, DateTime? date2, int? pageIndex = 1)
+        public JsonResult CashdrawList1(DateTime? date1, DateTime? date2, int? statu=1, int? pageIndex = 1)
         {
             if (pageIndex <= 1)
                 pageIndex = 1;
@@ -71,7 +71,7 @@ namespace Controllers
 
             string error = string.Empty;
             int record = 0;
-            List<md_cashdraw_app> resultlist = new md_cashdraw_app_Bll().SearchCashdrawList(1, date1, date2, null, null, null, statu, null, null, pageIndex.Value, 2,out record, out error);
+            List<md_cashdraw_app> resultlist = new md_cashdraw_app_Bll().SearchCashdrawList(1, date1, date2, null, null, null, statu.Value, null, null, pageIndex.Value, 2,out record, out error);
             if (resultlist != null)
             {
                 foreach(var item in resultlist)

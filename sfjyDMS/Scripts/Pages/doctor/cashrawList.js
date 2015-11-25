@@ -11,22 +11,41 @@
 })();
 
 (function () {
-    //点击全选触发  
+    ////点击全选触发  
+    //$("[name='selectall']:checkbox").on('click', function () {
+    //    $("[name='select']:checkbox").attr('checked', this.checked);
+    //});
+
+    ////点击每一个item触发  
+    //$("[name='hobby']:checkbox").on('click', function () {
+    //    var $items = $("[name='hobby']:checkbox");
+    //    $("[name='checkAll']:checkbox").attr('checked', $items.length == $items.filter("[name='hobby']:checked").length);
+    //});
+
+    //$(document).ready(function () {
+
+    //    $("[name='select']:checkbox").on('click', function () {
+    //        $(this).attr('checked', true);
+    //    });
+    //});
+
     $("[name='selectall']:checkbox").on('click', function () {
-        $("[name='select']:checkbox").attr('checked', this.checked);
-    });
-
-    //点击每一个item触发  
-    $("[name='hobby']:checkbox").on('click', function () {
-        var $items = $("[name='hobby']:checkbox");
-        $("[name='checkAll']:checkbox").attr('checked', $items.length == $items.filter("[name='hobby']:checked").length);
-    });
-
-    $(document).ready(function () {
-
-        $("[name='select']:checkbox").on('click', function () {
+        var value = $(this).val();
+        if (value == '0') {
             $(this).attr('checked', true);
-        });
+            $("[name='select']:checkbox").attr('checked', true);
+            $(this).attr("value", "1");
+        }
+        else {
+            $(this).attr('checked', false);
+            $("[name='select']:checkbox").attr('checked', false);
+            $(this).attr("value", "0");
+        }
+    });
+
+    $("[name='select']:checkbox").on('click', function () {
+        //$(this).prop("checked",true);;
+        $(this).attr('checked', true);
     });
 
     //$("[name='select']:checkbox").each(function () {
@@ -90,22 +109,24 @@
 
     $('#action').on("click", function () {
         first = 1;
-        var storeid = $("#storeid").val();
+        var statu = $("#statu").val();
         var date1Input = $("#date1Input").val();
         var date2Input = $("#date2Input").val();
-
-        findCashdraw(1, date1Input, date2Input, storeid);
+        $('#cashdrawpage').css("display", "none");
+        $('#cashdrawpage2').css("display", "");
+        findCashdraw(1, date1Input, date2Input, statu);
     });
 
+    var $pager2 = $("#cashdrawpage2");
     var findCashdraw = function (pageindex, date1, date2, statu) {
         $.ajax({
             url: "/Doctor/CashdrawList1",
             type: 'GET',
-            data: {
-                statu: statu,
+            data: {             
                 date1: date1,
                 date2: date2,
-                pageIndex: pageIndex,
+                statu: statu,
+                pageIndex: pageindex,
             },
             success: function (data) {
                 if (data && data.ResultList) {
@@ -116,7 +137,7 @@
 
                     //分页
                     var totalPages = Math.ceil(data.TotalRecord / 2);
-                    functions.initialPager($pager, totalPages, findCashdraw)
+                    functions.initialPager($pager2, totalPages, findCashdraw)
                 };
             }
         });
