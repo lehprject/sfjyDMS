@@ -11,6 +11,11 @@
 })();
 
 (function () {
+
+
+})();
+
+(function () {
     var $promotionname = $("#name");
     $promotionname.select2({
         placeholder: "活动名称",

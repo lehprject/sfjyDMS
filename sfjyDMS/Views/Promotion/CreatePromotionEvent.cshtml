@@ -1,17 +1,89 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<link href="@Url.Content("~/Content/datepicker/bootstrap-datepicker3.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/select2/select2.css")" rel="stylesheet" type="text/css" />
+<form id="form1" class="form-inline">
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div>
+            @ViewBag.ErrorMessage
+        </div>
+    }
+  <div class="panel panel-primary container-fluid">
+        <div class="panel-body">
+            <h2>基础信息</h2>
+            <table class="table table-bordered">
+                <tr>
+                    <td>活动名称</td>
+                    <td>
+                        <input id="name" name="name" class="form-control" data-val="true" data-val-required="请填写名称." />
+                        <span data-valmsg-for="name" data-valmsg-replace="true" style="color: red"></span>
+                    </td>
+                    <td>活动内容</td>
+                    <td>
+                        <input id="content" name="content" class="form-control" data-val="true" data-val-required="请填写内容." />
+                        <span data-valmsg-for="content" data-valmsg-replace="true" style="color: red"></span>
+                    </td>
+                    <td>生效时间</td>
+                    <td>
+                        <div id="date1Container">
+                            <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>结束时间</td>
+                    <td>
+                        <div id="date2Container">
+
+                            <input type="text" class="form-control" id="date2Input" name="date2" placeholder="" />
+                        </div>
+                    </td>
+                    <td></td>
+                    <td>
+                        <select id="contactor_gender" name="contactor_gender" class="form-control">
+                            
+                        </select>
+                    </td>
+                    <td></td>
+                    <td>
+                    </td>
+                </tr>              
+                </table>
+            <h2>参加活动的条件</h2>
+            <table class="table table-bordered">
+                <tr>
+                    <td style="width:20%">条件一</td>
+                    <td><input type="text" class="form-control" id="request1" name="request1" placeholder="" /></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">条件二</td>
+                    <td ><input type="text" class="form-control" id="request2" name="request2" placeholder="" /></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">条件三</td>
+                    <td><input type="text" class="form-control" id="request3" name="request3" placeholder="" /></td>
+                </tr>
+            </table>
+            <div class="col-lg-offset-5 col-lg-12">
+                <button id="btnSave" name="action" type="submit" class="btn btn-primary btn-lg btnSave" value="save">保存</button>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</form>
+@section scripts{
+    <script src="../Scripts/datepicker/bootstrap-datepicker.js"></script>
+    <script src="../Scripts/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>
+
+
+    <script src="../Scripts/Pages/Share.js"></script>
+    <script src="../Scripts/Pages/Promotion/PromotionEventList.js"></script>
+}
+
+
+
+
+

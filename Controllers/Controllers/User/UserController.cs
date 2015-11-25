@@ -107,7 +107,15 @@ namespace Controllers
                     list.Add(mainInfo);
                     int order = 1;
 
-                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "活动列表", ParentId = mainInfo.FunctionId, Url = "/Promotion/PromotionEventList", Order = order++ });
+                    {
+                        RoleAuthorization subInfo = new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "活动列表", ParentId = mainInfo.FunctionId, Url = "/Promotion/PromotionEventList", Order = order++ };
+                        list.Add(subInfo);
+
+                        int subOrder = 1;
+                        list.Add(new RoleAuthorization() { Level = 3, FunctionId = functionId++, FunctionName = "新增活动", ParentId = subInfo.FunctionId, Url = "/Promotion/GreatePromotionCoupons", ReferenceUrl = subInfo.Url, Order = subOrder++ });
+
+                        //list.Add(new RoleAuthorization() { Level = 4, FunctionId = functionId++, FunctionName = "新增回访", ParentId = subInfo.FunctionId, Url = "/member/RevisitInfo", ReferenceUrl = subInfo.Url, Order = subOrder++ });
+                    }                   
                 }
 
                 Helpers.RoleAuthorizationHelper helper = new Helpers.RoleAuthorizationHelper(list);

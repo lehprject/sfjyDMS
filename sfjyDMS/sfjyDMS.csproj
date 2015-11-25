@@ -284,6 +284,7 @@
     <Content Include="Scripts\Morris\raphael-min.js" />
     <Content Include="Scripts\Morris\raphael.js" />
     <Content Include="Scripts\Pages\doctor\cashrawList.js" />
+    <Content Include="Scripts\Pages\Promotion\PromotionCouponsList.js" />
     <Content Include="Scripts\Pages\Promotion\PromotionEventList.js" />
     <Content Include="Scripts\Pages\Share.js" />
     <Content Include="Scripts\respond.js" />

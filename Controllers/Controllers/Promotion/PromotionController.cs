@@ -115,10 +115,22 @@ namespace Controllers
             return null;
         }
 
+        public ActionResult CreatePromotionEvent()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult CreatePromotionEvent(FormCollection collection)
         {
-            //var mobile = collection["mobile"];
-            //var code = collection["vailcode"];
+            var date1 = collection["date1"];
+            var date2 = collection["date2"];
+
+            if(string.IsNullOrEmpty(date1)||string.IsNullOrEmpty(date2))
+            {
+                ViewBag.ErrorMessage = "请选择日期";
+                return View();
+            }
 
             promotion_events info = new promotion_events();
             info.Initial();
@@ -142,7 +154,6 @@ namespace Controllers
         }
 
         #endregion
-
 
         #region 优惠券
 
