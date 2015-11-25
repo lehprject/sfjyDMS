@@ -101,7 +101,7 @@ namespace Controllers
             //idstr = "1,2";
             var ids = new List<int>();
 
-            if (!string.IsNullOrEmpty(idstr))
+            if (!string.IsNullOrEmpty(idstr))   ///批注By Andy:此处判断，如果idstr为空的情况，代码会如何执行？
             {
                 if (idstr.Contains(','))
                 {
@@ -119,7 +119,7 @@ namespace Controllers
             foreach (var item in cashdrawlist)
             {
                 item.opstatus = (int)Model.ConfigClass.CashdrawStatus.已处理;
-                cashdrawBll.UpdateCashdraw(item, out error);
+                cashdrawBll.UpdateCashdraw(item, out error);   ///批注By Andy:更新一次就调用一次数据库连接，对数据库性能有影响，建议传入需要更新的ids,用update语句一次执行
             }
 
             var doctorids = cashdrawlist.Select(m => m.drid).Distinct().ToList();
