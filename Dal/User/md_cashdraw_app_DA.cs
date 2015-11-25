@@ -99,8 +99,8 @@ namespace Dal
 
                 //共多少行
                 record = sqlHelper.ExecuteScalar<int>(countSql, paraList.ToArray());
-                //if (record == 0)
-                //    return resultList;
+                if (record == 0)
+                    return resultList;
 
                 resultList = sqlHelper.ExecuteObjects<md_cashdraw_app>(selectSql, paraList.ToArray()).ToList();
                 return resultList;
