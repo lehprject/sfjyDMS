@@ -1,0 +1,114 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("~/Content/datepicker/bootstrap-datepicker3.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/select2/select2.css")" rel="stylesheet" type="text/css" />
+<form id="form1" class="form-inline">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <td>活动名称</td>
+                            <td>
+                                <select id="name" name="name" class="form-control" style="width: 90%; display: inline"></select>
+                            </td>
+                            <td>活动时间</td>
+                            <td style="width: 15%">
+                                <div id="date1Container">
+                                    <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" />
+
+                                </div>
+                            </td>
+                            <td>至</td>
+                            <td style="width: 15%">
+                                <div id="date2Container">
+
+                                    <input type="text" class="form-control" id="date2Input" name="date2" placeholder="" />
+                                </div>
+                            </td>
+                            <td style="width:12%">
+                                <button id="action" name="action" type="button" class="btn btn-primary" value="search">查询</button>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <table class="table table-striped" id="tbDetailList">
+                        <thead>
+                            <tr>
+                                <th>活动名称</th>
+                                <th>活动开始时间</th>
+                                <th>活动结束时间</th>
+                                <th>活动内容</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cashdrawListContainer"></tbody>
+                    </table>
+                    <div class="row-fluid" id="cashdrawpage"></div>
+                    <div class="row-fluid" id="cashdrawpage2" style="display:none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <tr>
+            <td>
+                <input type="checkbox" name="selectall" id="selectall" value="0" />全选
+                &nbsp;&nbsp;&nbsp;<button id="bulk" name="action" type="submit" class="btn btn-primary" value="search">批量处理</button>
+            </td>
+        </tr>
+    </table>
+</form>
+@section scripts{
+    <script src="../Scripts/datepicker/bootstrap-datepicker.js"></script>
+    <script src="../Scripts/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="../Scripts/jquery.twbsPagination.js"></script>
+    <script src="../Scripts/handlebars-v3.0.3.js"></script>
+    <script id="eventTemplate" type="text/x-handlebars-template">
+        {{#each this}}
+        <tr>
+            <td>
+                <input type="checkbox" name="select" value="{{pkid}}" />
+            </td>
+            <td>{{name}}</td>
+            <td>{{startdate}}</td>
+            <td>{{enddate}}</td>
+            <td>{{contents}}</td>
+            <td><a href="@Url.Action("","")">生成优惠券</a></td>
+        </tr>
+        {{/each}}
+    </script>
+
+    <script type="text/javascript">
+        (function () {
+            var statusData= @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.status));
+            if(statusData!=null){
+                for (var n = 0; n < statusData.length; n++) {
+                    $('#statu').append("<option value='" + statusData[n].Value + "'>" + statusData[n].Text + "</option>");
+                }
+            }
+        })();
+    </script>
+
+    <script src="../Scripts/Pages/Share.js"></script>
+    <script src="../Scripts/Pages/doctor/cashrawList.js"></script>
+}
+
+
+
+
+

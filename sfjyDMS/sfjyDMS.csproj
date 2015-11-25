@@ -284,6 +284,7 @@
     <Content Include="Scripts\Morris\raphael-min.js" />
     <Content Include="Scripts\Morris\raphael.js" />
     <Content Include="Scripts\Pages\doctor\cashrawList.js" />
+    <Content Include="Scripts\Pages\Promotion\PromotionEventList.js" />
     <Content Include="Scripts\Pages\Share.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -583,7 +584,7 @@
     <Content Include="Scripts\UEditor\third-party\video-js\font\vjs.woff" />
     <Content Include="Views\User\Container.cshtml" />
     <Content Include="Views\Doctor\cashdrawList.cshtml" />
-    <Content Include="Views\Promotion\PromotionCouponsList.cshtml" />
+    <Content Include="Views\Promotion\PromotionEventList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
