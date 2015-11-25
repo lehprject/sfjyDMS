@@ -133,6 +133,85 @@ namespace Dal
 
         #region 优惠券相关
 
+        #region 添加
+
+        public bool CreateCouponsList(promotion_coupons info, List<promotion_coupons_detail> detailList, List<promotion_coupons_usecase> usecaselist, out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                using (var tran = db.Database.BeginTransaction())
+                {
+                    #region 优惠券
+
+                    if (info.pkid == 0)
+                    {
+                        db.promotion_coupons.Add(info);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        db.Entry(info).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    #endregion
+
+                    #region 优惠券明细
+                    if (detailList != null)
+                    {
+                        foreach (var item in detailList)
+                        {
+                            if (item.pkid == 0)
+                            {
+                                item.coupons_id = info.pkid;
+                                db.promotion_coupons_detail.Add(item);
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                            }
+                        }
+                    }
+                    #endregion
+
+                    #region 使用条件
+                    if (usecaselist != null)
+                    {
+                        foreach (var item in usecaselist)
+                        {
+                            if (item.pkid == 0)
+                            {
+                                item.coupons_id = info.pkid;
+                                db.promotion_coupons_usecase.Add(item);
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+                                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                            }
+                        }
+                    }
+
+                    #endregion
+
+                    tran.Commit();
+                    return true;
+                }
+
+
+
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                error = Share.BaseTool.FormatExceptionMessage(ex);
+                return false;
+            }
+
+        }
+
+        #endregion
+
+        #region 查询
         public List<promotion_coupons> GetPromotionCouponsList(string name, decimal value, int issue_status, DateTime? startdate1, DateTime? startdate2, DateTime? enddate1, DateTime? enddate2,
             orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out int record, out string error)
         {
@@ -230,7 +309,7 @@ namespace Dal
                 return null;
             }
         }
-
+        #endregion
         #endregion
 
         #region 优惠卷明细相关
@@ -242,7 +321,7 @@ namespace Dal
             record = 0;
             try
             {
-                string selectSql = "select * from promotion_coupons where true";
+                string selectSql = "select use_status,code,sendtime,usetime,values,business_type,p.name as patient_name,m.name as doctor_name from promotion_coupons_detail d left join promotion_coupons c on d.coupons_id=c.pkid left join patient_info p on d.userid=p.pkid left join md_docter m on d.drid on m.pkid where true";
                 string countSql = "select * from promotion_coupons where true";
                 StringBuilder conditionSb = new System.Text.StringBuilder();
 
@@ -269,7 +348,7 @@ namespace Dal
 
                 if (drid > 0)
                 {
-                    conditionSb.Append(" AND drid = @drid ");
+                    conditionSb.Append(" AND d.drid = @drid ");
                     paraList.Add(new MySqlParameter("drid", drid));
                 }
 
@@ -304,7 +383,7 @@ namespace Dal
                 if (!string.IsNullOrEmpty(orderbyCol) && orderby.HasValue)
                     orderbyStr = orderbyFormat.getSortStr(orderby.Value, orderbyCol);
                 else
-                    orderbyStr = " order by pkid desc";
+                    orderbyStr = " order by d.pkid desc";
 
                 countSql += conditionSb.ToString();
                 countSql = string.Format("SELECT COUNT(*) FROM ({0}) AS t", countSql);

@@ -4,9 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.ChildClass
+namespace Model
 {
-    class child_promotion_coupons_detail
+    public partial class promotion_coupons_detail
     {
+        /// <summary>
+        /// 患者姓名
+        /// </summary>
+        public string patient_name { get; set; }
+
+        /// <summary>
+        /// 医生姓名
+        /// </summary>
+        public string doctor_name { get; set; }
+
+        /// <summary>
+        /// 面值
+        /// </summary>
+        public int values { get; set; }
     }
 }
