@@ -13,7 +13,9 @@
                         <tr>
                             <td>活动名称</td>
                             <td>
-                                <select id="name" name="name" class="form-control" style="width: 90%; display: inline"></select>
+                                <select id="name" name="name" class="form-control" style="width: 100%; display: inline">
+                                    <option></option>
+                                </select>
                             </td>
                             <td>活动时间</td>
                             <td style="width: 15%">
@@ -32,6 +34,7 @@
                             <td style="width:12%">
                                 <button id="action" name="action" type="button" class="btn btn-primary" value="search">查询</button>
                             </td>
+                            <td><button id="new" name="action" type="button" class="btn btn-primary" value="search">新增</button></td>
                         </tr>
                     </table>
 
@@ -55,28 +58,21 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tbody id="cashdrawListContainer"></tbody>
+                        <tbody id="promotionListContainer"></tbody>
                     </table>
-                    <div class="row-fluid" id="cashdrawpage"></div>
-                    <div class="row-fluid" id="cashdrawpage2" style="display:none"></div>
+                    <div class="row-fluid" id="promotionpage"></div>
                 </div>
             </div>
         </div>
     </div>
-
-    <table class="table">
-        <tr>
-            <td>
-                <input type="checkbox" name="selectall" id="selectall" value="0" />全选
-                &nbsp;&nbsp;&nbsp;<button id="bulk" name="action" type="submit" class="btn btn-primary" value="search">批量处理</button>
-            </td>
-        </tr>
-    </table>
 </form>
 @section scripts{
     <script src="../Scripts/datepicker/bootstrap-datepicker.js"></script>
     <script src="../Scripts/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="../Scripts/select2/select2.js"></script>
+    <script src="../Scripts/select2/select2-zh-CN.js"></script>
     <script src="../Scripts/jquery.twbsPagination.js"></script>
+
     <script src="../Scripts/handlebars-v3.0.3.js"></script>
     <script id="eventTemplate" type="text/x-handlebars-template">
         {{#each this}}
@@ -94,18 +90,10 @@
     </script>
 
     <script type="text/javascript">
-        (function () {
-            var statusData= @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.status));
-            if(statusData!=null){
-                for (var n = 0; n < statusData.length; n++) {
-                    $('#statu').append("<option value='" + statusData[n].Value + "'>" + statusData[n].Text + "</option>");
-                }
-            }
-        })();
     </script>
 
     <script src="../Scripts/Pages/Share.js"></script>
-    <script src="../Scripts/Pages/doctor/cashrawList.js"></script>
+    <script src="../Scripts/Pages/Promotion/PromotionEventList.js"></script>
 }
 
 

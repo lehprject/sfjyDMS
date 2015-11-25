@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using System;
 using Bll;
 using Share;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Controllers
@@ -35,13 +34,13 @@ namespace Controllers
         /// <param name="idName"></param>
         /// <param name="textName"></param>
         /// <returns></returns>
-        protected JsonResult SearchPromotionNameList(string nameparams, string format, string selectColumns, string idName, string textName)
+        public JsonResult SearchPromotionNameList(string nameparams, string format, string selectColumns, string idName, string textName)
         {
             //参数
-            nameparams = nameparams ?? string.Empty;
+           nameparams = nameparams ?? string.Empty;
             selectColumns = selectColumns ?? string.Empty;
-            idName = idName ?? "pkid";
-            textName = textName ?? "mname";
+            idName = idName ?? "name";
+            textName = textName ?? "name";
             format = format ?? string.Empty;
 
             //BLL
@@ -57,11 +56,11 @@ namespace Controllers
             {
                 string[] columns = string.IsNullOrEmpty(selectColumns) ? null : selectColumns.Split(',').ToArray();
                 var selectList = Helpers.SelectHelper.ToViewModelList<promotion_events>(promotionList, idName, textName, columns);
-                jsonResult = JsonConvert.SerializeObject(selectList);
+                //jsonResult = JsonConvert.SerializeObject(selectList);
             }
             else
             {
-                jsonResult = JsonConvert.SerializeObject(promotionList);
+                //jsonResult = JsonConvert.SerializeObject(promotionList);
             }
             return Json(jsonResult, JsonRequestBehavior.AllowGet);
         }

@@ -107,7 +107,7 @@ namespace Controllers
                     list.Add(mainInfo);
                     int order = 1;
 
-                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "活动列表", ParentId = mainInfo.FunctionId, Url = "/master/UploadProducts", Order = order++ });
+                    list.Add(new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "活动列表", ParentId = mainInfo.FunctionId, Url = "/Promotion/PromotionEventList", Order = order++ });
                 }
 
                 Helpers.RoleAuthorizationHelper helper = new Helpers.RoleAuthorizationHelper(list);
