@@ -13,8 +13,7 @@
                         <tr>
                             <td>状态</td>
                             <td>
-                                <select id="statu" name="storeid" class="form-control" style="width: 90%; display: inline">
-                                </select>
+                                <select id="statu" name="storeid" class="form-control" style="width: 90%; display: inline"></select>
                             </td>
                             <td>申请时间</td>
                             <td style="width: 15%">
@@ -74,7 +73,7 @@
         <tr>
             <td>
                 <input type="checkbox" name="selectall" id="selectall" value="0" />全选
-                &nbsp;&nbsp;&nbsp;<button id="bulk" name="action" type="button" class="btn btn-primary" value="search">批量处理</button>
+                &nbsp;&nbsp;&nbsp;<button id="bulk" name="action" type="submit" class="btn btn-primary" value="search">批量处理</button>
             </td>
         </tr>
     </table>
@@ -87,7 +86,9 @@
     <script id="cashdrawTemplate" type="text/x-handlebars-template">
         {{#each this}}
         <tr>
-            <td><input type="checkbox" name="select" value="{{pkid}}" /></td>
+            <td>               
+                <input type="checkbox" name="select" value="{{pkid}}" />
+            </td>
             <td>{{doctor_name}}</td>
             <td>{{apptime}}</td>
             <td>{{hospital}}</td>
@@ -106,7 +107,7 @@
             var statusData= @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.status));
             if(statusData!=null){
                 for (var n = 0; n < statusData.length; n++) {
-                    $('#storeid').append("<option value='" + statusData[n].Value + "'>" + statusData[n].Text + "</option>");
+                    $('#statu').append("<option value='" + statusData[n].Value + "'>" + statusData[n].Text + "</option>");
                 }
             }
         })();

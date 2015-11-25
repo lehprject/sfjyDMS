@@ -72,10 +72,12 @@ gvar.urlprefix = '/wap';
         });
     };
 
-    Page.functions.resetPager = function ($pager, onPageClick) {
+    Page.functions.resetPager = function ($pager,totalPages, onPageClick) {
         $pager.twbsPagination('destroy');
+        if (totalPages == 0)
+            totalPages = 1;
         $pager.twbsPagination({
-            totalPages: 1,
+            totalPages: totalPages,
             onPageClick: function (event, page) {
                 if (onPageClick && typeof onPageClick == 'function') {
                     onPageClick(page);
