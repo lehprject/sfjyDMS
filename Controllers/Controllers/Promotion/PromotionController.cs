@@ -98,7 +98,11 @@ namespace Controllers
 
             string error = string.Empty;
             int record = 0;
-            List<promotion_events> resultlist = new promotion_events_Bll().GetPromotionEventList(name, 0, 0, date1, date2, null, null,
+
+            Base_Bll bll = new Base_Bll();
+            var events= bll.GetInfo<md_docter>(BaseTool.GetIntNumber(name));
+
+            List<promotion_events> resultlist = new promotion_events_Bll().GetPromotionEventList(events.name, 0, 0, date1, date2, null, null,
              null, null, null, null, pageIndex.Value, 20, out record, out error);
             if (resultlist != null)
             {
@@ -124,11 +128,6 @@ namespace Controllers
         [HttpPost]
         public ActionResult CreatePromotionEvent(string name,string date1,string date2,string content,string remark)
         {
-            //var name = collection["name"];
-            //var date1 = collection["date1"];
-            //var date2 = collection["date2"];
-            //var content = collection["content"];
-
             if(string.IsNullOrEmpty(date1)||string.IsNullOrEmpty(date2))
             {
                 ViewBag.ErrorMessage = "请选择日期";
@@ -179,7 +178,8 @@ namespace Controllers
 
             string error = string.Empty;
             int record = 0;
-            List<promotion_coupons> resultlist = new promotion_events_Bll().GetPromotionCouponsList(null, 0, 0, null, null, null, null,
+            var bll = new promotion_events_Bll();
+            List<promotion_coupons> resultlist = bll.GetPromotionCouponsList(null, 0, 0, null, null, null, null,
            null, null, pageIndex.Value, 20, out record, out error);
             if (resultlist != null)
             {
@@ -188,6 +188,15 @@ namespace Controllers
                 //    item.apptime = item.app_time.ToString("yyyy - MM - dd");
                 //    item._optime = item.optime.ToString("yyyy - MM - dd");
                 //}
+                List<int> ids = resultlist.Select(m => m.pkid).ToList() ;
+                var details = bll.GetCouponsDetailByIds(ids);
+
+                foreach(var item in resultlist)
+                {
+                    var list = details.Where(m=>m.coupons_id==item.pkid&&m.userid>0).ToList();
+                    item.stock = item.issue_num - list.Count;
+                }
+
                 PagingResponse<promotion_coupons> pagingResponse = new PagingResponse<promotion_coupons>();
                 pagingResponse.TotalRecord = record;
                 pagingResponse.ResultList = resultlist;
@@ -244,8 +253,6 @@ namespace Controllers
             var activity = collection["activity"];
             var morethan = collection["morethan"];
             var value1 = collection["value1"];
-            var lessthan = collection["lessthan"];
-            var value2 = collection["value2"];
 
             #region 优惠券
             promotion_coupons info = new promotion_coupons();
@@ -261,14 +268,6 @@ namespace Controllers
             #region 条件
             List<promotion_coupons_usecase> usecasellist = new List<promotion_coupons_usecase>();
             if(BaseTool.GetIntNumber(morethan)>0&&BaseTool.GetIntNumber(value1)>0)
-            {
-                var usecase = new promotion_coupons_usecase();
-                usecase.Initial();
-                usecase.case_pamars = morethan;
-                usecase.case_pamars_value = value1;
-                usecasellist.Add(usecase);
-            }
-            if (BaseTool.GetIntNumber(lessthan) > 0 && BaseTool.GetIntNumber(value2) > 0)
             {
                 var usecase = new promotion_coupons_usecase();
                 usecase.Initial();

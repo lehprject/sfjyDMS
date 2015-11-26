@@ -90,7 +90,7 @@
     //查询列表异步分页 
 
     $('#action').on("click", function () {
-        var name = $('#name').text;
+        var name = $('#activity').val();
         var date1Input = $("#date1Input").val();
         var date2Input = $("#date2Input").val();
         findCashdraw(1, date1Input, date2Input, name, $pager);

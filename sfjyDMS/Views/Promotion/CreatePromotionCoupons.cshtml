@@ -64,7 +64,7 @@
                     </table>
                     <table class="table table-bordered">
                         <tr>
-                            <td colspan="6">兑换条件</td>
+                            <td colspan="4">兑换条件</td>
                         </tr>
                         <tr>
                             <td>订单金额</td>
@@ -72,21 +72,13 @@
                                 <select id="morethan" name="morethan" class="form-control" style="width: 100%; display: inline">
                                     <option value="1">></option>
                                     <option value="2">>=</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input id="value1" name="value1" class="form-control" data-val="true" data-val-required="请填写数量." />
-                            </td>
-                            <td>
-                                <select id="lessthan" name="lessthan" class="form-control" style="width: 100%; display: inline">
                                     <option value="3"><</option>
                                     <option value="4"><=</option>
                                 </select>
                             </td>
                             <td>
-                                <input id="value2" name="value2" class="form-control" data-val="true" data-val-required="请填写数量." />
+                                <input id="value1" name="value1" class="form-control"/>
                             </td>
-
                             <td><button id="btnSave" name="action" type="submit" class="btn btn-primary btn-lg btnSave" value="save">生成</button></td>
                         </tr>
                     </table>

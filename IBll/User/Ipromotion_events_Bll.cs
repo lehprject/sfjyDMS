@@ -41,6 +41,8 @@ namespace IBll
         List<promotion_coupons_detail> SearchPromotionCouponsList(int coupons_id, int use_status, int business_type, int userid, int drid, DateTime? sendtime1, DateTime? sendtime2, DateTime? usetime1, DateTime? usetime2,
            orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out int record, out string error);
 
+        List<promotion_coupons_detail> GetCouponsDetailByIds(List<int> ids);
+
         #endregion
     }
 }

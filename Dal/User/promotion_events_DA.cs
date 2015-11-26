@@ -434,6 +434,16 @@ namespace Dal
             }
         }
 
+        public List<promotion_coupons_detail> GetCouponsDetailByIds(List<int> ids)
+        {
+            string id = string.Join(",", ids.Select(t => t));
+            string sql = @"SELECT *                       
+                            FROM promotion_coupons_detail                             
+                            where FIND_IN_SET(pkid,@ids)";
+            List<promotion_coupons_detail> resultlist = sqlHelper.ExecuteObjects<promotion_coupons_detail>(sql, new MySqlParameter("ids", id));
+            return resultlist;
+        }
+
         #endregion
     }
 }
