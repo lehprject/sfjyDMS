@@ -7,6 +7,7 @@ using Model;
 using Model.ConfigClass;
 using MySql.Data.MySqlClient;
 using Share;
+using System.Data;
 
 namespace Dal
 {
@@ -173,16 +174,16 @@ namespace Dal
                         {
                             if (item.pkid == 0)
                             {
-                                item.coupons_id = info.pkid;
-
-                                db.promotion_coupons_detail.Add(item);
-                                db.SaveChanges();
+                                item.coupons_id = info.pkid;                      
                             }
                             else
                             {
                                 db.Entry(item).State = System.Data.Entity.EntityState.Modified;
                             }
                         }
+                        DataTable table = Share.BaseTool.ListToDataTable<promotion_coupons_detail>(detailList);
+                        table.TableName = "promotion_coupons_detail";
+                        var count=sqlHelper.BulkInsert(table);
                     }
                     #endregion
 

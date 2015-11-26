@@ -81,5 +81,16 @@ namespace Model.ConfigClass
         无效 = 0,
         有效 = 1
     }
+
+    /// <summary>
+    /// 大于等于状态
+    /// </summary>
+    public enum MoreThanStatus
+    {
+        大于 = 1,
+        大于等于 = 2,
+        小于 = 3,
+        小于等于 = 4,
+    }
     #endregion
 }

@@ -123,8 +123,10 @@ namespace Controllers
         [HttpPost]
         public ActionResult CreatePromotionEvent(FormCollection collection)
         {
+            var name = collection["name"];
             var date1 = collection["date1"];
             var date2 = collection["date2"];
+            var content = collection["content"];
 
             if(string.IsNullOrEmpty(date1)||string.IsNullOrEmpty(date2))
             {
@@ -134,12 +136,12 @@ namespace Controllers
 
             promotion_events info = new promotion_events();
             info.Initial();
-            info.name = "";
+            info.name = name;
             info.hospital_id = 0;
-            info.contents = "";
+            info.contents = content;
             info.face_type = 0; //面向对象
-            info.startdate = DateTime.Now;
-            info.enddate = DateTime.Now;
+            info.startdate = BaseTool.GetDateTime(date1);
+            info.enddate = BaseTool.GetDateTime(date2);
             info.attachfile = "";
 
             string error = string.Empty;
@@ -223,60 +225,78 @@ namespace Controllers
             return null;
         }
 
-        public JsonResult GreatePromotionCoupons()
+   
+        [HttpGet]
+        public ActionResult GreatePromotionCoupons()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GreatePromotionCoupons(FormCollection collection)
         {
             ResponseMessage result = new ResponseMessage();
+            var name = collection["name"];
+            var count = collection["count"];
+            var values = collection["values"];
+            var date1 = collection["date1"];
+            var date2 = collection["date2"];
+            var activity = collection["activity"];
+            var morethan = collection["morethan"];
+            var value1 = collection["value1"];
+            var lessthan = collection["lessthan"];
+            var value2 = collection["value2"];
 
-            #region 赋值 和 检验
-            string jsonData = HttpContext.Request.Form["jsonData"];
-            if (string.IsNullOrEmpty(jsonData))
-            {
-                result.Message = "提交信息有误,缺少jsonData";
-                return Json(result);
-            }
-
-            JObject postObject = JObject.Parse(jsonData);
-
-            string couponsJson = postObject["couponsInfo"] != null ? postObject["couponsInfo"].ToString() : string.Empty;
-
-            if (string.IsNullOrEmpty(couponsJson))
-            {
-                result.Message = "没有优惠券信息";
-                return Json(result);
-            }
-
-            //优惠券
+            #region 优惠券
             promotion_coupons info = new promotion_coupons();
             info.Initial();
-            JsonConvert.PopulateObject(couponsJson, info);
-
-            //使用优惠券条件
-            List<promotion_coupons_usecase> usecaseList = new List<promotion_coupons_usecase>();
-            var nResonList = postObject["usecaseList"].ToList();
-            foreach (var jtoken in nResonList)
-            {
-                promotion_coupons_usecase eachDetail = new promotion_coupons_usecase();
-                eachDetail.Initial();
-                JsonConvert.PopulateObject(jtoken.ToString(), eachDetail, new JsonSerializerSettings()
-                {
-                    NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore
-                });
-                usecaseList.Add(eachDetail);
-            }
+            info.name = name;
+            info.issue_num =BaseTool.GetIntNumber(count);
+            info.values = BaseTool.GetIntNumber(values);
+            info.startdate = BaseTool.GetDateTime(date1);
+            info.enddate = BaseTool.GetDateTime(date2);
+            info.events_id = BaseTool.GetIntNumber(activity);
             #endregion
 
+            #region 条件
+            List<promotion_coupons_usecase> usecasellist = new List<promotion_coupons_usecase>();
+            if(BaseTool.GetIntNumber(morethan)>0&&BaseTool.GetIntNumber(value1)>0)
+            {
+                var usecase = new promotion_coupons_usecase();
+                usecase.Initial();
+                usecase.case_pamars = morethan;
+                usecase.case_pamars_value = value1;
+                usecasellist.Add(usecase);
+            }
+            if (BaseTool.GetIntNumber(lessthan) > 0 && BaseTool.GetIntNumber(value2) > 0)
+            {
+                var usecase = new promotion_coupons_usecase();
+                usecase.Initial();
+                usecase.case_pamars = morethan;
+                usecase.case_pamars_value = value1;
+                usecasellist.Add(usecase);
+            }
+            #endregion 
+
+            #region 优惠券明细
             List<promotion_coupons_detail> detaillist = new List<promotion_coupons_detail>();
-            for (int i = 0; i < info.values; i++)
+            for (int i = 0; i < info.issue_num; i++)
             {
                 promotion_coupons_detail detail = new promotion_coupons_detail();
                 detail.Initial();
                 detail.code = string.Empty;
                 detaillist.Add(detail);
             }
+            #endregion
 
             promotion_events_Bll bll = new promotion_events_Bll();
             string error = string.Empty;
-            bll.CreatePromotionCoupons(info,detaillist,usecaseList,out error);
+            bll.CreatePromotionCoupons(info, detaillist, usecasellist, out error);
+
+            int record = 0;
+            List<promotion_coupons_detail> list = bll.SearchPromotionCouponsList(info.pkid, 0, 0, 0, 0, null, null, null, null,
+            null, null, 1, 1000, out record, out error);
+            ViewBag.detaillist = list;
 
             result.bSuccess = true;
             return Json(result);
