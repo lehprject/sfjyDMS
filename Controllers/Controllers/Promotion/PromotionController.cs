@@ -39,7 +39,7 @@ namespace Controllers
             //参数
            nameparams = nameparams ?? string.Empty;
             selectColumns = selectColumns ?? string.Empty;
-            idName = idName ?? "name";
+            idName = idName ?? "pkid";
             textName = textName ?? "name";
             format = format ?? string.Empty;
 
@@ -52,17 +52,18 @@ namespace Controllers
 
             //返回
             string jsonResult = string.Empty;
+            List<vm_SelectInfo> selectList = new List<vm_SelectInfo>();
             if (format == "select")
             {
                 string[] columns = string.IsNullOrEmpty(selectColumns) ? null : selectColumns.Split(',').ToArray();
-                var selectList = Helpers.SelectHelper.ToViewModelList<promotion_events>(promotionList, idName, textName, columns);
+                selectList = Helpers.SelectHelper.ToViewModelList<promotion_events>(promotionList, idName, textName, columns);
                 //jsonResult = JsonConvert.SerializeObject(selectList);
             }
             else
             {
                 //jsonResult = JsonConvert.SerializeObject(promotionList);
             }
-            return Json(jsonResult, JsonRequestBehavior.AllowGet);
+            return Json(selectList, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult SearchPromotionList(int? pageIndex = 1)
@@ -121,12 +122,12 @@ namespace Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePromotionEvent(FormCollection collection)
+        public ActionResult CreatePromotionEvent(string name,string date1,string date2,string content,string remark)
         {
-            var name = collection["name"];
-            var date1 = collection["date1"];
-            var date2 = collection["date2"];
-            var content = collection["content"];
+            //var name = collection["name"];
+            //var date1 = collection["date1"];
+            //var date2 = collection["date2"];
+            //var content = collection["content"];
 
             if(string.IsNullOrEmpty(date1)||string.IsNullOrEmpty(date2))
             {
@@ -225,15 +226,14 @@ namespace Controllers
             return null;
         }
 
-   
-        [HttpGet]
-        public ActionResult GreatePromotionCoupons()
+
+        public ActionResult CreatePromotionCoupons()
         {
-            return View();
+            return View(new promotion_coupons());
         }
 
         [HttpPost]
-        public ActionResult GreatePromotionCoupons(FormCollection collection)
+        public ActionResult CreatePromotionCoupons(FormCollection collection)
         {
             ResponseMessage result = new ResponseMessage();
             var name = collection["name"];
@@ -299,7 +299,7 @@ namespace Controllers
             ViewBag.detaillist = list;
 
             result.bSuccess = true;
-            return Json(result);
+            return View(info);
         }
 
         #endregion

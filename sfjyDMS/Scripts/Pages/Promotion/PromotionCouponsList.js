@@ -31,7 +31,40 @@
     var template = $('#couponsTemplate').html();
     var source = Handlebars.compile(template);
 
+    //--------------获取优惠券明细列表-----------
+    var $pager1 = $('#detailpage');
+    var $detailListContainer = $('#detailListContainer');
+
+    //模板
+    var template1 = $('#detailTemplate').html();
+    var source1 = Handlebars.compile(template1);
+
     var pageIndex = 1;
+
+
+    //--------------获取优惠券明细函数列表-----------
+    var findDetail = function (pageindex, coupons_id, $pager) {
+        $.ajax({
+            url: "/Promotion/SearchPromotionCouponsDetail",
+            type: 'GET',
+            data: {
+                coupons_id: coupons_id,
+                pageIndex: pageindex,
+            },
+            success: function (data) {
+                if (data && data.ResultList) {
+                    var records = data.ResultList;
+
+                    var html = source1(records);
+                    $detailListContainer.html(html);
+
+                    //分页
+                    var totalPages2 = Math.ceil(data.TotalRecord / 20);
+                    functions.resetPager($pager, totalPages2, findCashdraw)
+                };
+            }
+        });
+    };
 
     var searchPromotion = function (pageindex) {
         $.ajax({
@@ -43,12 +76,26 @@
             success: function (data) {
                 if (data && data.ResultList) {
                     var records = data.ResultList;
+                    
                     var html = source(records);
                     $couposonListContainer.html(html);
 
                     //分页
-                    var totalPages = Math.ceil(data.TotalRecord / 2);
+                    var totalPages = Math.ceil(data.TotalRecord / 20);
                     functions.initialPager($pager, totalPages, searchPromotion)
+
+
+                    $('#tbList button[value=selecct]').on('click', function () {
+                        if (event.target == this) {
+                            $button = $(this);
+                            var couponsid = $button.attr('data-orderid');
+
+                            $('#detaildiv').css("display", "");//明细列表
+
+                            findDetail(1, couponsid, $pager1);
+
+                        }
+                    });
                 };
             }
         });
@@ -74,7 +121,6 @@
             url: "/Promotion/SearchPromotionCoupons",
             type: 'GET',
             data: {
-                //string name, int values, int issue_status, DateTime? startdate1, DateTime? startdate2,
                 name: name,
                 values: values,
                 issue_status:status,
@@ -90,7 +136,7 @@
                     $couposonListContainer.html(html);
 
                     //分页
-                    var totalPages2 = Math.ceil(data.TotalRecord / 2);
+                    var totalPages2 = Math.ceil(data.TotalRecord / 20);
                     functions.resetPager($pager2, totalPages2, findCashdraw)
                 };
             }
@@ -100,46 +146,5 @@
 
     //--------------获取优惠券明细列表-----------
 
-    var $pager1 = $('#detailpage');
-    var $detailListContainer = $('#detailListContainer');
-
-    //模板
-    var template1 = $('#detailTemplate').html();
-    var source1 = Handlebars.compile(template1);
-
-    $('#tbList button[value=selecct]').on('click', function () {
-        if (event.target == this) {
-            $button = $(this);
-            var couponid = $button.attr('data-orderid');
-
-            $('#detaildiv').css("display", "");//明细列表
-
-            findDetail(1,couponsid,$pager1);
-          
-        }
-    });
-
-    var findDetail = function (pageindex,coupons_id,  $pager) {
-        $.ajax({
-            url: "/Promotion/SearchPromotionCouponsDetail",
-            type: 'GET',
-            data: {
-                coupons_id: couponid,
-                pageIndex: pageindex,
-            },
-            success: function (data) {
-                if (data && data.ResultList) {
-                    var records = data.ResultList;
-
-                    var html = source1(records);
-                    $detailListContainer.html(html);
-
-                    //分页
-                    var totalPages2 = Math.ceil(data.TotalRecord / 2);
-                    functions.resetPager($pager, totalPages2, findCashdraw)
-                };
-            }
-        });
-    };
 })();
 

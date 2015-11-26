@@ -113,7 +113,6 @@ namespace Model
                 {
                     obj.pkid = 0;
                     obj.coupons_id = 0;
-                    obj.values = 0;
                     obj.code = string.Empty;
                     obj.use_status = 0;
                     obj.business_type = 0;

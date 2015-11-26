@@ -34,7 +34,7 @@
                             <td style="width:12%">
                                 <button id="action" name="action" type="button" class="btn btn-primary" value="search">查询</button>
                             </td>
-                            <td><button id="new" name="action" type="button" class="btn btn-primary" value="search">新增</button></td>
+                            <td><a href="@Url.Action("CreatePromotionEvent", "Promotion")" id="new" name="action" class="btn btn-primary" >新增</a></td>
                         </tr>
                     </table>
 
@@ -77,14 +77,11 @@
     <script id="eventTemplate" type="text/x-handlebars-template">
         {{#each this}}
         <tr>
-            <td>
-                <input type="checkbox" name="select" value="{{pkid}}" />
-            </td>
             <td>{{name}}</td>
             <td>{{startdate}}</td>
             <td>{{enddate}}</td>
             <td>{{contents}}</td>
-            <td><a href="@Url.Action("","")">生成优惠券</a></td>
+            <td><a href="@Url.Action("PromotionCouponsList", "Promotion")">生成优惠券</a></td>
         </tr>
         {{/each}}
     </script>

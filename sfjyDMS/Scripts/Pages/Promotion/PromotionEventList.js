@@ -72,12 +72,14 @@
             },
             success: function (data) {
                 if (data && data.ResultList) {
+
+
                     var records = data.ResultList;
                     var html = source(records);
                     $cashdrawListContainer.html(html);
 
                     //分页
-                    var totalPages = Math.ceil(data.TotalRecord / 2);
+                    var totalPages = Math.ceil(data.TotalRecord / 20);
                     functions.initialPager($pager, totalPages, searchPromotion)
                 };
             }
@@ -88,7 +90,6 @@
     //查询列表异步分页 
 
     $('#action').on("click", function () {
-        first = 1;
         var name = $('#name').text;
         var date1Input = $("#date1Input").val();
         var date2Input = $("#date2Input").val();
@@ -101,7 +102,7 @@
             url: "/Promotion/PostSearchPromotionList",
             type: 'GET',
             data: {
-                name:"",
+                name: name,
                 date1: date1,
                 date2: date2,
                 statu: statu,
@@ -109,13 +110,17 @@
             },
             success: function (data) {
                 if (data && data.ResultList) {
+ 
+
                     var records = data.ResultList;
+                    
+                    
 
                     var html = source(records);
                     $cashdrawListContainer.html(html);
 
                     //分页
-                    var totalPages2 = Math.ceil(data.TotalRecord / 2);
+                    var totalPages2 = Math.ceil(data.TotalRecord / 20);
                     functions.resetPager($pager2, totalPages2, findCashdraw)
                 };
             }

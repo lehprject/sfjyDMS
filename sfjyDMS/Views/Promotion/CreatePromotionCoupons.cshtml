@@ -1,5 +1,5 @@
 ﻿@using Model;
-@model promotion_events
+@model promotion_coupons
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<promotion_coupons_detail> detaillist = ViewBag.detaillist;
@@ -7,85 +7,94 @@
 
 <link href="@Url.Content("~/Content/datepicker/bootstrap-datepicker3.css")" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/Content/select2/select2.css")" rel="stylesheet" type="text/css" />
-<form id="form1" class="form-inline">
 
-    @if (ViewBag.ErrorMessage != null)
-    {
-        <div>
-            @ViewBag.ErrorMessage
-        </div>
-    }
-    <div class="panel panel-primary container-fluid">
-        <div class="panel-body">
-            <h2>基础信息</h2>
-            <table class="table table-bordered">
-                <tr>
-                    <td>卷名称</td>
-                    <td>
-                        <input id="name" name="name" class="form-control" data-val="true" data-val-required="请填写名称." />
-                        <span data-valmsg-for="name" data-valmsg-replace="true" style="color: red"></span>
-                    </td>
+@if (ViewBag.ErrorMessage != null)
+{
+    <div>
+        @ViewBag.ErrorMessage
+    </div>
+}
+@using (Html.BeginForm("CreatePromotionCoupons", "Promotion", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <tr><td colspan="6">基础信息</td></tr>
+                        <tr>
+                            <td>卷名称</td>
+                            <td>
+                                <input id="name" name="name" value="@Model.name" class="form-control" data-val="true" data-val-required="请填写名称." />
+                                <span data-valmsg-for="name" data-valmsg-replace="true" style="color: red"></span>
+                            </td>
 
-                    <td>数量</td>
-                    <td>
-                        <input id="count" name="count" class="form-control" data-val="true" data-val-required="请填写数量." />
-                        <span data-valmsg-for="count" data-valmsg-replace="true" style="color: red"></span>
-                    </td>
-                    <td>面值</td>
-                    <td>
-                        <input id="values" name="values" class="form-control" data-val="true" data-val-required="请填写面值." />
-                        <span data-valmsg-for="values" data-valmsg-replace="true" style="color: red"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>生效时间</td>
-                    <td>
-                        <div id="date1Container">
-                            <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" />
-                        </div>
-                    </td>
+                            <td>数量</td>
+                            <td>
+                                <input id="count" name="count" value="@Model.issue_num" class="form-control" data-val="true" data-val-required="请填写数量." />
+                                <span data-valmsg-for="count" data-valmsg-replace="true" style="color: red"></span>
+                            </td>
+                            <td>面值</td>
+                            <td>
+                                <input id="values" name="values" value="@Model.values" class="form-control" data-val="true" data-val-required="请填写面值." />
+                                <span data-valmsg-for="values" data-valmsg-replace="true" style="color: red"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>生效时间</td>
+                            <td>
+                                <div id="date1Container">
+                                    <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" />
+                                </div>
+                            </td>
 
-                    <td>失效时间</td>
-                    <td>
-                        <div id="date2Container">
-                            <input type="text" class="form-control" id="date2Input" name="date2" placeholder="" />
-                        </div>
-                    </td>
-                    <td>活动名称</td>
-                    <td>
-                        <select id="activity" name="activity" class="form-control" style="width: 100%; display: inline">
-                            <option></option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
-            <table class="table table-bordered">
-                <tr>
-                    <td colspan="3">兑换条件</td>
-                </tr>
-                <tr>
-                    <td>订单金额</td>
-                    <td>
-                        <select id="morethan" name="morethan" class="form-control" style="width: 100%; display: inline">
-                            <option value="1">></option>
-                            <option value="2">>=</option>
-                        </select>
-                        <input id="value1" name="value1" class="form-control" data-val="true" data-val-required="请填写数量." />
+                            <td>失效时间</td>
+                            <td>
+                                <div id="date2Container">
+                                    <input type="text" class="form-control" id="date2Input" name="date2" placeholder="" />
+                                </div>
+                            </td>
+                            <td>活动名称</td>
+                            <td>
+                                <select id="activity" name="activity" class="form-control" style="width: 100%; display: inline">
+                                    <option></option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td colspan="6">兑换条件</td>
+                        </tr>
+                        <tr>
+                            <td>订单金额</td>
+                            <td>
+                                <select id="morethan" name="morethan" class="form-control" style="width: 100%; display: inline">
+                                    <option value="1">></option>
+                                    <option value="2">>=</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input id="value1" name="value1" class="form-control" data-val="true" data-val-required="请填写数量." />
+                            </td>
+                            <td>
+                                <select id="lessthan" name="lessthan" class="form-control" style="width: 100%; display: inline">
+                                    <option value="3"><</option>
+                                    <option value="4"><=</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input id="value2" name="value2" class="form-control" data-val="true" data-val-required="请填写数量." />
+                            </td>
 
-                        <select id="lessthan" name="lessthan" class="form-control" style="width: 100%; display: inline">
-                            <option value="3"><</option>
-                            <option value="4"><=</option>
-                        </select>
-                        <input id="value2" name="value2" class="form-control" data-val="true" data-val-required="请填写数量." />
-                    </td>
-
-                    <td><button id="btnSave" name="action" type="submit" class="btn btn-primary btn-lg btnSave" value="save">生成</button></td>
-                </tr>
-            </table>
+                            <td><button id="btnSave" name="action" type="submit" class="btn btn-primary btn-lg btnSave" value="save">生成</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div id="div1" class="row" style="display:none">
+    <div id="div1" class="row" >
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -98,7 +107,7 @@
                                     <div>生成进度：@detaillist.Count 张</div>
                                     foreach (var item in detaillist)
                                     {
-                                        <div>卷编码 @item.code</div>
+                                        <div>卷编码 @item.pkid</div>
                                     }
                                 }
                             </td>
@@ -109,18 +118,24 @@
             </div>
         </div>
     </div>
-</form>
+}
+
 @section scripts{
     <script src="../Scripts/datepicker/bootstrap-datepicker.js"></script>
     <script src="../Scripts/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>
-
+    <script src="../Scripts/select2/select2.js"></script>
+    <script src="../Scripts/select2/select2-zh-CN.js"></script>
+    <script src="../Scripts/validation/jquery.validate.js"></script>
+    <script src="../Scripts/validation/jquery.validate.unobtrusive.js"></script>
+    <script src="../Scripts/validation/showError.js"></script>
     <script>
         (function () {
-            var list= @detaillist;
+            var list= @ViewBag.detaillist;
 
-            if(list!=null){
+            //if(list!=null||list!=undefined){
+            //    alert("fdfd");
                 $("#div1").css("display","");
-            }
+            //}
         })();
     </script>
 

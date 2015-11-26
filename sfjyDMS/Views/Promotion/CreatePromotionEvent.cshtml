@@ -14,10 +14,12 @@
             @ViewBag.ErrorMessage
         </div>
     }
-  <div class="panel panel-primary container-fluid">
+    <div class="panel panel-primary container-fluid">
         <div class="panel-body">
-            <h2>活动信息</h2>
             <table class="table table-bordered">
+                <tr>
+                    <td colspan="6">活动信息</td>
+                </tr>
                 <tr>
                     <td>活动名称</td>
                     <td>
@@ -46,37 +48,28 @@
                     </td>
 
                     <td></td>
-                    <td>
-                        <select id="contactor_gender" name="contactor_gender" class="form-control">
-                            
-                        </select>
+                    <td>                     
                     </td>
                     <td></td>
-                    <td>
-                    </td>
-                </tr>              
-                </table>
-            <h2>活动参加条件</h2>
-            <table class="table table-bordered">
+                    <td></td>
+                </tr>
+            </table>
+            <table id="tab1" class="table table-bordered">
                 <thead>
+                    <tr>
+                        <td colspan="2">活动参加条件</td>
+                    </tr>
                     <tr>
                         <th>ID</th>
                         <th>条件</th>
                     </tr>
                 </thead>
                 <tr>
-                    <td style="width:20%">条件一</td>
-                    <td><input type="text" class="form-control" id="request1" name="request1" placeholder="" /></td>
-                </tr>
-                <tr>
-                    <td style="width:20%">条件二</td>
-                    <td ><input type="text" class="form-control" id="request2" name="request2" placeholder="" /></td>
-                </tr>
-                <tr>
-                    <td style="width:20%">条件三</td>
-                    <td><input type="text" class="form-control" id="request3" name="request3" placeholder="" /></td>
-                </tr>
+                    <td style="width:20%">1</td>
+                    <td><input type="text" class="form-control" name="remark" placeholder="" /></td>
+                </tr>               
             </table>
+            <button id="add" name="action" type="button" class="btn btn-primary btn-lg btnSave" value="save">添加条件</button>
             <div class="col-lg-offset-5 col-lg-12">
                 <button id="btnSave" name="action" type="submit" class="btn btn-primary btn-lg btnSave" value="save">保存</button>
             </div>
@@ -86,10 +79,14 @@
 @section scripts{
     <script src="../Scripts/datepicker/bootstrap-datepicker.js"></script>
     <script src="../Scripts/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="../Scripts/validation/jquery.validate.js"></script>
+    <script src="../Scripts/validation/jquery.validate.unobtrusive.js"></script>
+    <script src="../Scripts/validation/showError.js"></script>
 
 
     <script src="../Scripts/Pages/Share.js"></script>
     <script src="../Scripts/Pages/Promotion/PromotionEventList.js"></script>
+<script src="../Scripts/Pages/Promotion/createPromotionEvent.js"></script>
 }
 
 

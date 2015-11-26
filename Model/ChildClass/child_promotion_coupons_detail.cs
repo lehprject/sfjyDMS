@@ -21,6 +21,6 @@ namespace Model
         /// <summary>
         /// 面值
         /// </summary>
-        public int values { get; set; }
+        public decimal valuess { get; set; }
     }
 }

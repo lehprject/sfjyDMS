@@ -116,7 +116,7 @@ namespace Controllers
                     }
 
                     {
-                        RoleAuthorization subInfo = new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "优惠券列表", ParentId = mainInfo.FunctionId, Url = "/Promotion/CreatePromotionCoupons", Order = order++ };
+                        RoleAuthorization subInfo = new RoleAuthorization() { Level = 2, FunctionId = functionId++, FunctionName = "优惠券列表", ParentId = mainInfo.FunctionId, Url = "/Promotion/PromotionCouponsList", Order = order++ };
                         list.Add(subInfo);
 
                         int subOrder = 1;
