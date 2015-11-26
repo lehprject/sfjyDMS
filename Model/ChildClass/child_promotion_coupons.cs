@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.ChildClass
+namespace Model
 {
-    class child_promotion_coupons
+    public partial class promotion_coupons
     {
+        /// <summary>
+        /// 库存数量
+        /// </summary>
+        public int stock { get; set; }
     }
 }

@@ -15,7 +15,7 @@
                             <td>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="" />
                             </td>
-                            <td>面值</td>
+                            <td>卷面值</td>
                             <td>
                                 <input type="text" class="form-control" id="values" name="values" placeholder="" />
                             </td>
@@ -25,7 +25,7 @@
                                     <option></option>
                                 </select>
                             </td>
-                            <td>开始时间</td>
+                            <td>生效时间</td>
                             <td style="width: 15%">
                                 <div id="date1Container">
                                     <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" />
@@ -42,7 +42,7 @@
                             <td style="width:12%">
                                 <button id="action" name="action" type="button" class="btn btn-primary" value="search">查询</button>
                             </td>
-                            <td><button id="new" name="action" type="button" class="btn btn-primary" value="search">生成优惠券</button></td>
+                            <td><button id="new" name="action" type="button" class="btn btn-primary" value="search">生成</button></td>
                         </tr>
                     </table>
 
@@ -59,11 +59,14 @@
                     <table id="tbList" class="table table-striped" id="tbDetailList">
                         <thead>
                             <tr>
-                                <th>活动名称</th>
-                                <th>活动开始时间</th>
-                                <th>活动结束时间</th>
-                                <th>活动内容</th>
-                                <th>操作</th>
+                                <th></th>
+                                <th>现金卷名称</th>
+                                <th>面值</th>
+                                <th>库存数量</th>
+                                <th>总数量</th>
+                                <th>所在活动</th>
+                                <th>生效时间</th>
+                                <th>失效时间</th>
                             </tr>
                         </thead>
                         <tbody id="couponsListContainer"></tbody>
@@ -75,6 +78,7 @@
     </div>
 
     <div id="detaildiv"class="row" style="display:none">
+        <h2>详情</h2>
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -82,11 +86,14 @@
                     <table class="table table-striped" id="tbDetailList">
                         <thead>
                             <tr>
-                                <th>活动名称</th>
-                                <th>活动开始时间</th>
-                                <th>活动结束时间</th>
-                                <th>活动内容</th>
-                                <th>操作</th>
+                                <th>卷编码</th>
+                                <th>面值</th>
+                                <th>状态</th>
+                                <th>赠送时间</th>
+                                <th>兑换时间</th>
+                                <th>业务类型</th>
+                                <th>使用人</th>
+                                <th>所属医生</th>
                             </tr>
                         </thead>
                         <tbody id="detailListContainer"></tbody>
@@ -113,10 +120,12 @@
                 <input id="id" name="id" value="{{pkid}}" type="hidden" />
             </td>
             <td>{{name}}</td>
+            <td>{{values}}</td>
+            <td>{{stock}}</td>
+            <td>{{issue_num}}</td>
+            <td>{{}}</td>
             <td>{{startdate}}</td>
             <td>{{enddate}}</td>
-            <td>{{contents}}</td>
-            <td><a href="@Url.Action("","")">生成优惠券</a></td>
         </tr>
         {{/each}}
     </script>
@@ -127,11 +136,14 @@
             <td>
                 <input type="checkbox" name="select" value="{{pkid}}" />
             </td>
-            <td>{{name}}</td>
-            <td>{{startdate}}</td>
-            <td>{{enddate}}</td>
-            <td>{{contents}}</td>
-            <td><a href="@Url.Action("","")">生成优惠券</a></td>
+            <td>{{code}}</td>
+            <td>{{values}}</td>
+            <td>{{use_status}}</td>
+            <td>{{sendtime}}</td>
+            <td>{{usetime}}</td>
+            <td>{{business_type}}</td>
+            <td>{{patient_name}}</td>
+            <td>{{doctor_name}}</td>
         </tr>
         {{/each}}
     </script>
