@@ -887,6 +887,24 @@ namespace Share
 
         #endregion
 
+        #region 随机
+
+        public static string Random(int length)
+        {
+            string NumberStr = "";
+            var random = new Random((int)DateTime.Now.Ticks);
+            const string textArray = "023456789";
+
+            //生成验证码
+            for (var i = 0; i < length; i++)
+            {
+                NumberStr = NumberStr + textArray.Substring(random.Next() % textArray.Length, 1);
+            }
+            return NumberStr;
+        }
+
+        #endregion
+
     }
 
 

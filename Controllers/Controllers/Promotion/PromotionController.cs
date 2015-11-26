@@ -316,11 +316,10 @@ namespace Controllers
            null, null, pageIndex.Value, 20, out record, out error);
             if (resultlist != null)
             {
-                //foreach (var item in resultlist)
-                //{
-                //    item.apptime = item.app_time.ToString("yyyy - MM - dd");
-                //    item._optime = item.optime.ToString("yyyy - MM - dd");
-                //}
+               foreach(var item in resultlist)
+               {
+                   item.statusstr = Enum.GetName(typeof(Model.ConfigClass.CouponsStatus), item.use_status);
+               }
                 PagingResponse<promotion_coupons_detail> pagingResponse = new PagingResponse<promotion_coupons_detail>();
                 pagingResponse.TotalRecord = record;
                 pagingResponse.ResultList = resultlist;

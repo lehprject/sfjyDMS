@@ -8,6 +8,7 @@
     ;
     //-------日期-------
     functions.initialDatePicker($('#date1Container input'), $('#date2Container input'));
+
 })();
 
 (function () {
@@ -73,6 +74,9 @@
             success: function (data) {
                 if (data && data.ResultList) {
 
+                    data.ResultList.each(function () {
+                        $(this).startdate = functions.datetimetostring($(this).startdate);
+                    });
 
                     var records = data.ResultList;
                     var html = source(records);

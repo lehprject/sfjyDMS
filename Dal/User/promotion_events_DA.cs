@@ -175,6 +175,7 @@ namespace Dal
                             if (item.pkid == 0)
                             {
                                 item.coupons_id = info.pkid;
+                                item.code = "SFJY" + DateTime.Now.ToString("yyyyMMdd") + Share.BaseTool.Random(3);
                                 db.promotion_coupons_detail.Add(item);
                             }
                             else

@@ -83,7 +83,7 @@ gvar.urlprefix = '/wap';
         });
     };
 
-    Page.functions.resetPager = function ($pager,totalPages, onPageClick) {
+    Page.functions.resetPager = function ($pager, totalPages, onPageClick) {
         $pager.twbsPagination('destroy');
         if (totalPages == 0)
             totalPages = 1;
@@ -140,4 +140,13 @@ gvar.urlprefix = '/wap';
             });
         }
     }
+
+    Page.functions.datetimetostring = function (value) {
+
+        var da = new Date(parseInt(value.replace("/Date(", "").replace(")/", "").split("+")[0]));
+
+        var values = da.getFullYear() + "-" + (da.getMonth() + 1) + "-" + da.getDate() + " " + da.getHours() + ":" + da.getMinutes() + ":" + da.getSeconds();
+        return values.substring(0, 10);
+    }
+
 })();
