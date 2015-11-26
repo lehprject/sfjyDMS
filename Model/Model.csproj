@@ -76,6 +76,7 @@
     <Compile Include="ChildClass\child_patient_order.cs" />
     <Compile Include="ChildClass\child_patient_recipelist.cs" />
     <Compile Include="ChildClass\child_patient_recipelist_druguse.cs" />
+    <Compile Include="ChildClass\child_promotion_coupons.cs" />
     <Compile Include="ChildClass\child_promotion_coupons_detail.cs" />
     <Compile Include="ChildClass\child_promotion_events.cs" />
     <Compile Include="ConfigClass\Enums.cs" />
