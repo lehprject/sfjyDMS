@@ -16,7 +16,7 @@
 })();
 
 (function () {
-    var $promotionname = $("#name");
+    var $promotionname = $("#activity");
     $promotionname.select2({
         placeholder: "活动名称",
         language: "zh-CN",

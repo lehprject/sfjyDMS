@@ -1,17 +1,113 @@
-﻿@{
-    Layout = null;
+﻿@using Model;
+@model promotion_events
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<promotion_coupons_detail> detaillist = ViewBag.detaillist;
 }
 
-<!DOCTYPE html>
+<link href="@Url.Content("~/Content/datepicker/bootstrap-datepicker3.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/select2/select2.css")" rel="stylesheet" type="text/css" />
+<form id="form1" class="form-inline">
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div>
+            @ViewBag.ErrorMessage
+        </div>
+    }
+    <div class="panel panel-primary container-fluid">
+        <div class="panel-body">
+            <h2>基础信息</h2>
+            <table class="table table-bordered">
+                <tr>
+                    <td>卷名称</td>
+                    <td>
+                        <input id="name" name="name" class="form-control" data-val="true" data-val-required="请填写名称." />
+                        <span data-valmsg-for="name" data-valmsg-replace="true" style="color: red"></span>
+                    </td>
+
+                    <td>数量</td>
+                    <td>
+                        <input id="count" name="count" class="form-control" data-val="true" data-val-required="请填写数量." />
+                        <span data-valmsg-for="count" data-valmsg-replace="true" style="color: red"></span>
+                    </td>
+                    <td>面值</td>
+                    <td>
+                        <input id="values" name="values" class="form-control" data-val="true" data-val-required="请填写面值." />
+                        <span data-valmsg-for="values" data-valmsg-replace="true" style="color: red"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>生效时间</td>
+                    <td>
+                        <div id="date1Container">
+                            <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" />
+                        </div>
+                    </td>
+
+                    <td>失效时间</td>
+                    <td>
+                        <div id="date2Container">
+                            <input type="text" class="form-control" id="date2Input" name="date2" placeholder="" />
+                        </div>
+                    </td>
+                    <td>活动名称</td>
+                    <td>
+                        <select id="activity" name="activity" class="form-control" style="width: 100%; display: inline">
+                            <option></option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <table class="table table-bordered">
+                <tr>
+                    <td colspan="3">兑换条件</td>
+                </tr>
+                <tr>
+                    <td>订单金额</td>
+                    <td><input type="text" class="form-control" id="request1" name="request1" placeholder="" /></td>
+
+                    <td><button id="btnSave" name="action" type="submit" class="btn btn-primary btn-lg btnSave" value="save">生成</button></td>
+                </tr>
+            </table>
+        </div>
     </div>
-</body>
-</html>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <table class="table table-striped" id="tbDetailList">
+                        <tr>
+                            <td>
+                                @if (detaillist != null && detaillist.Any())
+                                {
+                                    <div>生成进度：@detaillist.Count 张</div>
+                                    foreach (var item in detaillist)
+                                    {
+                                        <div>卷编码 @item.code</div>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="row-fluid" id="promotionpage"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section scripts{
+    <script src="../Scripts/datepicker/bootstrap-datepicker.js"></script>
+    <script src="../Scripts/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>
+
+
+    <script src="../Scripts/Pages/Share.js"></script>
+    <script src="../Scripts/Pages/Promotion/PromotionEventList.js"></script>
+}
+
+
+
+
+
