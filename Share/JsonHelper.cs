@@ -52,15 +52,13 @@ namespace Share
 
     }
 
-    #region Newtonsoft 更加高效
-
-    #region 拓展
+    #region 拓展DefaultContractResolver
     /// <summary>
     /// 序列化时，对指定属性不进行序列化，用于返回敏感信息，如序列member_info时，ignore密码属性
     /// </summary>
-    public class IgnorableSerializerContractResolver : Newtonsoft.Json.Serialization.DefaultContractResolver
+    public class IgnorableSerializerContractResolver : DefaultContractResolver
     {
-        protected readonly Dictionary<Type, HashSet<string>> Ignores;
+        public readonly Dictionary<Type, HashSet<string>> Ignores;
 
         public IgnorableSerializerContractResolver()
         {
@@ -180,6 +178,20 @@ namespace Share
         public IncludableSerializerContractResolver()
         {
             Includes = new Dictionary<Type, HashSet<string>>();
+
+        }
+
+        public IncludableSerializerContractResolver(IgnorableSerializerContractResolver ignoreResolver)
+            : this()
+        {
+            if (ignoreResolver.Ignores != null)
+            {
+                foreach (var item in ignoreResolver.Ignores)
+                {
+                    Ignores.Add(item.Key, item.Value);
+                }
+            }
+
         }
 
         public bool IsInclude(Type type, string propertyName)
@@ -238,7 +250,7 @@ namespace Share
         protected override Newtonsoft.Json.Serialization.JsonProperty CreateProperty(System.Reflection.MemberInfo member, Newtonsoft.Json.MemberSerialization memberSerialization)
         {
             Newtonsoft.Json.Serialization.JsonProperty property = base.CreateProperty(member, memberSerialization);
-            if (property.Ignored == false)
+            if (property != null && property.Ignored == false)
             {
                 if (this.IsInclude(property.DeclaringType, property.PropertyName)
                     // need to check basetype as well for EF -- @per comment by user576838
@@ -258,7 +270,5 @@ namespace Share
             return property;
         }
     }
-    #endregion
-
     #endregion
 }

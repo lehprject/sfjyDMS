@@ -15,7 +15,9 @@ namespace webApi.Controllers
         #endregion
 
         #region 配置信息
-        protected int PageSize { get; set; }
+        protected int PageSize { get { return 20; }  }
         #endregion
+
+
     }
 }

@@ -23,7 +23,7 @@ namespace webApi.Controllers.Doctor
             var resultList = visitBll.SearchPreVisitList(DoctorID, 0, 0, null, null,
             null, 0, null, null, 0, null, null,
              null, null, pageindex.Value, PageSize, out error);
-
+ 
 
             return resultList;
         }
