@@ -22,5 +22,6 @@ namespace Model
         public int pre_type { get; set; }
         public string remarks { get; set; }
         public System.DateTime createtime { get; set; }
+        public int status { get; set; }
     }
 }

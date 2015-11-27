@@ -23,5 +23,6 @@ namespace Model
         public decimal check_usetime { get; set; }
         public decimal service_money { get; set; }
         public System.DateTime createtime { get; set; }
+        public int status { get; set; }
     }
 }

@@ -38,9 +38,29 @@
           <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="typeid" Type="int" Nullable="false" />
           <Property Name="chk_item" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="chk_value" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="chk_unit" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="chk_item_code" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="chk_unit1" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="chk_unit2" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="ipt_indicator" Type="bit" Nullable="false" />
+          <Property Name="remark" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="formtype" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="chk_demo_value">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="chk_demo_id" Type="int" Nullable="false" />
+          <Property Name="chk_value1_min" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="chk_value1_max" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="chk_value1_remark" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="chk_value2_min" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="chk_value2_max" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="chk_value2_remark" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="age_stage" Type="int" Nullable="false" />
+          <Property Name="chk_method" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="chk_sample" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="chk_info">
           <Key>
@@ -53,6 +73,9 @@
           <Property Name="chk_demo_id" Type="int" Nullable="false" />
           <Property Name="chk_result" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="fileid" Type="int" Nullable="false" />
+          <Property Name="chk_demo_valueid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="createuser" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="chk_type">
           <Key>
@@ -114,6 +137,7 @@
           <Property Name="pre_type" Type="int" Nullable="false" />
           <Property Name="remarks" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="dr_recall_rcd">
           <Key>
@@ -212,6 +236,10 @@
           <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="current_income" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="mobileno" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="qq_openid" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="weixin_openid" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sinaweibo_openid" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="md_docter_files">
           <Key>
@@ -389,6 +417,9 @@
           <Property Name="disease_his" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="family_his" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="mobileno" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="qq_openid" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="weixin_openid" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sinaweibo_openid" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="patient_medical_rcd">
           <Key>
@@ -417,6 +448,18 @@
           <Property Name="status" Type="int" Nullable="false" />
           <Property Name="contents" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patient_message_rcd">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="msg_id" Type="int" Nullable="false" />
+          <Property Name="rcd_contents" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="attach_file1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="attach_file2" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="createuser" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="patient_next_visit">
           <Key>
@@ -448,6 +491,7 @@
           <Property Name="check_usetime" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="service_money" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="patient_recipelist">
           <Key>
@@ -536,12 +580,15 @@
           <Property Name="enddate" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="attachfile" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="remarks" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="event_type" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="sfjyModelStoreContainer">
           <EntitySet Name="area_city" EntityType="Self.area_city" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="area_district" EntityType="Self.area_district" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="area_province" EntityType="Self.area_province" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="chk_demo" EntityType="Self.chk_demo" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="chk_demo_value" EntityType="Self.chk_demo_value" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="chk_info" EntityType="Self.chk_info" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="chk_type" EntityType="Self.chk_type" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="dr_addvisit" EntityType="Self.dr_addvisit" Schema="sfjy" store:Type="Tables" />
@@ -571,6 +618,7 @@
           <EntitySet Name="patient_info" EntityType="Self.patient_info" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_medical_rcd" EntityType="Self.patient_medical_rcd" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_message" EntityType="Self.patient_message" Schema="sfjy" store:Type="Tables" />
+          <EntitySet Name="patient_message_rcd" EntityType="Self.patient_message_rcd" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_next_visit" EntityType="Self.patient_next_visit" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_next_visit_date" EntityType="Self.patient_next_visit_date" Schema="sfjy" store:Type="Tables" />
           <EntitySet Name="patient_order" EntityType="Self.patient_order" Schema="sfjy" store:Type="Tables" />
@@ -641,6 +689,8 @@
           <EntitySet Name="promotion_coupons_usecase" EntityType="sfjyModel.promotion_coupons_usecase" />
           <EntitySet Name="dr_message" EntityType="sfjyModel.dr_message" />
           <EntitySet Name="dr_recall_rcd" EntityType="sfjyModel.dr_recall_rcd" />
+          <EntitySet Name="chk_demo_value" EntityType="sfjyModel.chk_demo_value" />
+          <EntitySet Name="patient_message_rcd" EntityType="sfjyModel.patient_message_rcd" />
         </EntityContainer>
         <EntityType Name="area_city">
           <Key>
@@ -675,9 +725,12 @@
           <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="typeid" Type="Int32" Nullable="false" />
           <Property Name="chk_item" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="chk_value" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="chk_unit" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ipt_indicator" Type="Boolean" Nullable="false" />
+          <Property Name="chk_item_code" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="chk_unit1" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="chk_unit2" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="remark" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="formtype" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="chk_info">
           <Key>
@@ -690,6 +743,9 @@
           <Property Name="chk_demo_id" Type="Int32" Nullable="false" />
           <Property Name="chk_result" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="fileid" Type="Int32" Nullable="false" />
+          <Property Name="chk_demo_valueid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="createuser" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="chk_type">
           <Key>
@@ -738,6 +794,7 @@
           <Property Name="pre_type" Type="Int32" Nullable="false" />
           <Property Name="remarks" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="dr_visit">
           <Key>
@@ -814,6 +871,10 @@
           <Property Name="createtime" Type="DateTime" Nullable="false" />
           <Property Name="current_income" Type="Decimal" Nullable="false" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="mobileno" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="qq_openid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="weixin_openid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sinaweibo_openid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="md_dr_account">
           <Key>
@@ -923,6 +984,9 @@
           <Property Name="disease_his" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="family_his" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="mobileno" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="qq_openid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="weixin_openid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sinaweibo_openid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="patient_medical_rcd">
           <Key>
@@ -954,6 +1018,7 @@
           <Property Name="check_usetime" Type="Decimal" Nullable="false" />
           <Property Name="service_money" Type="Decimal" Nullable="false" />
           <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="patient_recipelist">
           <Key>
@@ -1031,6 +1096,8 @@
           <Property Name="enddate" Type="DateTime" Nullable="false" />
           <Property Name="attachfile" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="remarks" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="event_type" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="patient_message">
           <Key>
@@ -1163,6 +1230,35 @@
           <Property Name="optime" Type="DateTime" Nullable="false" />
           <Property Name="opstatus" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="chk_demo_value">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="chk_demo_id" Type="Int32" Nullable="false" />
+          <Property Name="chk_value1_min" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="chk_value1_max" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="chk_value1_remark" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="chk_value2_min" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="chk_value2_max" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="chk_value2_remark" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="age_stage" Type="Int32" Nullable="false" />
+          <Property Name="chk_method" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="chk_sample" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="patient_message_rcd">
+          <Key>
+            <PropertyRef Name="pkid" />
+          </Key>
+          <Property Name="pkid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="msg_id" Type="Int32" Nullable="false" />
+          <Property Name="rcd_contents" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="attach_file1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="attach_file2" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="createuser" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1213,9 +1309,12 @@
           <EntitySetMapping Name="chk_demo">
             <EntityTypeMapping TypeName="sfjyModel.chk_demo">
               <MappingFragment StoreEntitySet="chk_demo">
+                <ScalarProperty Name="formtype" ColumnName="formtype" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="chk_unit2" ColumnName="chk_unit2" />
+                <ScalarProperty Name="chk_unit1" ColumnName="chk_unit1" />
+                <ScalarProperty Name="chk_item_code" ColumnName="chk_item_code" />
                 <ScalarProperty Name="ipt_indicator" ColumnName="ipt_indicator" />
-                <ScalarProperty Name="chk_unit" ColumnName="chk_unit" />
-                <ScalarProperty Name="chk_value" ColumnName="chk_value" />
                 <ScalarProperty Name="chk_item" ColumnName="chk_item" />
                 <ScalarProperty Name="typeid" ColumnName="typeid" />
                 <ScalarProperty Name="pkid" ColumnName="pkid" />
@@ -1225,6 +1324,9 @@
           <EntitySetMapping Name="chk_info">
             <EntityTypeMapping TypeName="sfjyModel.chk_info">
               <MappingFragment StoreEntitySet="chk_info">
+                <ScalarProperty Name="createuser" ColumnName="createuser" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="chk_demo_valueid" ColumnName="chk_demo_valueid" />
                 <ScalarProperty Name="fileid" ColumnName="fileid" />
                 <ScalarProperty Name="chk_result" ColumnName="chk_result" />
                 <ScalarProperty Name="chk_demo_id" ColumnName="chk_demo_id" />
@@ -1276,6 +1378,7 @@
           <EntitySetMapping Name="dr_pre_visit">
             <EntityTypeMapping TypeName="sfjyModel.dr_pre_visit">
               <MappingFragment StoreEntitySet="dr_pre_visit">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="createtime" ColumnName="createtime" />
                 <ScalarProperty Name="remarks" ColumnName="remarks" />
                 <ScalarProperty Name="pre_type" ColumnName="pre_type" />
@@ -1351,6 +1454,10 @@
           <EntitySetMapping Name="md_docter">
             <EntityTypeMapping TypeName="sfjyModel.md_docter">
               <MappingFragment StoreEntitySet="md_docter">
+                <ScalarProperty Name="sinaweibo_openid" ColumnName="sinaweibo_openid" />
+                <ScalarProperty Name="weixin_openid" ColumnName="weixin_openid" />
+                <ScalarProperty Name="qq_openid" ColumnName="qq_openid" />
+                <ScalarProperty Name="mobileno" ColumnName="mobileno" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="current_income" ColumnName="current_income" />
                 <ScalarProperty Name="createtime" ColumnName="createtime" />
@@ -1466,6 +1573,9 @@
           <EntitySetMapping Name="patient_info">
             <EntityTypeMapping TypeName="sfjyModel.patient_info">
               <MappingFragment StoreEntitySet="patient_info">
+                <ScalarProperty Name="sinaweibo_openid" ColumnName="sinaweibo_openid" />
+                <ScalarProperty Name="weixin_openid" ColumnName="weixin_openid" />
+                <ScalarProperty Name="qq_openid" ColumnName="qq_openid" />
                 <ScalarProperty Name="mobileno" ColumnName="mobileno" />
                 <ScalarProperty Name="family_his" ColumnName="family_his" />
                 <ScalarProperty Name="disease_his" ColumnName="disease_his" />
@@ -1506,6 +1616,7 @@
           <EntitySetMapping Name="patient_order">
             <EntityTypeMapping TypeName="sfjyModel.patient_order">
               <MappingFragment StoreEntitySet="patient_order">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="createtime" ColumnName="createtime" />
                 <ScalarProperty Name="service_money" ColumnName="service_money" />
                 <ScalarProperty Name="check_usetime" ColumnName="check_usetime" />
@@ -1589,6 +1700,8 @@
           <EntitySetMapping Name="promotion_events">
             <EntityTypeMapping TypeName="sfjyModel.promotion_events">
               <MappingFragment StoreEntitySet="promotion_events">
+                <ScalarProperty Name="event_type" ColumnName="event_type" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
                 <ScalarProperty Name="createtime" ColumnName="createtime" />
                 <ScalarProperty Name="attachfile" ColumnName="attachfile" />
                 <ScalarProperty Name="enddate" ColumnName="enddate" />
@@ -1740,6 +1853,37 @@
                 <ScalarProperty Name="opuser" ColumnName="opuser" />
                 <ScalarProperty Name="createtime" ColumnName="createtime" />
                 <ScalarProperty Name="drid" ColumnName="drid" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="chk_demo_value">
+            <EntityTypeMapping TypeName="sfjyModel.chk_demo_value">
+              <MappingFragment StoreEntitySet="chk_demo_value">
+                <ScalarProperty Name="chk_sample" ColumnName="chk_sample" />
+                <ScalarProperty Name="chk_method" ColumnName="chk_method" />
+                <ScalarProperty Name="age_stage" ColumnName="age_stage" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="chk_value2_remark" ColumnName="chk_value2_remark" />
+                <ScalarProperty Name="chk_value2_max" ColumnName="chk_value2_max" />
+                <ScalarProperty Name="chk_value2_min" ColumnName="chk_value2_min" />
+                <ScalarProperty Name="chk_value1_remark" ColumnName="chk_value1_remark" />
+                <ScalarProperty Name="chk_value1_max" ColumnName="chk_value1_max" />
+                <ScalarProperty Name="chk_value1_min" ColumnName="chk_value1_min" />
+                <ScalarProperty Name="chk_demo_id" ColumnName="chk_demo_id" />
+                <ScalarProperty Name="pkid" ColumnName="pkid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient_message_rcd">
+            <EntityTypeMapping TypeName="sfjyModel.patient_message_rcd">
+              <MappingFragment StoreEntitySet="patient_message_rcd">
+                <ScalarProperty Name="createuser" ColumnName="createuser" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="attach_file2" ColumnName="attach_file2" />
+                <ScalarProperty Name="attach_file1" ColumnName="attach_file1" />
+                <ScalarProperty Name="rcd_contents" ColumnName="rcd_contents" />
+                <ScalarProperty Name="msg_id" ColumnName="msg_id" />
                 <ScalarProperty Name="pkid" ColumnName="pkid" />
               </MappingFragment>
             </EntityTypeMapping>

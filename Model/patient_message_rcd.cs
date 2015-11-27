@@ -12,18 +12,14 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class promotion_events
+    public partial class patient_message_rcd
     {
         public int pkid { get; set; }
-        public string name { get; set; }
-        public string contents { get; set; }
-        public int hospital_id { get; set; }
-        public int face_type { get; set; }
-        public System.DateTime startdate { get; set; }
-        public System.DateTime enddate { get; set; }
-        public string attachfile { get; set; }
+        public int msg_id { get; set; }
+        public string rcd_contents { get; set; }
+        public string attach_file1 { get; set; }
+        public string attach_file2 { get; set; }
         public System.DateTime createtime { get; set; }
-        public string remarks { get; set; }
-        public int event_type { get; set; }
+        public string createuser { get; set; }
     }
 }

@@ -28,5 +28,9 @@ namespace Model
         public System.DateTime createtime { get; set; }
         public decimal current_income { get; set; }
         public string email { get; set; }
+        public string mobileno { get; set; }
+        public string qq_openid { get; set; }
+        public string weixin_openid { get; set; }
+        public string sinaweibo_openid { get; set; }
     }
 }
