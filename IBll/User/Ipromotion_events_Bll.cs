@@ -31,7 +31,7 @@ namespace IBll
         #endregion
 
         #region 查询
-        List<promotion_coupons> GetPromotionCouponsList(string name, decimal value, int issue_status, DateTime? startdate1, DateTime? startdate2, DateTime? enddate1, DateTime? enddate2,
+        List<promotion_coupons> GetPromotionCouponsList(string name, int value, int issue_status, DateTime? startdate1, DateTime? startdate2, DateTime? enddate1, DateTime? enddate2,
            orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out int record, out string error);
         #endregion
         #endregion
@@ -40,6 +40,8 @@ namespace IBll
         #region 优惠卷明细相关
         List<promotion_coupons_detail> SearchPromotionCouponsList(int coupons_id, int use_status, int business_type, int userid, int drid, DateTime? sendtime1, DateTime? sendtime2, DateTime? usetime1, DateTime? usetime2,
            orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out int record, out string error);
+
+        List<promotion_coupons_detail> GetCouponsDetailByIds(List<int> ids);
 
         #endregion
     }

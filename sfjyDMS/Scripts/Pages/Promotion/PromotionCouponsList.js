@@ -55,12 +55,17 @@
                 if (data && data.ResultList) {
                     var records = data.ResultList;
 
+                    $.each(records, function (name, value) {
+                        value.send = functions.datetimetostring(value.sendtime);
+                        value.use = functions.datetimetostring(value.usetime);
+                    });
+
                     var html = source1(records);
                     $detailListContainer.html(html);
 
                     //分页
                     var totalPages2 = Math.ceil(data.TotalRecord / 20);
-                    functions.resetPager($pager, totalPages2, findCashdraw)
+                    functions.initialPager($pager, totalPages2, findDetail);
                 };
             }
         });
@@ -76,7 +81,12 @@
             success: function (data) {
                 if (data && data.ResultList) {
                     var records = data.ResultList;
-                    
+
+                    $.each(records, function (name, value) {
+                        value.start = functions.datetimetostring(value.startdate);
+                        value.end = functions.datetimetostring(value.enddate);
+                    });
+
                     var html = source(records);
                     $couposonListContainer.html(html);
 
@@ -105,21 +115,24 @@
     //查询列表异步分页 
 
     $('#action').on("click", function () {
-        first = 1;
         var name = $('#name').val();
         var values = $('#values').val();
         var status = $('#status').val();
         var date1Input = $("#date1Input").val();
         var date2Input = $("#date2Input").val();
+        if (values == "") {
+            values = 0;
+        }
 
-        findCashdraw(1, name, values, status, date1Input, date2Input, name, $pager);
+        findCashdraw(1, name, values, status, date1Input, date2Input, $pager);
     });
 
 
-    var findCashdraw = function (pageindex, name, values,status, date1, date2, $pager2) {
+    var findCashdraw = function (pageindex, name, values,status, date1, date2, $pager) {
         $.ajax({
             url: "/Promotion/SearchPromotionCoupons",
-            type: 'GET',
+            type: 'POST',
+            contentType: 'application/x-www-form-urlencoded',
             data: {
                 name: name,
                 values: values,
@@ -132,12 +145,29 @@
                 if (data && data.ResultList) {
                     var records = data.ResultList;
 
+                    $.each(records, function (name, value) {
+                        value.start = functions.datetimetostring(value.startdate);
+                        value.end = functions.datetimetostring(value.enddate);
+                    });
+
                     var html = source(records);
                     $couposonListContainer.html(html);
 
                     //分页
                     var totalPages2 = Math.ceil(data.TotalRecord / 20);
-                    functions.resetPager($pager2, totalPages2, findCashdraw)
+                    functions.resetPager($pager, totalPages2, findCashdraw);
+
+                    $('#tbList button[value=selecct]').on('click', function () {
+                        if (event.target == this) {
+                            $button = $(this);
+                            var couponsid = $button.attr('data-orderid');
+
+                            $('#detaildiv').css("display", "");//明细列表
+
+                            findDetail(1, couponsid, $pager1);
+
+                        }
+                    });
                 };
             }
         });

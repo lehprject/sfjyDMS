@@ -17,8 +17,11 @@ namespace Model
         public int pkid { get; set; }
         public int typeid { get; set; }
         public string chk_item { get; set; }
-        public string chk_value { get; set; }
-        public string chk_unit { get; set; }
         public bool ipt_indicator { get; set; }
+        public string chk_item_code { get; set; }
+        public string chk_unit1 { get; set; }
+        public string chk_unit2 { get; set; }
+        public string remark { get; set; }
+        public string formtype { get; set; }
     }
 }

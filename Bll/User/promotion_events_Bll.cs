@@ -27,7 +27,7 @@ namespace Bll
         public List<promotion_events> GetPromotionEventList(string name, int hospital_id, int face_type, DateTime? startdate1, DateTime? startdate2, DateTime? enddate1, DateTime? enddate2,
              DateTime? createtime1, DateTime? createtime2, orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out int record, out string error)
         {
-            return new promotion_events_DA().GetPromotionEventList(name,hospital_id, face_type, startdate1, startdate2, enddate1, enddate2,
+            return new promotion_events_DA().GetPromotionEventList(name, hospital_id, face_type, startdate1, startdate2, enddate1, enddate2,
              createtime1, createtime2, orderby, orderbyCol, pageIndex, pageSize, out record, out error);
         }
 
@@ -99,7 +99,7 @@ namespace Bll
         /// <param name="record"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public List<promotion_coupons> GetPromotionCouponsList(string name, decimal value, int issue_status, DateTime? startdate1, DateTime? startdate2, DateTime? enddate1, DateTime? enddate2,
+        public List<promotion_coupons> GetPromotionCouponsList(string name, int value, int issue_status, DateTime? startdate1, DateTime? startdate2, DateTime? enddate1, DateTime? enddate2,
             orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out int record, out string error)
         {
             error = string.Empty;
@@ -120,6 +120,11 @@ namespace Bll
             record = 0;
             return new promotion_events_DA().SearchPromotionCouponsList(coupons_id, use_status, business_type, userid, drid, sendtime1, sendtime2, usetime1, usetime2,
              orderby, orderbyCol, pageIndex, pageSize, out record, out error);
+        }
+
+        public List<promotion_coupons_detail> GetCouponsDetailByIds(List<int> ids)
+        {
+            return new promotion_events_DA().GetCouponsDetailByIds(ids);
         }
 
         #endregion

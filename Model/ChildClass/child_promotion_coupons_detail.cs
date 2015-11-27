@@ -22,5 +22,10 @@ namespace Model
         /// 面值
         /// </summary>
         public decimal valuess { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public string statusstr { get; set; }
     }
 }

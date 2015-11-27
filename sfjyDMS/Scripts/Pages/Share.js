@@ -1,16 +1,16 @@
 ﻿//全局变量
 var gvar = gvar || {};
-gvar.urlprefix = '/wap';
+gvar.urlprefix = '';
 
 (function ($) {
-    var oldAjax = $.ajax;
-    $.ajax = function () {
-        var url = arguments[0].url;
-        if (url != null && url != undefined && url[0] == '/') {
-            arguments[0].url = gvar.urlprefix + arguments[0].url;
-        }
-        oldAjax.call(this, arguments);
-    }
+    //var oldAjax = $.ajax;
+    //$.ajax = function () {
+    //    var url = arguments[0].url;
+    //    if (url != null && url != undefined && url[0] == '/') {
+    //        arguments[0].url = gvar.urlprefix + arguments[0].url;
+    //    }
+    //    oldAjax.call(this, arguments);
+    //}
 })(jQuery);
 
 (function () {
@@ -83,7 +83,7 @@ gvar.urlprefix = '/wap';
         });
     };
 
-    Page.functions.resetPager = function ($pager,totalPages, onPageClick) {
+    Page.functions.resetPager = function ($pager, totalPages, onPageClick) {
         $pager.twbsPagination('destroy');
         if (totalPages == 0)
             totalPages = 1;
@@ -140,4 +140,13 @@ gvar.urlprefix = '/wap';
             });
         }
     }
+
+    Page.functions.datetimetostring = function (value) {
+
+        var da = new Date(parseInt(value.replace("/Date(", "").replace(")/", "").split("+")[0]));
+
+        var values = da.getFullYear() + "-" + (da.getMonth() + 1) + "-" + da.getDate() + " " + da.getHours() + ":" + da.getMinutes() + ":" + da.getSeconds();
+        return values.substring(0, 10);
+    }
+
 })();

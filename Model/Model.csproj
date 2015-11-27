@@ -79,6 +79,9 @@
     <Compile Include="ChildClass\child_promotion_coupons.cs" />
     <Compile Include="ChildClass\child_promotion_coupons_detail.cs" />
     <Compile Include="ChildClass\child_promotion_events.cs" />
+    <Compile Include="chk_demo_value.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ConfigClass\Enums.cs" />
     <Compile Include="chk_demo.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
@@ -172,6 +175,9 @@
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="patient_message.cs">
+      <DependentUpon>sfjyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="patient_message_rcd.cs">
       <DependentUpon>sfjyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="patient_next_visit.cs">

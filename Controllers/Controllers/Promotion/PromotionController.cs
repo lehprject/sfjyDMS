@@ -37,7 +37,7 @@ namespace Controllers
         public JsonResult SearchPromotionNameList(string nameparams, string format, string selectColumns, string idName, string textName)
         {
             //参数
-           nameparams = nameparams ?? string.Empty;
+            nameparams = nameparams ?? string.Empty;
             selectColumns = selectColumns ?? string.Empty;
             idName = idName ?? "pkid";
             textName = textName ?? "name";
@@ -79,8 +79,7 @@ namespace Controllers
             {
                 foreach (var item in resultlist)
                 {
-                    item.starttime = item.startdate.ToString("yyyy - MM - dd");
-                    item.endtime = item.enddate.ToString("yyyy - MM - dd");
+                    item.eventtypestr = Enum.GetName(typeof(Model.ConfigClass.PromotionEventType), item.pkid);
                 }
                 PagingResponse<promotion_events> pagingResponse = new PagingResponse<promotion_events>();
                 pagingResponse.TotalRecord = record;
@@ -98,14 +97,20 @@ namespace Controllers
 
             string error = string.Empty;
             int record = 0;
+            Base_Bll bll = new Base_Bll();
+            var events = bll.GetInfo<promotion_events>(BaseTool.GetIntNumber(name));
+            if (events != null)
+            {
+                name = events.name;
+            }
+
             List<promotion_events> resultlist = new promotion_events_Bll().GetPromotionEventList(name, 0, 0, date1, date2, null, null,
              null, null, null, null, pageIndex.Value, 20, out record, out error);
             if (resultlist != null)
             {
                 foreach (var item in resultlist)
                 {
-                    item.starttime = item.startdate.ToString("yyyy - MM - dd");
-                    item.endtime = item.enddate.ToString("yyyy - MM - dd");
+                    item.eventtypestr = Enum.GetName(typeof(Model.ConfigClass.PromotionEventType), item.pkid);
                 }
                 PagingResponse<promotion_events> pagingResponse = new PagingResponse<promotion_events>();
                 pagingResponse.TotalRecord = record;
@@ -118,18 +123,21 @@ namespace Controllers
 
         public ActionResult CreatePromotionEvent()
         {
+            List<SelectListItem> eventtype = (Share.EnumOperate.ToKeyValues(typeof(PromotionEventType))
+   .Select(t => new SelectListItem() { Value = t.Key.ToString(), Text = t.Value, Selected = t.Key == 0 })).ToList();
+            ViewBag.eventtype = eventtype;
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreatePromotionEvent(string name,string date1,string date2,string content,string remark)
+        public ActionResult CreatePromotionEvent(string name, string date1, string date2, string content, string remark)
         {
-            //var name = collection["name"];
-            //var date1 = collection["date1"];
-            //var date2 = collection["date2"];
-            //var content = collection["content"];
 
-            if(string.IsNullOrEmpty(date1)||string.IsNullOrEmpty(date2))
+            List<SelectListItem> eventtype = (Share.EnumOperate.ToKeyValues(typeof(PromotionEventType))
+ .Select(t => new SelectListItem() { Value = t.Key.ToString(), Text = t.Value, Selected = t.Key == 0 })).ToList();
+            ViewBag.eventtype = eventtype;
+
+            if (string.IsNullOrEmpty(date1) || string.IsNullOrEmpty(date2))
             {
                 ViewBag.ErrorMessage = "请选择日期";
                 return View();
@@ -179,15 +187,20 @@ namespace Controllers
 
             string error = string.Empty;
             int record = 0;
-            List<promotion_coupons> resultlist = new promotion_events_Bll().GetPromotionCouponsList(null, 0, 0, null, null, null, null,
+            var bll = new promotion_events_Bll();
+            List<promotion_coupons> resultlist = bll.GetPromotionCouponsList(null, 0, 0, null, null, null, null,
            null, null, pageIndex.Value, 20, out record, out error);
             if (resultlist != null)
             {
-                //foreach (var item in resultlist)
-                //{
-                //    item.apptime = item.app_time.ToString("yyyy - MM - dd");
-                //    item._optime = item.optime.ToString("yyyy - MM - dd");
-                //}
+                List<int> ids = resultlist.Select(m => m.pkid).ToList();
+                var details = bll.GetCouponsDetailByIds(ids);
+
+                foreach (var item in resultlist)
+                {
+                    var list = details.Where(m => m.coupons_id == item.pkid && m.userid > 0).ToList();
+                    item.stock = item.issue_num - list.Count;
+                }
+
                 PagingResponse<promotion_coupons> pagingResponse = new PagingResponse<promotion_coupons>();
                 pagingResponse.TotalRecord = record;
                 pagingResponse.ResultList = resultlist;
@@ -212,11 +225,6 @@ namespace Controllers
            null, null, pageIndex.Value, 20, out record, out error);
             if (resultlist != null)
             {
-                //foreach (var item in resultlist)
-                //{
-                //    item.apptime = item.app_time.ToString("yyyy - MM - dd");
-                //    item._optime = item.optime.ToString("yyyy - MM - dd");
-                //}
                 PagingResponse<promotion_coupons> pagingResponse = new PagingResponse<promotion_coupons>();
                 pagingResponse.TotalRecord = record;
                 pagingResponse.ResultList = resultlist;
@@ -244,14 +252,12 @@ namespace Controllers
             var activity = collection["activity"];
             var morethan = collection["morethan"];
             var value1 = collection["value1"];
-            var lessthan = collection["lessthan"];
-            var value2 = collection["value2"];
 
             #region 优惠券
             promotion_coupons info = new promotion_coupons();
             info.Initial();
             info.name = name;
-            info.issue_num =BaseTool.GetIntNumber(count);
+            info.issue_num = BaseTool.GetIntNumber(count);
             info.values = BaseTool.GetIntNumber(values);
             info.startdate = BaseTool.GetDateTime(date1);
             info.enddate = BaseTool.GetDateTime(date2);
@@ -260,7 +266,7 @@ namespace Controllers
 
             #region 条件
             List<promotion_coupons_usecase> usecasellist = new List<promotion_coupons_usecase>();
-            if(BaseTool.GetIntNumber(morethan)>0&&BaseTool.GetIntNumber(value1)>0)
+            if (BaseTool.GetIntNumber(morethan) > 0 && BaseTool.GetIntNumber(value1) > 0)
             {
                 var usecase = new promotion_coupons_usecase();
                 usecase.Initial();
@@ -268,15 +274,7 @@ namespace Controllers
                 usecase.case_pamars_value = value1;
                 usecasellist.Add(usecase);
             }
-            if (BaseTool.GetIntNumber(lessthan) > 0 && BaseTool.GetIntNumber(value2) > 0)
-            {
-                var usecase = new promotion_coupons_usecase();
-                usecase.Initial();
-                usecase.case_pamars = morethan;
-                usecase.case_pamars_value = value1;
-                usecasellist.Add(usecase);
-            }
-            #endregion 
+            #endregion
 
             #region 优惠券明细
             List<promotion_coupons_detail> detaillist = new List<promotion_coupons_detail>();
@@ -317,11 +315,10 @@ namespace Controllers
            null, null, pageIndex.Value, 20, out record, out error);
             if (resultlist != null)
             {
-                //foreach (var item in resultlist)
-                //{
-                //    item.apptime = item.app_time.ToString("yyyy - MM - dd");
-                //    item._optime = item.optime.ToString("yyyy - MM - dd");
-                //}
+                foreach (var item in resultlist)
+                {
+                    item.statusstr = Enum.GetName(typeof(Model.ConfigClass.CouponsStatus), item.use_status);
+                }
                 PagingResponse<promotion_coupons_detail> pagingResponse = new PagingResponse<promotion_coupons_detail>();
                 pagingResponse.TotalRecord = record;
                 pagingResponse.ResultList = resultlist;

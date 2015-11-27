@@ -175,6 +175,7 @@ namespace Dal
                             if (item.pkid == 0)
                             {
                                 item.coupons_id = info.pkid;
+                                item.code = "SFJY" + DateTime.Now.ToString("yyyyMMdd") + Share.BaseTool.Random(3);
                                 db.promotion_coupons_detail.Add(item);
                             }
                             else
@@ -249,18 +250,12 @@ namespace Dal
 
                 if (value > 0)
                 {
-                    conditionSb.Append(" AND value = @value ");
-                    paraList.Add(new MySqlParameter("value", value));
+                    conditionSb.Append(" AND `values` = @values ");
+                    paraList.Add(new MySqlParameter("values", value));
                 }
 
                 conditionSb.Append(" AND issue_status = @issue_status ");
                 paraList.Add(new MySqlParameter("issue_status", issue_status));
-
-                if (!string.IsNullOrEmpty(name))
-                {
-                    conditionSb.Append(" AND name LIKE CONCAT('%', @name, '%') ");
-                    paraList.Add(new MySqlParameter("name", name));
-                }
 
                 if (startdate1.HasValue)
                 {
@@ -432,6 +427,16 @@ namespace Dal
                 error += BaseTool.FormatExceptionMessage(ex);
                 return null;
             }
+        }
+
+        public List<promotion_coupons_detail> GetCouponsDetailByIds(List<int> ids)
+        {
+            string id = string.Join(",", ids.Select(t => t));
+            string sql = @"SELECT *                       
+                            FROM promotion_coupons_detail                             
+                            where FIND_IN_SET(pkid,@ids)";
+            List<promotion_coupons_detail> resultlist = sqlHelper.ExecuteObjects<promotion_coupons_detail>(sql, new MySqlParameter("ids", id));
+            return resultlist;
         }
 
         #endregion

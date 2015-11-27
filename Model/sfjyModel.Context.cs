@@ -68,5 +68,7 @@ namespace Model
         public virtual DbSet<promotion_coupons_usecase> promotion_coupons_usecase { get; set; }
         public virtual DbSet<dr_message> dr_message { get; set; }
         public virtual DbSet<dr_recall_rcd> dr_recall_rcd { get; set; }
+        public virtual DbSet<chk_demo_value> chk_demo_value { get; set; }
+        public virtual DbSet<patient_message_rcd> patient_message_rcd { get; set; }
     }
 }

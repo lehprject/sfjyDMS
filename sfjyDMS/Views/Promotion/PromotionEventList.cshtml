@@ -9,7 +9,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <table class="table">
+                    <table class="table-condensed">
                         <tr>
                             <td>活动名称</td>
                             <td>
@@ -18,23 +18,23 @@
                                 </select>
                             </td>
                             <td>活动时间</td>
-                            <td style="width: 15%">
+                            <td>
                                 <div id="date1Container">
                                     <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" />
 
                                 </div>
                             </td>
                             <td>至</td>
-                            <td style="width: 15%">
+                            <td >
                                 <div id="date2Container">
 
                                     <input type="text" class="form-control" id="date2Input" name="date2" placeholder="" />
                                 </div>
                             </td>
-                            <td style="width:12%">
+                            <td >
                                 <button id="action" name="action" type="button" class="btn btn-primary" value="search">查询</button>
-                            </td>
-                            <td><a href="@Url.Action("CreatePromotionEvent", "Promotion")" id="new" name="action" class="btn btn-primary" >新增</a></td>
+                            
+                            <a href="@Url.Action("CreatePromotionEvent", "Promotion")" id="new" name="action" class="btn btn-primary">新增</a></td>
                         </tr>
                     </table>
 
@@ -52,6 +52,7 @@
                         <thead>
                             <tr>
                                 <th>活动名称</th>
+                                <th>活动类型</th>
                                 <th>活动开始时间</th>
                                 <th>活动结束时间</th>
                                 <th>活动内容</th>
@@ -78,8 +79,9 @@
         {{#each this}}
         <tr>
             <td>{{name}}</td>
-            <td>{{startdate}}</td>
-            <td>{{enddate}}</td>
+            <td>{{eventtypestr}}</td>
+            <td>{{start}}</td>
+            <td>{{end}}</td>
             <td>{{contents}}</td>
             <td><a href="@Url.Action("PromotionCouponsList", "Promotion")">生成优惠券</a></td>
         </tr>

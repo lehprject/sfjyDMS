@@ -12,17 +12,19 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class chk_info
+    public partial class chk_demo_value
     {
         public int pkid { get; set; }
-        public int medical_id { get; set; }
-        public int patient_id { get; set; }
-        public int chk_type_id { get; set; }
         public int chk_demo_id { get; set; }
-        public string chk_result { get; set; }
-        public int fileid { get; set; }
-        public int chk_demo_valueid { get; set; }
-        public System.DateTime createtime { get; set; }
-        public string createuser { get; set; }
+        public string chk_value1_min { get; set; }
+        public string chk_value1_max { get; set; }
+        public string chk_value1_remark { get; set; }
+        public string chk_value2_min { get; set; }
+        public string chk_value2_max { get; set; }
+        public string chk_value2_remark { get; set; }
+        public string gender { get; set; }
+        public int age_stage { get; set; }
+        public string chk_method { get; set; }
+        public string chk_sample { get; set; }
     }
 }
