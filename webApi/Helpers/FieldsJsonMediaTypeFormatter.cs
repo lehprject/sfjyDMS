@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq; 
-
+using System.Linq;  
 using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json;
-
+using Newtonsoft.Json; 
 using System.Net.Http.Formatting;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace webApi
 { 
 
-    #region 自定义JsonMediaTypeFormatter
+    /// <summary>
+    /// 继承JsonMediaTypeFormatter（WEB API 默认用作json序列化的类）
+    /// 查看当前请求的路由信息,是否包含{fields}
+    /// 如果包含,则只序列化{fields}包含的属性
+    /// 否则,走默认的机制
+    /// 
+    /// </summary>
     public class FieldsJsonMediaTypeFormatter : JsonMediaTypeFormatter
     {
 
@@ -21,8 +26,7 @@ namespace webApi
             private set;
         }
 
-        public override MediaTypeFormatter GetPerRequestFormatterInstance(Type type, HttpRequestMessage request,
-            System.Net.Http.Headers.MediaTypeHeaderValue mediaType)
+        public override MediaTypeFormatter GetPerRequestFormatterInstance(Type type, HttpRequestMessage request,MediaTypeHeaderValue mediaType)
         {
             //所需的对象属性
             var includingFields = request.GetRouteData().Values["fields"];
@@ -55,6 +59,6 @@ namespace webApi
 
         }
     }
-    #endregion
+ 
 
 }

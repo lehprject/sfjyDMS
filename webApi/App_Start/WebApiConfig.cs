@@ -21,15 +21,20 @@ namespace webApi
             //config.Formatters.Remove(config.Formatters.XmlFormatter); 
 
             //JSON 格式化
-            config.Formatters.Remove(config.Formatters.JsonFormatter);
+            config.Formatters.Remove(config.Formatters.JsonFormatter); 
+            var jsonFormatter = new FieldsJsonMediaTypeFormatter();
+
+            #region SerializerSettings
             var jsonResolve = new Share.IgnorableSerializerContractResolver();
             jsonResolve.Ignore(typeof(Model.md_user), "loginpwd");
             jsonResolve.Ignore(typeof(Model.dr_visit), "pkid");
-            var jsonFormatter = new FieldsJsonMediaTypeFormatter();
+
             jsonFormatter.SerializerSettings = new JsonSerializerSettings
             {
                 ContractResolver = jsonResolve,
-            }; ;
+            };
+            #endregion 
+
             config.Formatters.Add(jsonFormatter);
 
             //----------- Web API routes -----------
@@ -56,6 +61,8 @@ namespace webApi
             config.Routes.MapHttpRoute(
                 name: "ActionMethod",
                 //如果使用 "api/{controller}/{action}",则DefaultApi就被覆盖
+                //所以使用了"api/{controller}/action/{action}"
+                //{fields}:指定返回所需对象的属性,多个属性用","（逗号）隔开
                 routeTemplate: "api/{controller}/action/{action}/{fields}",
                 defaults: new { action = RouteParameter.Optional, fields = RouteParameter.Optional }
             );
