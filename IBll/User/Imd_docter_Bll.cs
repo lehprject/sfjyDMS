@@ -23,6 +23,8 @@ namespace IBll
 
         md_docter UpdateDocter(md_docter info, out string error);
 
+        bool UpdateChashdrawList(List<md_docter> list, out string error);
+
         #endregion
         #endregion
     }

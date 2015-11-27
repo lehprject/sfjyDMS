@@ -62,7 +62,7 @@
                     $cashdrawListContainer.html(html);
 
                     //分页
-                    var totalPages = Math.ceil(data.TotalRecord / 2);
+                    var totalPages = Math.ceil(data.TotalRecord / 20);
                     functions.initialPager($pager, totalPages, searchCashdraw)
                 };
             }
@@ -77,13 +77,7 @@
         var statu = $("#statu").val();
         var date1Input = $("#date1Input").val();
         var date2Input = $("#date2Input").val();
-        //$('#cashdrawpage').css("display", "none");
-        //$('#cashdrawpage2').css("display", "");
         var $pager2 = $('#cashdrawpage');
-        //var pagin = $(".pagination");
-        //pagin.remove();
-        //$('#cashdrawpage2').trigger('create');
-
         findCashdraw(1, date1Input, date2Input, statu, $pager2);
     });
 
@@ -106,7 +100,7 @@
                     $cashdrawListContainer.html(html);
 
                     //分页
-                    var totalPages2 = Math.ceil(data.TotalRecord / 2);
+                    var totalPages2 = Math.ceil(data.TotalRecord / 20);
                     functions.resetPager($pager2, totalPages2, findCashdraw)
                 };
             }
@@ -117,9 +111,7 @@
     $('#bulk').on("click", function () {
         var str = '';
         $("[name='select']:checked").each(function () {
-            //if ($(this).attr('checked')) {
             str += $(this).val() + ',';
-            //}
         });
 
         var statu = $("#statu").val();

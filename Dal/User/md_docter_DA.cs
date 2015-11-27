@@ -52,6 +52,25 @@ namespace Dal
             }
         }
 
+        public bool UpdateChashdrawList(List<md_docter> list, out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                foreach (var item in list)
+                {
+                    db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                }
+                db.SaveChanges();
+                return true;
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                error = Share.BaseTool.FormatExceptionMessage(ex);
+                return false;
+            }
+        }
+
         #endregion
     }
 }

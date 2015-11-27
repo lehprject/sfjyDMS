@@ -93,6 +93,21 @@ namespace Bll
             }
         }
 
+        public bool UpdateChashdrawList(List<md_docter> list, out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                md_docter_DA da = new md_docter_DA();
+                return da.UpdateChashdrawList(list, out error);
+            }
+            catch (Exception ex)
+            {
+                error = "修改失败";
+                return false;
+            }
+        }
+
         #endregion
         #endregion
     }

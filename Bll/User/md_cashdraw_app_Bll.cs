@@ -32,7 +32,7 @@ namespace Bll
             }
         }
 
-        public List<md_cashdraw_app> GetCashdrawByIds(List<int> ids)
+        public List<md_cashdraw_app> GetCashdrawByIds(string ids)
         {
             return new md_cashdraw_app_DA().GetCashdrawByIds(ids);
         }
@@ -79,6 +79,27 @@ namespace Bll
             {
                 error = Share.BaseTool.FormatExceptionMessage(ex);
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// 更新提现申请集合
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public bool UpdateChashdrawList(List<md_cashdraw_app> list,out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                md_cashdraw_app_DA da = new md_cashdraw_app_DA();
+                return da.UpdateChashdrawList(list, out error);
+            }
+            catch (Exception ex)
+            {
+                error = "修改失败";
+                return false;
             }
         }
 

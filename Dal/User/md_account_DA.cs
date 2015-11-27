@@ -29,6 +29,24 @@ namespace Dal
             }
 
         }
+        public bool CreateAccountList(List< md_dr_account> list, out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                foreach (var item in list)
+                {
+                    db.md_dr_account.Add(item);
+                }
+                db.SaveChanges();
+                return true;
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                error = Share.BaseTool.FormatExceptionMessage(ex);
+                return false;
+            }
+        }
         #endregion
     }
 }

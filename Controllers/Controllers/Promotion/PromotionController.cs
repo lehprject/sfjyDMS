@@ -318,6 +318,7 @@ namespace Controllers
                 foreach (var item in resultlist)
                 {
                     item.statusstr = Enum.GetName(typeof(Model.ConfigClass.CouponsStatus), item.use_status);
+                    item.businesstypestr =item.business_type == 0?null: Enum.GetName(typeof(Model.ConfigClass.CouponsStatus), item.business_type);
                 }
                 PagingResponse<promotion_coupons_detail> pagingResponse = new PagingResponse<promotion_coupons_detail>();
                 pagingResponse.TotalRecord = record;

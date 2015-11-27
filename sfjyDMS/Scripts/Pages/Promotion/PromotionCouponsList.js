@@ -40,7 +40,7 @@
     var source1 = Handlebars.compile(template1);
 
     var pageIndex = 1;
-
+    var couponsid = 0;
 
     //--------------获取优惠券明细函数列表-----------
     var findDetail = function (pageindex, coupons_id, $pager) {
@@ -48,7 +48,7 @@
             url: "/Promotion/SearchPromotionCouponsDetail",
             type: 'GET',
             data: {
-                coupons_id: coupons_id,
+                coupons_id: couponsid,
                 pageIndex: pageindex,
             },
             success: function (data) {
@@ -98,7 +98,7 @@
                     $('#tbList button[value=selecct]').on('click', function () {
                         if (event.target == this) {
                             $button = $(this);
-                            var couponsid = $button.attr('data-orderid');
+                            couponsid = $button.attr('data-orderid');
 
                             $('#detaildiv').css("display", "");//明细列表
 
@@ -160,7 +160,7 @@
                     $('#tbList button[value=selecct]').on('click', function () {
                         if (event.target == this) {
                             $button = $(this);
-                            var couponsid = $button.attr('data-orderid');
+                            couponsid = $button.attr('data-orderid');
 
                             $('#detaildiv').css("display", "");//明细列表
 

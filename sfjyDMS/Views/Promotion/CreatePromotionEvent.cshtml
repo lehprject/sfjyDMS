@@ -42,7 +42,7 @@
         <tr>
             <td>活动说明</td>
             <td>
-                <textarea id="content" name="content" class="form-control" data-val="true" data-val-required="请填写内容."></textarea>
+                <textarea id="content" name="content" class="form-control" data-val="true" wrap="hard"  data-val-required="请填写内容."></textarea>
                 @*<input type="text" id="content" name="content" class="form-control" data-val="true" data-val-required="请填写内容." />*@
                 <span data-valmsg-for="content" data-valmsg-replace="true" style="color: red"></span>
             </td>
@@ -50,7 +50,7 @@
             <td>活动类型</td>
             <td>
                 <select id="status" name="status" class="form-control" style="width: 100%; display: inline">
-                    <option></option>
+                    <option>请选择</option>
                 </select>
             </td>
             <td></td>
@@ -75,6 +75,7 @@
     <button id="add" name="action" type="button" class="btn btn-primary btn-lg btnSave" value="save">添加条件</button>
     <div class="col-lg-offset-5 col-lg-12">
         <button id="btnSave" name="action" type="submit" class="btn btn-primary btn-lg btnSave" value="save">保存</button>
+        <a href="@Url.Action("PromotionEventList", "Promotion")"  name="action" class="btn btn-primary btn-lg btnSave">返回</a>
     </div>
 </form>
 @section scripts{

@@ -59,7 +59,7 @@ namespace Controllers
             return null;
         }
 
-        public JsonResult CashdrawList1(DateTime? date1, DateTime? date2, int? statu=1, int? pageIndex = 1)
+        public JsonResult CashdrawList1(DateTime? date1, DateTime? date2, int? statu = 1, int? pageIndex = 1)
         {
             if (pageIndex <= 1)
                 pageIndex = 1;
@@ -71,10 +71,10 @@ namespace Controllers
 
             string error = string.Empty;
             int record = 0;
-            List<md_cashdraw_app> resultlist = new md_cashdraw_app_Bll().SearchCashdrawList(1, date1, date2, null, null, null, statu.Value, null, null, pageIndex.Value, 2,out record, out error);
+            List<md_cashdraw_app> resultlist = new md_cashdraw_app_Bll().SearchCashdrawList(1, date1, date2, null, null, null, statu.Value, null, null, pageIndex.Value, 2, out record, out error);
             if (resultlist != null)
             {
-                foreach(var item in resultlist)
+                foreach (var item in resultlist)
                 {
                     item.apptime = item.app_time.ToString("yyyy - MM - dd");
                     item._optime = item.optime.ToString("yyyy - MM - dd");
@@ -97,53 +97,51 @@ namespace Controllers
 
         public ActionResult UpdateCashdrawList(string idstr)
         {
-
-            //idstr = "1,2";
-            var ids = new List<int>();
-
-            if (!string.IsNullOrEmpty(idstr))   ///批注By Andy:此处判断，如果idstr为空的情况，代码会如何执行？
+            if (!string.IsNullOrEmpty(idstr))
             {
-                if (idstr.Contains(','))
+                var str = idstr.TrimEnd(',');
+                md_cashdraw_app_Bll cashdrawBll = new md_cashdraw_app_Bll();
+                md_docter_Bll doctorBll = new md_docter_Bll();
+                List<md_cashdraw_app> cashdrawlist = cashdrawBll.GetCashdrawByIds(str);
+                string error = string.Empty;
+                foreach (var item in cashdrawlist)
                 {
-                    var values = idstr.Split(',');
-                    foreach (var item in values)
+                    item.opstatus = (int)Model.ConfigClass.CashdrawStatus.已处理;  ///批注By Andy:更新一次就调用一次数据库连接，对数据库性能有影响，建议传入需要更新的ids,用update语句一次执行
+                }
+                cashdrawBll.UpdateChashdrawList(cashdrawlist, out error);
+
+                var doctorids = cashdrawlist.Select(m => m.drid).Distinct().ToList();
+                var doctorlist = doctorBll.GetDoctorByIds(doctorids);
+
+                List<md_docter> doctors = new List<md_docter>();
+                List<md_dr_account> dr_accountlist = new List<md_dr_account>();
+                foreach (var item in doctorlist)
+                {
+                    var list = cashdrawlist.Where(m => m.drid == item.pkid.ToString()).ToList();
+                    if (list.Any())
                     {
-                        ids.Add(BaseTool.GetIntNumber(item));
+                        var money = list.Select(m => m.drawmoney).Sum();
+                        item.current_income -= money;
+                        doctors.Add(item);
+                        md_dr_account accountinfo = new md_dr_account();
+                        accountinfo.Initial();
+                        accountinfo.dr_id = item.pkid;
+                        accountinfo.income_type = 0;
+                        accountinfo.money = money;
+                        dr_accountlist.Add(accountinfo);
                     }
                 }
-            }
-            md_cashdraw_app_Bll cashdrawBll = new md_cashdraw_app_Bll();
-            md_docter_Bll doctorBll = new md_docter_Bll();
-            List<md_cashdraw_app> cashdrawlist = cashdrawBll.GetCashdrawByIds(ids);
-            string error = string.Empty;
-            foreach (var item in cashdrawlist)
-            {
-                item.opstatus = (int)Model.ConfigClass.CashdrawStatus.已处理;
-                cashdrawBll.UpdateCashdraw(item, out error);   ///批注By Andy:更新一次就调用一次数据库连接，对数据库性能有影响，建议传入需要更新的ids,用update语句一次执行
-            }
-
-            var doctorids = cashdrawlist.Select(m => m.drid).Distinct().ToList();
-            var doctorlist = doctorBll.GetDoctorByIds(doctorids);
-
-            foreach (var item in doctorlist)
-            {
-                var list = cashdrawlist.Where(m => m.drid == item.pkid.ToString()).ToList();
-                if (list.Any())
+                if (doctors.Any())
                 {
-                    var money = list.Select(m => m.drawmoney).Sum();
-                    item.current_income -= money;
-                    doctorBll.UpdateDocter(item, out error);
-
-                    md_dr_account accountinfo = new md_dr_account();
-                    accountinfo.Initial();
-                    accountinfo.dr_id = item.pkid;
-                    accountinfo.income_type = 0;
-                    accountinfo.money = money;
-
-                    md_account_Bll accountBll = new md_account_Bll();
-                    accountBll.CreateAccount(accountinfo,out error);
+                    doctorBll.UpdateChashdrawList(doctors, out error);
                 }
+                if (dr_accountlist.Any())
+                {
+                    new md_account_Bll().CreateAccountList(dr_accountlist, out error);
+                }
+
             }
+
             return View();
         }
 

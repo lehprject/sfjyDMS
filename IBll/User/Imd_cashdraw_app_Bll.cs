@@ -13,7 +13,7 @@ namespace IBll
         #region 查询
         List<md_cashdraw_app> SearchCashdrawList(int drid, DateTime? app_time1, DateTime? app_time2, string opuser, DateTime? optime1, DateTime? optime2, int opstatus, orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out int record, out string error);
 
-        List<md_cashdraw_app> GetCashdrawByIds(List<int> ids);
+        List<md_cashdraw_app> GetCashdrawByIds(string ids);
 
         #endregion
 
@@ -23,6 +23,8 @@ namespace IBll
 
         #region 修改
         md_cashdraw_app UpdateCashdraw(md_cashdraw_app info, out string error);
+
+        bool UpdateChashdrawList(List<md_cashdraw_app> list, out string error);
 
         #endregion
     }

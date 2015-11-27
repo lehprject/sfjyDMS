@@ -893,7 +893,7 @@ namespace Share
         {
             string NumberStr = "";
             var random = new Random((int)DateTime.Now.Ticks);
-            const string textArray = "023456789";
+            const string textArray = "0123456789";
 
             //生成验证码
             for (var i = 0; i < length; i++)

@@ -37,6 +37,29 @@ namespace Bll
             }
 
         }
+
+        /// <summary>
+        /// 添加医生明细信息
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public bool CreateAccountList(List<md_dr_account> list, out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                md_account_DA da = new md_account_DA();
+                da.CreateAccountList(list, out error);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                error += Share.BaseTool.FormatExceptionMessage(ex);
+                return false;
+            }
+
+        }
         #endregion
     }
 }

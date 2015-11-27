@@ -113,13 +113,13 @@ namespace Dal
             }
         }
 
-        public List<md_cashdraw_app> GetCashdrawByIds(List<int> ids)
+        public List<md_cashdraw_app> GetCashdrawByIds(string ids)
         {
-            string id = string.Join(",", ids.Select(t => t));
+            //string id = string.Join(",", ids.Select(t => t));
             string sql = @"SELECT *                       
                             FROM md_cashdraw_app                             
                             where FIND_IN_SET(pkid,@ids)";
-            List<md_cashdraw_app> resultlist = sqlHelper.ExecuteObjects<md_cashdraw_app>(sql, new MySqlParameter("ids", id));
+            List<md_cashdraw_app> resultlist = sqlHelper.ExecuteObjects<md_cashdraw_app>(sql, new MySqlParameter("ids", ids));
             return resultlist;
         }
 
@@ -159,6 +159,25 @@ namespace Dal
             {
                 error = Share.BaseTool.FormatExceptionMessage(ex);
                 return null;
+            }
+        }
+
+        public bool UpdateChashdrawList(List<md_cashdraw_app> list,out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                foreach (var item in list)
+                {
+                    db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                }
+                db.SaveChanges();
+                return true;
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                error = Share.BaseTool.FormatExceptionMessage(ex);
+                return false;
             }
         }
 

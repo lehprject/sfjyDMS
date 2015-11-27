@@ -27,5 +27,10 @@ namespace Model
         /// 状态
         /// </summary>
         public string statusstr { get; set; }
+
+        /// <summary>
+        /// 业务类型
+        /// </summary>
+        public string businesstypestr { get; set; }
     }
 }
