@@ -52,6 +52,7 @@
                         <thead>
                             <tr>
                                 <th>活动名称</th>
+                                <th>活动类型</th>
                                 <th>活动开始时间</th>
                                 <th>活动结束时间</th>
                                 <th>活动内容</th>
@@ -78,8 +79,9 @@
         {{#each this}}
         <tr>
             <td>{{name}}</td>
-            <td>{{startdate}}</td>
-            <td>{{enddate}}</td>
+            <td>{{eventtypestr}}</td>
+            <td>{{start}}</td>
+            <td>{{end}}</td>
             <td>{{contents}}</td>
             <td><a href="@Url.Action("PromotionCouponsList", "Promotion")">生成优惠券</a></td>
         </tr>

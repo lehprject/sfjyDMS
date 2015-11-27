@@ -17,5 +17,10 @@ namespace Model
         /// 活动结束时间
         /// </summary>
         public string endtime { get; set; }
+
+        /// <summary>
+        /// 活动类型
+        /// </summary>
+        public string eventtypestr { get; set; }
     }
 }

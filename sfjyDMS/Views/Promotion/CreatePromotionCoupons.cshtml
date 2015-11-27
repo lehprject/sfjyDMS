@@ -77,7 +77,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input id="value1" name="value1" class="form-control"/>
+                                <input id="value1" name="value1" class="form-control" />
                             </td>
                             <td><button id="btnSave" name="action" type="submit" class="btn btn-primary btn-lg btnSave" value="save">生成</button></td>
                         </tr>
@@ -86,7 +86,7 @@
             </div>
         </div>
     </div>
-    <div id="div1" class="row" >
+    <div id="div1" class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -99,7 +99,7 @@
                                     <div>生成进度：@detaillist.Count 张</div>
                                     foreach (var item in detaillist)
                                     {
-                                        <div>卷编码 @item.pkid</div>
+                                        <div>卷编码 @item.code</div>
                                     }
                                 }
                             </td>
@@ -126,7 +126,7 @@
 
             //if(list!=null||list!=undefined){
             //    alert("fdfd");
-                $("#div1").css("display","");
+            $("#div1").css("display","");
             //}
         })();
     </script>

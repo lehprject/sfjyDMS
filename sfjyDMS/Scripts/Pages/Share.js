@@ -1,16 +1,16 @@
 ﻿//全局变量
 var gvar = gvar || {};
-gvar.urlprefix = '/wap';
+gvar.urlprefix = '';
 
 (function ($) {
-    var oldAjax = $.ajax;
-    $.ajax = function () {
-        var url = arguments[0].url;
-        if (url != null && url != undefined && url[0] == '/') {
-            arguments[0].url = gvar.urlprefix + arguments[0].url;
-        }
-        oldAjax.call(this, arguments);
-    }
+    //var oldAjax = $.ajax;
+    //$.ajax = function () {
+    //    var url = arguments[0].url;
+    //    if (url != null && url != undefined && url[0] == '/') {
+    //        arguments[0].url = gvar.urlprefix + arguments[0].url;
+    //    }
+    //    oldAjax.call(this, arguments);
+    //}
 })(jQuery);
 
 (function () {

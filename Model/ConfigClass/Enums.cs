@@ -92,5 +92,23 @@ namespace Model.ConfigClass
         小于 = 3,
         小于等于 = 4,
     }
+
+    /// <summary>
+    /// 活动类型
+    /// </summary>
+    public enum PromotionEventType
+    {
+        内部活动 = 1,
+        外部活动 = 2,
+    }
+
+    /// <summary>
+    /// 优惠券业务类型
+    /// </summary>
+    public enum CouponsBusinessType
+    {
+        在线咨询 = 1,
+        付费电话 = 2,
+    }
     #endregion
 }

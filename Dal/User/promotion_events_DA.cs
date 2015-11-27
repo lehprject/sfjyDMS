@@ -250,18 +250,12 @@ namespace Dal
 
                 if (value > 0)
                 {
-                    conditionSb.Append(" AND value = @value ");
-                    paraList.Add(new MySqlParameter("value", value));
+                    conditionSb.Append(" AND `values` = @values ");
+                    paraList.Add(new MySqlParameter("values", value));
                 }
 
                 conditionSb.Append(" AND issue_status = @issue_status ");
                 paraList.Add(new MySqlParameter("issue_status", issue_status));
-
-                if (!string.IsNullOrEmpty(name))
-                {
-                    conditionSb.Append(" AND name LIKE CONCAT('%', @name, '%') ");
-                    paraList.Add(new MySqlParameter("name", name));
-                }
 
                 if (startdate1.HasValue)
                 {

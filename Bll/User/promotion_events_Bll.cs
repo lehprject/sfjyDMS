@@ -99,7 +99,7 @@ namespace Bll
         /// <param name="record"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public List<promotion_coupons> GetPromotionCouponsList(string name, decimal value, int issue_status, DateTime? startdate1, DateTime? startdate2, DateTime? enddate1, DateTime? enddate2,
+        public List<promotion_coupons> GetPromotionCouponsList(string name, int value, int issue_status, DateTime? startdate1, DateTime? startdate2, DateTime? enddate1, DateTime? enddate2,
             orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out int record, out string error)
         {
             error = string.Empty;

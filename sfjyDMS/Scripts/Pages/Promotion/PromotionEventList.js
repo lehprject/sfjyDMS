@@ -68,17 +68,19 @@
         $.ajax({
             url: "/Promotion/SearchPromotionList",
             type: 'GET',
+            contentType: 'application/x-www-form-urlencoded',
             data: {
                 pageIndex: pageindex,
             },
             success: function (data) {
                 if (data && data.ResultList) {
+                    var records = data.ResultList;
 
-                    data.ResultList.each(function () {
-                        $(this).startdate = functions.datetimetostring($(this).startdate);
+                    $.each(records, function (name, value) {
+                        value.start = functions.datetimetostring(value.startdate);
+                        value.end = functions.datetimetostring(value.enddate);
                     });
 
-                    var records = data.ResultList;
                     var html = source(records);
                     $cashdrawListContainer.html(html);
 
@@ -97,11 +99,11 @@
         var name = $('#activity').val();
         var date1Input = $("#date1Input").val();
         var date2Input = $("#date2Input").val();
-        findCashdraw(1, date1Input, date2Input, name, $pager);
+        findCashdraw(1, name, date1Input, date2Input, $pager);
     });
 
 
-    var findCashdraw = function (pageindex, date1, date2, statu, $pager2) {
+    var findCashdraw = function (pageindex,name, date1, date2, $pager2) {
         $.ajax({
             url: "/Promotion/PostSearchPromotionList",
             type: 'GET',
@@ -109,16 +111,15 @@
                 name: name,
                 date1: date1,
                 date2: date2,
-                statu: statu,
                 pageIndex: pageindex,
             },
             success: function (data) {
                 if (data && data.ResultList) {
- 
-
-                    var records = data.ResultList;
-                    
-                    
+                    var records = data.ResultList;                    
+                    $.each(records, function (name, value) {
+                        value.start = functions.datetimetostring(value.startdate);
+                        value.end = functions.datetimetostring(value.enddate);
+                    });
 
                     var html = source(records);
                     $cashdrawListContainer.html(html);

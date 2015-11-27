@@ -14,64 +14,68 @@
             @ViewBag.ErrorMessage
         </div>
     }
-    
-            <table class="table table-bordered">
-                <tr>
-                    <td colspan="6">活动信息</td>
-                </tr>
-                <tr>
-                    <td>活动名称</td>
-                    <td>
-                        <input id="name" name="name" class="form-control" data-val="true" data-val-required="请填写名称." />
-                        <span data-valmsg-for="name" data-valmsg-replace="true" style="color: red"></span>
-                    </td>
 
-                    <td>活动日期</td>
-                    <td>
-                        <div id="date1Container">
-                            <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" />
-                        </div>
-                    </td>
-                    <td>结束时间</td>
-                    <td>
-                        <div id="date2Container">
-                            <input type="text" class="form-control" id="date2Input" name="date2" placeholder="" />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>活动说明</td>
-                    <td>
-                        <input id="content" name="content" class="form-control" data-val="true" data-val-required="请填写内容." multiple />
-                        <span data-valmsg-for="content" data-valmsg-replace="true" style="color: red"></span>
-                    </td>
+    <table class="table table-bordered">
+        <tr>
+            <td colspan="6">活动信息</td>
+        </tr>
+        <tr>
+            <td>活动名称</td>
+            <td>
+                <input id="name" name="name" class="form-control" data-val="true" data-val-required="请填写名称." />
+                <span data-valmsg-for="name" data-valmsg-replace="true" style="color: red"></span>
+            </td>
 
-                    <td></td>
-                    <td>                     
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-            <table id="tab1" class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td colspan="2">活动参加条件</td>
-                    </tr>
-                    <tr>
-                        <th>ID</th>
-                        <th>条件</th>
-                    </tr>
-                </thead>
-                <tr>
-                    <td style="width:20%">1</td>
-                    <td><input type="text" class="form-control" name="remark" placeholder="" /></td>
-                </tr>               
-            </table>
-            <button id="add" name="action" type="button" class="btn btn-primary btn-lg btnSave" value="save">添加条件</button>
-            <div class="col-lg-offset-5 col-lg-12">
-                <button id="btnSave" name="action" type="submit" class="btn btn-primary btn-lg btnSave" value="save">保存</button>
-            </div>
+            <td>活动日期</td>
+            <td>
+                <div id="date1Container">
+                    <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" />
+                </div>
+            </td>
+            <td>结束时间</td>
+            <td>
+                <div id="date2Container">
+                    <input type="text" class="form-control" id="date2Input" name="date2" placeholder="" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>活动说明</td>
+            <td>
+                <textarea id="content" name="content" class="form-control" data-val="true" data-val-required="请填写内容."></textarea>
+                @*<input type="text" id="content" name="content" class="form-control" data-val="true" data-val-required="请填写内容." />*@
+                <span data-valmsg-for="content" data-valmsg-replace="true" style="color: red"></span>
+            </td>
+
+            <td>活动类型</td>
+            <td>
+                <select id="status" name="status" class="form-control" style="width: 100%; display: inline">
+                    <option></option>
+                </select>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <table id="tab1" class="table table-bordered">
+        <thead>
+            <tr>
+                <td colspan="2">活动参加条件</td>
+            </tr>
+            <tr>
+                <th>ID</th>
+                <th>条件</th>
+            </tr>
+        </thead>
+        <tr>
+            <td style="width:20%">1</td>
+            <td><input type="text" class="form-control" name="remark" placeholder="" /></td>
+        </tr>
+    </table>
+    <button id="add" name="action" type="button" class="btn btn-primary btn-lg btnSave" value="save">添加条件</button>
+    <div class="col-lg-offset-5 col-lg-12">
+        <button id="btnSave" name="action" type="submit" class="btn btn-primary btn-lg btnSave" value="save">保存</button>
+    </div>
 </form>
 @section scripts{
     <script src="../Scripts/datepicker/bootstrap-datepicker.js"></script>
@@ -80,10 +84,19 @@
     <script src="../Scripts/validation/jquery.validate.unobtrusive.js"></script>
     <script src="../Scripts/validation/showError.js"></script>
 
-
+    <script type="text/javascript">
+        (function () {
+            var statusData= @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.eventtype));
+            if(statusData!=null){
+                for (var n = 0; n < statusData.length; n++) {
+                    $('#status').append("<option value='" + statusData[n].Value + "'>" + statusData[n].Text + "</option>");
+                }
+            }
+        })();
+    </script>
     <script src="../Scripts/Pages/Share.js"></script>
     <script src="../Scripts/Pages/Promotion/PromotionEventList.js"></script>
-<script src="../Scripts/Pages/Promotion/createPromotionEvent.js"></script>
+    <script src="../Scripts/Pages/Promotion/createPromotionEvent.js"></script>
 }
 
 
