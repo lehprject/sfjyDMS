@@ -29,7 +29,7 @@ namespace Dal
                 List<MySqlParameter> paraList = new List<MySqlParameter>();
 
                 #region 条件
-                if(!string.IsNullOrEmpty(name))
+                if (!string.IsNullOrEmpty(name))
                 {
                     conditionSb.Append(" AND name LIKE CONCAT('%', @name, '%') ");
                     paraList.Add(new MySqlParameter("name", name));
@@ -170,22 +170,27 @@ namespace Dal
                     #region 优惠券明细
                     if (detailList != null)
                     {
+                        string[] arrNum = new string[detailList.Count];
+                        int i = 0;
                         foreach (var item in detailList)
-                        {
+                        {                      
                             if (item.pkid == 0)
-                            {
+                            {                            
+                                string tmp = string.Empty;
+                                tmp = Share.BaseTool.Random(3); //随机取数 
+                                tmp = BaseTool.getRandomNum(arrNum, tmp, 3); //取出值赋到数组中 
+                                arrNum[i] = tmp;
+
                                 item.coupons_id = info.pkid;
-                                item.code = "SFJY" + DateTime.Now.ToString("yyyyMMdd") + Share.BaseTool.Random(3);
+                                item.code = "SFJY" + DateTime.Now.ToString("yyyyMMdd") + tmp;
                                 db.promotion_coupons_detail.Add(item);
+                                i++;
                             }
                             else
                             {
                                 db.Entry(item).State = System.Data.Entity.EntityState.Modified;
                             }
                         }
-                        //DataTable table = Share.BaseTool.ListToDataTable<promotion_coupons_detail>(detailList);
-                        //table.TableName = "promotion_coupons_detail";
-                        //var count=sqlHelper.BulkInsert(table);
                         db.SaveChanges();
                     }
                     #endregion
