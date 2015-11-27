@@ -235,8 +235,8 @@ namespace Dal
             record = 0;
             try
             {
-                string selectSql = "select * from promotion_coupons where true";
-                string countSql = "select * from promotion_coupons where true";
+                string selectSql = "select c.values as valuess,c.name as name,c.pkid as pkid,p.name as events,c.startdate as startdate,c.enddate as enddate,issue_num from promotion_coupons as c left join promotion_events as p on c.events_id = p.pkid where true ";
+                string countSql = "select c.values as valuess,c.name as name,c.pkid as pkid,p.name as events,c.startdate as startdate,c.enddate as enddate,issue_num from promotion_coupons as c left join promotion_events as p on c.events_id = p.pkid where true ";
                 StringBuilder conditionSb = new System.Text.StringBuilder();
 
                 List<MySqlParameter> paraList = new List<MySqlParameter>();
@@ -244,7 +244,7 @@ namespace Dal
                 #region 条件
                 if (!string.IsNullOrEmpty(name))
                 {
-                    conditionSb.Append(" AND name LIKE CONCAT('%', @name, '%') ");
+                    conditionSb.Append(" AND c.name LIKE CONCAT('%', @name, '%') ");
                     paraList.Add(new MySqlParameter("name", name));
                 }
 
@@ -288,7 +288,7 @@ namespace Dal
                 if (!string.IsNullOrEmpty(orderbyCol) && orderby.HasValue)
                     orderbyStr = orderbyFormat.getSortStr(orderby.Value, orderbyCol);
                 else
-                    orderbyStr = " order by pkid desc";
+                    orderbyStr = " order by c.pkid desc";
 
                 countSql += conditionSb.ToString();
                 countSql = string.Format("SELECT COUNT(*) FROM ({0}) AS t", countSql);
