@@ -4,8 +4,7 @@
  */
 (function () {
     //short cut
-    var functions = Page.functions
-    ;
+    var functions = Page.functions;
     //-------日期-------
     functions.initialDatePicker($('#date1Container input'), $('#date2Container input'));
 })();
@@ -18,19 +17,12 @@
 
 
     $("[name='select']:checkbox").on('click', function () {
-        //$(this).prop("checked",true);;
         $(this).prop('checked', true);
     });
 
 })();
 
 (function () {
-    //short cut
-    var cacheData = Page.cacheData,
-        jqueryMap = Page.jqueryMap,
-        varData = Page.varData,
-        viewModel = Page.viewModel;
-
 
     //--------------获取提现申请列表----------------
 
@@ -38,17 +30,12 @@
     var $cashdrawListContainer = $('#cashdrawListContainer');
 
     var functions = Page.functions;
-    jqueryMap.$cashdrawListContainer = $cashdrawListContainer;
 
     //模板
     var template = $('#cashdrawTemplate').html();
     var source = Handlebars.compile(template);
 
-    var pageIndex = 1;
-    var pageSize = 20;
-    var first = 0;
-
-    var searchCashdraw = function (pageindex, pagesize) {
+    var searchCashdraw = function (pageindex) {
         $.ajax({
             url: "/Doctor/Cashdraws",
             type: 'GET',
@@ -58,6 +45,13 @@
             success: function (data) {
                 if (data && data.ResultList) {
                     var records = data.ResultList;
+
+                    $.each(records, function (name, value) {
+                        value.apptime = functions.datetimetostring(value.app_time);
+                        value._optime = functions.datetimetostring(value.optime);
+                    });
+
+
                     var html = source(records);
                     $cashdrawListContainer.html(html);
 
@@ -68,12 +62,11 @@
             }
         });
     }
-    searchCashdraw(1, pageSize);
+    searchCashdraw(1);
 
     //查询列表异步分页 
 
     $('#action').on("click", function () {
-        first = 1;
         var statu = $("#statu").val();
         var date1Input = $("#date1Input").val();
         var date2Input = $("#date2Input").val();
@@ -107,7 +100,7 @@
         });
     }
 
-
+    //批量处理提现申请
     $('#bulk').on("click", function () {
         var str = '';
         $("[name='select']:checked").each(function () {

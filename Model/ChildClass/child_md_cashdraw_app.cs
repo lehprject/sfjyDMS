@@ -23,14 +23,5 @@ namespace Model
         /// </summary>
         public string bank { get; set; }
 
-        /// <summary>
-        /// 申请时间
-        /// </summary>
-        public string apptime { get; set; }
-
-        /// <summary>
-        /// 处理时间
-        /// </summary>
-        public string _optime { get; set; }
     }
 }

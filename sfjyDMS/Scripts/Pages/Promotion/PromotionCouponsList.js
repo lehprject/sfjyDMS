@@ -19,31 +19,26 @@
 
 (function () {
     //short cut
-
-    //--------------获取优惠券列表-----------
+    var functions = Page.functions;
 
     var $pager = $('#couponspage');
     var $couposonListContainer = $('#couponsListContainer');
 
-    var functions = Page.functions;
-
-    //模板
+    //优惠券模板
     var template = $('#couponsTemplate').html();
     var source = Handlebars.compile(template);
 
-    //--------------获取优惠券明细列表-----------
     var $pager1 = $('#detailpage');
     var $detailListContainer = $('#detailListContainer');
 
-    //模板
+    //优惠券明细模板
     var template1 = $('#detailTemplate').html();
     var source1 = Handlebars.compile(template1);
 
-    var pageIndex = 1;
     var couponsid = 0;
 
-    //--------------获取优惠券明细函数列表-----------
-    var findDetail = function (pageindex, coupons_id, $pager) {
+    //--------------获取优惠券明细列表-----------
+    var findDetail = function (pageindex, $pager) {
         $.ajax({
             url: "/Promotion/SearchPromotionCouponsDetail",
             type: 'GET',
@@ -102,7 +97,7 @@
 
                             $('#detaildiv').css("display", "");//明细列表
 
-                            findDetail(1, couponsid, $pager1);
+                            findDetail(1, $pager1);
 
                         }
                     });
@@ -164,7 +159,7 @@
 
                             $('#detaildiv').css("display", "");//明细列表
 
-                            findDetail(1, couponsid, $pager1);
+                            findDetail(1,$pager1);
 
                         }
                     });
@@ -172,9 +167,6 @@
             }
         });
     }
-
-
-    //--------------获取优惠券明细列表-----------
 
 })();
 
