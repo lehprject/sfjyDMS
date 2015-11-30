@@ -4,8 +4,7 @@
  */
 (function () {
     //short cut
-    var functions = Page.functions
-    ;
+    var functions = Page.functions;
     //-------日期-------
     functions.initialDatePicker($('#date1Container input'), $('#date2Container input'));
 })();
@@ -18,19 +17,12 @@
 
 
     $("[name='select']:checkbox").on('click', function () {
-        //$(this).prop("checked",true);;
         $(this).prop('checked', true);
     });
 
 })();
 
 (function () {
-    //short cut
-    var cacheData = Page.cacheData,
-        jqueryMap = Page.jqueryMap,
-        varData = Page.varData,
-        viewModel = Page.viewModel;
-
 
     //--------------获取提现申请列表----------------
 
@@ -38,7 +30,6 @@
     var $cashdrawListContainer = $('#cashdrawListContainer');
 
     var functions = Page.functions;
-    jqueryMap.$cashdrawListContainer = $cashdrawListContainer;
 
     //模板
     var template = $('#cashdrawTemplate').html();
@@ -73,7 +64,6 @@
     //查询列表异步分页 
 
     $('#action').on("click", function () {
-        first = 1;
         var statu = $("#statu").val();
         var date1Input = $("#date1Input").val();
         var date2Input = $("#date2Input").val();
@@ -107,7 +97,7 @@
         });
     }
 
-
+    //批量处理提现申请
     $('#bulk').on("click", function () {
         var str = '';
         $("[name='select']:checked").each(function () {

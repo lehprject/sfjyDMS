@@ -11,7 +11,6 @@
 })();
 
 (function () {
-    //点击全选触发  
     $("[name='select']:checkbox").on('click', function () {
         if (this.checked)
         {
