@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Doctor\DoctorController.cs" />
+    <Compile Include="Controllers\Patient\PatientMessageController.cs" />
     <Compile Include="Controllers\Promotion\PromotionController.cs" />
     <Compile Include="Controllers\User\UserController.cs" />
     <Compile Include="Helpers\RoleAuthorizationHelper.cs" />

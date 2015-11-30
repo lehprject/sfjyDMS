@@ -23,9 +23,17 @@ namespace IBll
         #region 查询
 
 
-        List<patient_message> SearchMessgaeList(
-             int patientid, int drid, int status, string contents,
+        List<patient_message> SearchMessgaeList(int hispital_id,
+             int patientid, int drid, int status, string contents, DateTime? createtime1, DateTime? createtime2,
              orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error);
+
+        #endregion
+
+        #endregion
+
+        #region  患者留言记录回复  patient_message_rcd
+        #region 添加
+        patient_message_rcd CreateMessageRcd(patient_message_rcd info, out string error);
 
         #endregion
 

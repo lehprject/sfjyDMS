@@ -16,7 +16,7 @@ namespace webApi.Controllers.Patient
         {
             patient_message_Bll messageBll = new patient_message_Bll();
             string error = string.Empty;
-            var resultList = messageBll.SearchMessgaeList(DoctorID,0,0,null,null,null,pageindex,PageSize,out error);
+            var resultList = messageBll.SearchMessgaeList(0,DoctorID,0,0,null,null,null,null,null,pageindex,PageSize,out error);
             return resultList;
         }
 
