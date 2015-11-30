@@ -291,6 +291,7 @@
     <Content Include="Scripts\Morris\raphael-min.js" />
     <Content Include="Scripts\Morris\raphael.js" />
     <Content Include="Scripts\Pages\doctor\cashrawList.js" />
+    <Content Include="Scripts\Pages\patient\PatientMessageList.js" />
     <Content Include="Scripts\Pages\Promotion\createPromotionCoupons.js" />
     <Content Include="Scripts\Pages\Promotion\createPromotionEvent.js" />
     <Content Include="Scripts\Pages\Promotion\PromotionCouponsList.js" />
