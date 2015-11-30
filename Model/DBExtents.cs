@@ -137,6 +137,21 @@ namespace Model
                     return;
                 }
             }
+
+            {
+                patient_message_rcd obj = vobj as patient_message_rcd;
+                if (obj != null)
+                {
+                    obj.pkid = 0;
+                    obj.msg_id = 0;
+                    obj.rcd_contents = string.Empty;
+                    obj.attach_file1 = string.Empty;
+                    obj.attach_file2 = string.Empty;
+                    obj.createtime = DateTime.Now;
+                    obj.createuser = string.Empty;
+                    return;
+                }
+            }
         }
         #endregion
     }

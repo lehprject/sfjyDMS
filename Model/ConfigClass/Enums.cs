@@ -110,5 +110,14 @@ namespace Model.ConfigClass
         在线咨询 = 1,
         付费电话 = 2,
     }
+
+    /// <summary>
+    /// 留言状态
+    /// </summary>
+    public enum MessageReplyType
+    {
+        未回复 = 0,
+        已回复 = 1,
+    }
     #endregion
 }

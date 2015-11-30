@@ -1,17 +1,106 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<link href="@Url.Content("~/Content/datepicker/bootstrap-datepicker3.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/select2/select2.css")" rel="stylesheet" type="text/css" />
+<form id="form1" class="form-inline">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table-condensed">
+                        <tr>
+                            <td>所属医院</td>
+                            <td>
+                                <select id="hospital" name="hospital" class="form-control" style="width: 100%; display: inline">
+                                    <option></option>
+                                </select>
+                            </td>
+                            <td>留言时间</td>
+                            <td>
+                                <div id="date1Container">
+                                    <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" />
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+                                </div>
+                            </td>
+                            <td>至</td>
+                            <td>
+                                <div id="date2Container">
+
+                                    <input type="text" class="form-control" id="date2Input" name="date2" placeholder="" />
+                                </div>
+                            </td>
+                            <td>处理状态</td>
+                            <td>
+                                <select id="status" name="status" class="form-control" style="width: 100%; display: inline">
+                                    <option></option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <button id="action" name="action" type="button" class="btn btn-primary" value="search">查询</button>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <table class="table table-striped" id="tbDetailList">
+                        <thead>
+                            <tr>
+                                <th>留言时间</th>
+                                <th>医生</th>
+                                <th>提交人</th>
+                                <th>处理状态</th>
+                                <th>摘要</th>
+                            </tr>
+                        </thead>
+                        <tbody id="promotionListContainer"></tbody>
+                    </table>
+                    <div class="row-fluid" id="promotionpage"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section scripts{
+    <script src="../Scripts/datepicker/bootstrap-datepicker.js"></script>
+    <script src="../Scripts/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="../Scripts/select2/select2.js"></script>
+    <script src="../Scripts/select2/select2-zh-CN.js"></script>
+    <script src="../Scripts/jquery.twbsPagination.js"></script>
+
+    <script src="../Scripts/handlebars-v3.0.3.js"></script>
+    <script id="eventTemplate" type="text/x-handlebars-template">
+        {{#each this}}
+        <tr>
+            <td>{{name}}</td>
+            <td>{{eventtypestr}}</td>
+            <td>{{start}}</td>
+            <td>{{end}}</td>
+            <td>{{contents}}</td>
+            <td><a href="@Url.Action("PromotionCouponsList", "Promotion")">生成优惠券</a></td>
+        </tr>
+        {{/each}}
+    </script>
+
+    <script type="text/javascript">
+    </script>
+
+    <script src="../Scripts/Pages/Share.js"></script>
+    <script src="../Scripts/Pages/Promotion/PromotionEventList.js"></script>
+}
+
+
+
+
+

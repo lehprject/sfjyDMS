@@ -1,17 +1,75 @@
-﻿@{
-    Layout = null;
+﻿@using Model;
+@model promotion_events
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<link href="@Url.Content("~/Content/datepicker/bootstrap-datepicker3.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/select2/select2.css")" rel="stylesheet" type="text/css" />
+<form id="form1" class="form-inline">
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div>
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    <table class="table table-bordered">
+        <tr>
+            <td>ID号</td>
+            <td ></td>
+        </tr>
+        <tr>
+            <td>提交时间</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>提交人</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>留言内容</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>回复内容</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button id="action" name="action" type="button" class="btn btn-primary" value="search">查询</button></td>
+        </tr>
+       
+    </table>
+    <button id="add" name="action" type="button" class="btn btn-primary btn-lg btnSave" value="save">添加条件</button>
+    <div class="col-lg-offset-5 col-lg-12">
+        <button id="btnSave" name="action" type="submit" class="btn btn-primary btn-lg btnSave" value="save">保存</button>
+        <a href="@Url.Action("PromotionEventList", "Promotion")" name="action" class="btn btn-primary btn-lg btnSave">返回</a>
     </div>
-</body>
-</html>
+</form>
+@section scripts{
+    <script src="../Scripts/datepicker/bootstrap-datepicker.js"></script>
+    <script src="../Scripts/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="../Scripts/validation/jquery.validate.js"></script>
+    <script src="../Scripts/validation/jquery.validate.unobtrusive.js"></script>
+    <script src="../Scripts/validation/showError.js"></script>
+
+    <script type="text/javascript">
+        (function () {
+            var statusData= @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.eventtype));
+            if(statusData!=null){
+                for (var n = 0; n < statusData.length; n++) {
+                    $('#status').append("<option value='" + statusData[n].Value + "'>" + statusData[n].Text + "</option>");
+                }
+            }
+        })();
+    </script>
+    <script src="../Scripts/Pages/Share.js"></script>
+    <script src="../Scripts/Pages/Promotion/PromotionEventList.js"></script>
+    <script src="../Scripts/Pages/Promotion/createPromotionEvent.js"></script>
+}
+
+
+
+
+
