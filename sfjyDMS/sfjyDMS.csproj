@@ -598,6 +598,8 @@
     <Content Include="Views\Promotion\CreatePromotionEvent.cshtml" />
     <Content Include="Views\Promotion\PromotionCouponsList.cshtml" />
     <Content Include="Views\Promotion\CreatePromotionCoupons.cshtml" />
+    <Content Include="Views\Patient\PatientMessageList.cshtml" />
+    <Content Include="Views\Patient\CreatePatientMessageRcd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

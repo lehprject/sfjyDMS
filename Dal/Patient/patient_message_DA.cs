@@ -40,8 +40,8 @@ namespace Dal
         #region 查询
 
 
-        public List<patient_message> SearchMessgaeList(
-             int patientid,int drid,int status,string contents,
+        public List<patient_message> SearchMessgaeList(int hispital_id,
+             int patientid, int drid, int status, string contents, DateTime? createtime1, DateTime? createtime2,
              orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
         {
             error = string.Empty;
@@ -49,7 +49,7 @@ namespace Dal
             {
                 #region Command
 
-                string selectSql = string.Format("select * from patient_message WHERE TRUE ");
+                string selectSql = string.Format("select p.createtime,d.name as doctor_name,i.name as patient_name,p.status,contents from patient_message p left join patient_info i on p.patientid =i.pkid left join md_docter d on p.drid=d.pkid left join md_hospital h on d.hispital_id=h.pkid WHERE TRUE ");
 
                 StringBuilder conditionSb = new System.Text.StringBuilder();
 
@@ -57,30 +57,48 @@ namespace Dal
                 #endregion
 
                 #region 搜索条件
+
+                if (hispital_id > 0)
+                {
+                    conditionSb.Append("AND h.pkid = @hispital_id");
+                    paraList.Add(new MySqlParameter("hispital_id", drid));
+                }
+
                 if (!string.IsNullOrEmpty(contents))
                 {
-                    conditionSb.Append(" AND contents like CONCAT('%', @contents  , '%') ");
+                    conditionSb.Append(" AND p.contents like CONCAT('%', @contents  , '%') ");
                     paraList.Add(new MySqlParameter("contents", contents));
                 }
 
             
                 if (drid > 0)
                 {
-                    conditionSb.Append("AND drid = @drid");
+                    conditionSb.Append("AND p.drid = @drid");
                     paraList.Add(new MySqlParameter("drid", drid));
                 }
                 if (patientid > 0)
                 {
-                    conditionSb.Append("AND patientid = @patientid");
+                    conditionSb.Append("AND p.patientid = @patientid");
                     paraList.Add(new MySqlParameter("patientid", patientid));
                 }
 
                 if (status > 0)
                 {
-                    conditionSb.Append("AND status = @status");
+                    conditionSb.Append("AND p.status = @status");
                     paraList.Add(new MySqlParameter("status", status));
                 }
- 
+
+                if (createtime1.HasValue)
+                {
+                    conditionSb.Append(" AND DATEDIFF(p.createtime,@createtime1) >= 0 ");
+                    paraList.Add(new MySqlParameter("createtime1", createtime1.Value));
+                }
+
+                if (createtime2.HasValue)
+                {
+                    conditionSb.Append(" AND DATEDIFF(p.createtime,@createtime2) <= 0 ");
+                    paraList.Add(new MySqlParameter("createtime2", createtime2.Value));
+                }
 
                 #endregion
 
@@ -89,7 +107,7 @@ namespace Dal
                 if (!string.IsNullOrEmpty(orderbyCol) && orderby.HasValue)
                     orderbyStr = orderbyFormat.getSortStr(orderby.Value, orderbyCol);
                 else
-                    orderbyStr = " order by pkid ";
+                    orderbyStr = " order by p.pkid ";
 
                 selectSql += conditionSb.ToString() + orderbyStr;
                 if (pageIndex > 0)
@@ -113,6 +131,28 @@ namespace Dal
             }
         }
 
+        #endregion
+
+        #endregion
+
+        #region  患者留言记录回复  patient_message_rcd
+        #region 添加
+        public patient_message_rcd CreateMessageRcd(patient_message_rcd info, out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                db.patient_message_rcd.Add(info);
+                db.SaveChanges();
+                return info;
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                error = Share.BaseTool.FormatExceptionMessage(ex);
+                return null;
+            }
+
+        }
         #endregion
 
         #endregion

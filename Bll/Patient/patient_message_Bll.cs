@@ -41,8 +41,8 @@ namespace Bll
         #region 查询
 
 
-        public List<patient_message> SearchMessgaeList(
-             int patientid, int drid, int status, string contents,
+        public List<patient_message> SearchMessgaeList(int hispital_id,
+             int patientid, int drid, int status, string contents, DateTime? createtime1, DateTime? createtime2,
              orderbyEnum? orderby, string orderbyCol, int pageIndex, int pageSize, out string error)
         {
             error = string.Empty;
@@ -50,7 +50,7 @@ namespace Bll
             {
                 patient_message_DA messageDa = new patient_message_DA();
 
-                var resultList = messageDa.SearchMessgaeList(patientid,drid,status,contents,
+                var resultList = messageDa.SearchMessgaeList(hispital_id,patientid, drid, status, contents,createtime1, createtime2,
                                                   orderby, orderbyCol, pageIndex, pageSize, out  error);
                 return resultList;
 
@@ -62,6 +62,29 @@ namespace Bll
             }
         }
 
+        #endregion
+
+        #endregion
+
+        #region  患者留言记录回复  patient_message_rcd
+        #region 添加
+        public patient_message_rcd CreateMessageRcd(patient_message_rcd info, out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                patient_message_DA messageDa = new patient_message_DA();
+                info = messageDa.CreateMessageRcd(info, out error);
+                return info;
+            }
+            catch (Exception ex)
+            {
+                error = Share.BaseTool.FormatExceptionMessage(ex);
+                return null;
+            }
+
+
+        }
         #endregion
 
         #endregion
