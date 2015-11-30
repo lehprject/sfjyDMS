@@ -251,6 +251,7 @@
       <DependentUpon>sfjyModel.edmx</DependentUpon>
       <LastGenOutput>sfjyModel.cs</LastGenOutput>
     </None>
+    <None Include="数据库更新说明.docx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
