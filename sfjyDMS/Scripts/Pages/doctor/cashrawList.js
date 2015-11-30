@@ -35,11 +35,7 @@
     var template = $('#cashdrawTemplate').html();
     var source = Handlebars.compile(template);
 
-    var pageIndex = 1;
-    var pageSize = 20;
-    var first = 0;
-
-    var searchCashdraw = function (pageindex, pagesize) {
+    var searchCashdraw = function (pageindex) {
         $.ajax({
             url: "/Doctor/Cashdraws",
             type: 'GET',
@@ -49,6 +45,13 @@
             success: function (data) {
                 if (data && data.ResultList) {
                     var records = data.ResultList;
+
+                    $.each(records, function (name, value) {
+                        value.apptime = functions.datetimetostring(value.app_time);
+                        value._optime = functions.datetimetostring(value.optime);
+                    });
+
+
                     var html = source(records);
                     $cashdrawListContainer.html(html);
 
@@ -59,7 +62,7 @@
             }
         });
     }
-    searchCashdraw(1, pageSize);
+    searchCashdraw(1);
 
     //查询列表异步分页 
 

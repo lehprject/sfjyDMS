@@ -45,11 +45,6 @@ namespace Controllers
             List<md_cashdraw_app> resultlist = new md_cashdraw_app_Bll().SearchCashdrawList(1, null, null, null, null, null, 0, null, null, pageIndex.Value, 2, out record, out error);
             if (resultlist != null)
             {
-                foreach (var item in resultlist)
-                {
-                    item.apptime = item.app_time.ToString("yyyy - MM - dd");
-                    item._optime = item.optime.ToString("yyyy - MM - dd");
-                }
                 PagingResponse<md_cashdraw_app> pagingResponse = new PagingResponse<md_cashdraw_app>();
                 pagingResponse.TotalRecord = record;
                 pagingResponse.ResultList = resultlist;
@@ -74,13 +69,6 @@ namespace Controllers
             List<md_cashdraw_app> resultlist = new md_cashdraw_app_Bll().SearchCashdrawList(1, date1, date2, null, null, null, statu.Value, null, null, pageIndex.Value, 2, out record, out error);
             if (resultlist != null)
             {
-                foreach (var item in resultlist)
-                {
-                    item.apptime = item.app_time.ToString("yyyy - MM - dd");
-                    item._optime = item.optime.ToString("yyyy - MM - dd");
-                }
-
-
                 PagingResponse<md_cashdraw_app> pagingResponse = new PagingResponse<md_cashdraw_app>();
                 pagingResponse.TotalRecord = record;
                 pagingResponse.ResultList = resultlist;
