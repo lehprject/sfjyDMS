@@ -252,6 +252,7 @@ namespace Controllers
             var activity = collection["activity"];
             var morethan = collection["morethan"];
             var value1 = collection["value1"];
+            var select = collection["select"];
 
             #region 优惠券
             promotion_coupons info = new promotion_coupons();
@@ -262,6 +263,7 @@ namespace Controllers
             info.startdate = BaseTool.GetDateTime(date1);
             info.enddate = BaseTool.GetDateTime(date2);
             info.events_id = BaseTool.GetIntNumber(activity);
+            info.issue_status = BaseTool.GetIntNumber(select);
             #endregion
 
             #region 条件

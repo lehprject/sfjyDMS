@@ -16,10 +16,10 @@
 }
 @using (Html.BeginForm("CreatePromotionCoupons", "Promotion", FormMethod.Post))
 {
-    <div class="row">
+    @*<div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-body">
+                <div class="panel-body">*@
                     <table class="table table-bordered">
                         <tr><td colspan="6">基础信息</td></tr>
                         <tr>
@@ -44,14 +44,16 @@
                             <td>生效时间</td>
                             <td>
                                 <div id="date1Container">
-                                    <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" />
+                                    <input type="text" class="form-control" id="date1Input" name="date1" placeholder="" data-val="true" data-val-required="请填上日期." />
+                                    <span data-valmsg-for="date1Input" data-valmsg-replace="true" style="color: red"></span>
                                 </div>
                             </td>
 
                             <td>失效时间</td>
                             <td>
                                 <div id="date2Container">
-                                    <input type="text" class="form-control" id="date2Input" name="date2" placeholder="" />
+                                    <input type="text" class="form-control" id="date2Input" name="date2" placeholder="" data-val="true" data-val-required="请填上日期." />
+                                    <span data-valmsg-for="date2Input" data-valmsg-replace="true" style="color: red"></span>
                                 </div>
                             </td>
                             <td>活动名称</td>
@@ -79,13 +81,15 @@
                             <td>
                                 <input id="value1" name="value1" class="form-control" />
                             </td>
-                            <td><button id="btnSave" name="action" type="submit" class="btn btn-primary btn-lg btnSave" value="save">生成</button></td>
+                            <td>
+                          启用<input type="checkbox" name="select" id="select" value="0" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button id="btnSave" name="action" type="submit" class="btn btn-primary btn-lg btnSave" value="save">生成</button></td>
                         </tr>
                     </table>
-                </div>
+                @*</div>
             </div>
         </div>
-    </div>
+    </div>*@
     <div id="div1" class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
@@ -110,7 +114,7 @@
             </div>
         </div>
     </div>
-                    <a href="@Url.Action("PromotionEventList", "Promotion")" name="action" class="btn btn-primary">返回</a>
+    <a href="@Url.Action("PromotionEventList", "Promotion")" name="action" class="btn btn-primary">返回</a>
 }
 
 @section scripts{
@@ -134,6 +138,7 @@
 
     <script src="../Scripts/Pages/Share.js"></script>
     <script src="../Scripts/Pages/Promotion/PromotionEventList.js"></script>
+    <script src="../Scripts/Pages/Promotion/createPromotionCoupons.js"></script>
 
 }
 

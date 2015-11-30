@@ -29,7 +29,7 @@ namespace Dal
                 List<MySqlParameter> paraList = new List<MySqlParameter>();
 
                 #region 条件
-                if(!string.IsNullOrEmpty(name))
+                if (!string.IsNullOrEmpty(name))
                 {
                     conditionSb.Append(" AND name LIKE CONCAT('%', @name, '%') ");
                     paraList.Add(new MySqlParameter("name", name));
@@ -170,22 +170,27 @@ namespace Dal
                     #region 优惠券明细
                     if (detailList != null)
                     {
+                        string[] arrNum = new string[detailList.Count];
+                        int i = 0;
                         foreach (var item in detailList)
-                        {
+                        {                      
                             if (item.pkid == 0)
-                            {
+                            {                            
+                                string tmp = string.Empty;
+                                tmp = Share.BaseTool.Random(3); //随机取数 
+                                tmp = BaseTool.getRandomNum(arrNum, tmp, 3); //取出值赋到数组中 
+                                arrNum[i] = tmp;
+
                                 item.coupons_id = info.pkid;
-                                item.code = "SFJY" + DateTime.Now.ToString("yyyyMMdd") + Share.BaseTool.Random(3);
+                                item.code = "SFJY" + DateTime.Now.ToString("yyyyMMdd") + tmp;
                                 db.promotion_coupons_detail.Add(item);
+                                i++;
                             }
                             else
                             {
                                 db.Entry(item).State = System.Data.Entity.EntityState.Modified;
                             }
                         }
-                        //DataTable table = Share.BaseTool.ListToDataTable<promotion_coupons_detail>(detailList);
-                        //table.TableName = "promotion_coupons_detail";
-                        //var count=sqlHelper.BulkInsert(table);
                         db.SaveChanges();
                     }
                     #endregion
@@ -235,8 +240,8 @@ namespace Dal
             record = 0;
             try
             {
-                string selectSql = "select * from promotion_coupons where true";
-                string countSql = "select * from promotion_coupons where true";
+                string selectSql = "select c.values as valuess,c.name as name,c.pkid as pkid,p.name as events,c.startdate as startdate,c.enddate as enddate,issue_num from promotion_coupons as c left join promotion_events as p on c.events_id = p.pkid where true ";
+                string countSql = "select c.values as valuess,c.name as name,c.pkid as pkid,p.name as events,c.startdate as startdate,c.enddate as enddate,issue_num from promotion_coupons as c left join promotion_events as p on c.events_id = p.pkid where true ";
                 StringBuilder conditionSb = new System.Text.StringBuilder();
 
                 List<MySqlParameter> paraList = new List<MySqlParameter>();
@@ -244,7 +249,7 @@ namespace Dal
                 #region 条件
                 if (!string.IsNullOrEmpty(name))
                 {
-                    conditionSb.Append(" AND name LIKE CONCAT('%', @name, '%') ");
+                    conditionSb.Append(" AND c.name LIKE CONCAT('%', @name, '%') ");
                     paraList.Add(new MySqlParameter("name", name));
                 }
 
@@ -288,7 +293,7 @@ namespace Dal
                 if (!string.IsNullOrEmpty(orderbyCol) && orderby.HasValue)
                     orderbyStr = orderbyFormat.getSortStr(orderby.Value, orderbyCol);
                 else
-                    orderbyStr = " order by pkid desc";
+                    orderbyStr = " order by c.pkid desc";
 
                 countSql += conditionSb.ToString();
                 countSql = string.Format("SELECT COUNT(*) FROM ({0}) AS t", countSql);
